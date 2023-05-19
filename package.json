@@ -9,14 +9,39 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.8",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.8",
+    "@hookform/resolvers": "^3.1.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/joy": "^5.0.0-alpha.78",
+    "@mui/lab": "^5.0.0-alpha.129",
+    "@mui/material": "^5.12.3",
+    "@next/font": "^13.3.4",
+    "@tanstack/react-query": "^4.29.5",
+    "@tanstack/react-query-devtools": "^4.29.6",
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
+    "axios": "^1.3.6",
+    "cookies-next": "^2.1.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
+    "ky-universal": "^0.11.0",
+    "lodash": "^4.17.21",
     "next": "13.3.1",
+    "prettier-plugin-organize-imports": "^3.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.0.4"
+    "react-hook-form": "^7.43.9",
+    "sass": "^1.62.1",
+    "typescript": "5.0.4",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^7.0.0",
+    "@types/lodash": "^4.14.194",
+    "mini-css-extract-plugin": "^2.7.5",
+    "prettier": "^2.8.8"
   }
 }
