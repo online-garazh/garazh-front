@@ -1,16 +1,6 @@
-// import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-// import isEmpty from 'lodash/isEmpty';
 import { ConfigRoute } from '@/types/app';
 import { QueryClient } from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-// import { initializeApollo } from '~/graphql/apolloClient';
-// import { GET_CURRENT_SHORT_USER } from '~/graphql/queries/auth.queries';
-
-// import { IUser } from '~/types/entities';
-// import { REDIRECT_TO_SIGN_IN, accessRoute } from '~/utils/accessRoute';
-// import { authToken } from '~/utils/authToken';
-// import { queriesFetcher } from '~/utils/common';
-// import { useServerSideLogout } from '~/utils/hooks/useLogout';
 
 import { apiRequest } from '@/utils/api';
 import { authToken } from '@/utils/authToken';
