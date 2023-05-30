@@ -1,4 +1,6 @@
-import { ListItemText } from '@mui/material';
+import { ListItem } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import { memo, type ReactNode } from 'react';
 
 import { Link } from '~/components/common/next-link';
@@ -26,11 +28,20 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
         color: palette.tertiary.main,
         '&:hover': {
           textDecoration: 'none',
+          li: {
+            backgroundColor: palette.secondary.main,
+            color: palette.secondary.contrastText,
+          },
         },
       })}
     >
-      {icon}
-      <ListItemText primary={text} />
+      <ListItem sx={{ pl: 2, py: 0.75, borderRadius: 2 }}>
+        <Box sx={{ width: 24, height: 24, mr: 2.75 }}>{icon}</Box>
+
+        <Typography variant="body1" sx={{ fontWeight: 300, fontSize: '0.875rem' }}>
+          {text}
+        </Typography>
+      </ListItem>
     </Link>
   );
 });

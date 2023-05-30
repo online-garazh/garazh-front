@@ -29,7 +29,6 @@ export enum UiILocators {
   BACK_TO_HOME_BUTTON = 'back-to-home-button',
   BUTTON_UP = 'button-up',
 
-  USER_LAYOUT_SIDEBAR_SETTINGS_LINK = 'user-layout-sidebar-settings-link',
-  USER_LAYOUT_SIDEBAR_PROFILE_LINK = 'user-layout-sidebar-profile-link',
-  USER_LAYOUT_SIDEBAR_HOME_LINK = 'user-layout-sidebar-home-link',
+  USER_LAYOUT_SIDEBAR_MY_GARAGE_LINK = 'user-layout-sidebar-garage-link',
+  USER_LAYOUT_SIDEBAR_FEED_LINK = 'user-layout-sidebar-feed-link',
 }

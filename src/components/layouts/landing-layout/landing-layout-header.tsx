@@ -48,7 +48,7 @@ export const LandingLayoutHeader = memo(function LandingLayoutHeaderBase() {
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
           <Button
             href={RoutePaths.SIGN_IN}
-            variant="contained"
+            variant="outlined"
             color="secondary"
             size="medium"
             id={UiILocators.SIGN_IN_FORM_SUBMIT}
@@ -61,7 +61,7 @@ export const LandingLayoutHeader = memo(function LandingLayoutHeaderBase() {
 
           <Button
             href={RoutePaths.SIGN_UP}
-            variant="outlined"
+            variant="contained"
             color="secondary"
             size="medium"
             id={UiILocators.SIGN_IN_FORM_SUBMIT}
@@ -75,7 +75,7 @@ export const LandingLayoutHeader = memo(function LandingLayoutHeaderBase() {
               onClick={changeDarkModeHandler}
               color="inherit"
               edge="end"
-              sx={{ ml: 1 }}
+              sx={{ ml: 0.5 }}
             >
               {palette.mode === 'dark' ? <Brightness7Icon color="tertiary" /> : <Brightness4Icon color="tertiary" />}
             </IconButton>

@@ -1,16 +1,14 @@
 export enum RoutePaths {
-  // Auth pages
   FORGOT_PASSWORD = '/forgot-password',
   NEW_PASSWORD = '/new-password',
+  MY_GARAGE = '/my-garage',
   SIGN_UP = '/sign-up',
   SIGN_IN = '/sign-in',
-  // Landing page
-  INDEX = '/',
-  // My own profile pages
   SETTINGS = '/settings',
   PROFILE = '/profile',
-  HOME = '/home',
+  INDEX = '/',
+  FEED = '/feed',
 }
 
 export const NOT_AUTH_REDIRECT = RoutePaths.SIGN_IN;
-export const AUTH_REDIRECT = RoutePaths.HOME;
+export const AUTH_REDIRECT = RoutePaths.FEED;

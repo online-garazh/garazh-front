@@ -158,7 +158,7 @@ export function SignUpForm(props: Props) {
                 }
                 label="Підтвердження пароля"
                 error={fieldState.invalid}
-                type={boolValue ? 'text' : 'password'}
+                type={boolValue ? 'text' : 'new-password'}
                 id={UiILocators.SIGN_UP_FORM_CONFIRM_PASSWORD}
               />
             )}

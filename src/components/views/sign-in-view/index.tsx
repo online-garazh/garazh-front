@@ -27,7 +27,7 @@ export function SignInView() {
       void router.push(RoutePaths.HOME);
     },
     onError: (error) => {
-      console.info('onError', error);
+      console.debug('onError', error);
     },
   });
   const submitHandler = (_data: FormValues) => {
@@ -63,14 +63,14 @@ export function SignInView() {
         })}
       >
         <Grid item xs>
-          <Link href={RoutePaths.FORGOT_PASSWORD} id={UiILocators.SIGN_IN_FORM_FORGOT_LINK} color="secondary">
-            Забули пароль?
+          <Link href={RoutePaths.SIGN_UP} id={UiILocators.SIGN_IN_FORM_SIGN_UP_LINK} color="secondary">
+            Реєстрація
           </Link>
         </Grid>
 
         <Grid item>
-          <Link href={RoutePaths.SIGN_UP} id={UiILocators.SIGN_IN_FORM_SIGN_UP_LINK} color="secondary">
-            Новий користувач? Створити аккаунт
+          <Link href={RoutePaths.FORGOT_PASSWORD} id={UiILocators.SIGN_IN_FORM_FORGOT_LINK} color="secondary">
+            Забули пароль?
           </Link>
         </Grid>
       </Grid>

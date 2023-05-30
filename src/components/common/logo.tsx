@@ -18,18 +18,31 @@ export function Logo() {
   return (
     <Box
       onClick={logoClickHandler}
-      sx={{
-        height: 40,
-        width: 40,
-      }}
+      sx={({ palette, transitions }) => ({
+        backgroundColor: palette.background.primary,
+        justifyContent: 'center',
+        borderRadius: 2,
+        transition: transitions.create('background-color', {
+          duration: transitions.duration.shorter,
+          easing: transitions.easing.sharp,
+        }),
+        alignItems: 'center',
+        display: 'flex',
+        height: 46,
+        width: 56,
+        '&:hover': {
+          backgroundColor: palette.background.secondary,
+          cursor: 'pointer',
+        },
+      })}
     >
       <SvgIcon
         color="primary"
         inheritViewBox
         component={icons.svg.logo}
         sx={{
-          height: 40,
-          width: 40,
+          height: 30,
+          width: 30,
         }}
       />
     </Box>

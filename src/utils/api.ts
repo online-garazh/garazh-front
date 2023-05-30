@@ -39,7 +39,7 @@ export const apiRequest = async <TData>(
 
     return response.data;
   } catch (error) {
-    console.info('Error request', error);
+    console.debug('Error request', error);
 
     return Promise.reject(error);
   }
@@ -51,10 +51,7 @@ export const useApiQuery = <TData>(
   { ctx }: { ctx?: any } = {}
 ): UseQueryResult<AxiosResponse<TData>, AxiosError> => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  const { token, getAuthToken } = authService(ctx);
-  const test = getAuthToken();
-
-  console.info('test', test);
+  const { token } = authService(ctx);
 
   return useQuery<TData, AxiosError, AxiosResponse<TData>>({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps

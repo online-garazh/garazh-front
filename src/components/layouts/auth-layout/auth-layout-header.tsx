@@ -47,7 +47,7 @@ export const AuthLayoutHeader = memo(function AuthLayoutHeaderBase() {
             onClick={changeDarkModeHandler}
             color="inherit"
             edge="end"
-            sx={{ ml: 1 }}
+            sx={{ ml: 0.5 }}
           >
             {palette.mode === 'dark' ? <Brightness7Icon color="tertiary" /> : <Brightness4Icon color="tertiary" />}
           </IconButton>

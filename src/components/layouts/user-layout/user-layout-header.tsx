@@ -1,5 +1,3 @@
-import process from 'process';
-
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -7,6 +5,7 @@ import { AppBar, IconButton, Toolbar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { memo } from 'react';
 
+import { Logo } from '~/components/common/logo';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { themeStoreMutations } from '~/stores/theme.store';
 import { UiElementNames, uiStoreMutations } from '~/stores/ui.store';
@@ -35,13 +34,17 @@ export const UserLayoutHeader = memo(function UserLayoutHeaderBase() {
           display: 'flex',
           height: HEADER_HEIGHT,
           width: '100%',
-          px: 2,
+          pl: 1,
+          pr: 2,
           [breakpoints.up('xs')]: {
             minHeight: HEADER_HEIGHT,
-            px: 2,
+            pl: 1,
+            pr: 2,
           },
         })}
       >
+        <Logo />
+
         <IconButton aria-label="toggle drawer" onClick={toggleDrawerHandler} color="inherit" edge="start">
           <MenuIcon />
         </IconButton>
@@ -52,7 +55,7 @@ export const UserLayoutHeader = memo(function UserLayoutHeaderBase() {
             onClick={changeDarkModeHandler}
             color="inherit"
             edge="end"
-            sx={{ ml: 1 }}
+            sx={{ ml: 0.5 }}
           >
             {palette.mode === 'dark' ? <Brightness7Icon color="tertiary" /> : <Brightness4Icon color="tertiary" />}
           </IconButton>

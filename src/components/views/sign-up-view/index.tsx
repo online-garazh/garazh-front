@@ -29,7 +29,7 @@ export function SignUpView() {
       void router.push('/home');
     },
     onError: (error) => {
-      console.info('onError', error);
+      console.debug('onError', error);
     },
   });
   const { mutate: signUpMutate, isLoading: signUpLoading } = usePostMutation<User, User>('/auth/signup/', {
@@ -37,7 +37,7 @@ export function SignUpView() {
       signInMutate({ email: variables.email, password: variables.password });
     },
     onError: (error) => {
-      console.info('onError', error);
+      console.debug('onError', error);
     },
   });
   const submitHandler = (data: FormValues) => {

@@ -1,4 +1,3 @@
-export const USER_DRAWER_FULL_WIDTH = 240;
-export const USER_DRAWER_ROLLED_WIDTH = 64;
-export const USER_DRAWER_ROLLED_WIDTH_XS = 56;
-export const HEADER_HEIGHT = 56;
+export const USER_DRAWER_FULL_WIDTH = 220;
+export const USER_DRAWER_ROLLED_WIDTH = 70;
+export const HEADER_HEIGHT = 60;

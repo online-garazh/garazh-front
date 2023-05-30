@@ -95,7 +95,7 @@ export function SignInForm(props: Props) {
                 }
                 label="Пароль"
                 error={fieldState.invalid}
-                type={boolValue ? 'text' : 'password'}
+                type={boolValue ? 'text' : 'new-password'}
                 id={UiILocators.SIGN_IN_FORM_PASSWORD}
               />
             )}

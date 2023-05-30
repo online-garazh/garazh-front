@@ -1,9 +1,10 @@
 import { dehydrate } from '@tanstack/react-query';
-import Link from 'next/link';
 
-import { HomeView } from '~/components/views/home-view';
+import { getLayout } from '~/components/layouts/user-layout';
+import { ProfileView } from '~/components/views/profile-view';
 import { useCurrentUser } from '~/hooks/use-current-user.hook';
 import { type RouteConfig } from '~/types/app.type';
+import { PagesSubTitles } from '~/types/page.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
@@ -11,17 +12,12 @@ const ROUTE_CONFIG: RouteConfig = {
   requireAuth: false,
 };
 
-export default function Home() {
+export default function ProfileRoute() {
   const { currentUser } = useCurrentUser();
 
-  console.info('currentUser', currentUser);
+  console.debug('currentUser', currentUser);
 
-  return (
-    <>
-      <HomeView />
-      Home <Link href="/">go to landing</Link>
-    </>
-  );
+  return <ProfileView />;
 }
 
 export const getServerSideProps = withSession(
@@ -32,3 +28,9 @@ export const getServerSideProps = withSession(
   }),
   ROUTE_CONFIG
 );
+
+ProfileRoute.layoutConfig = {
+  subTitle: PagesSubTitles.PROFILE,
+};
+
+ProfileRoute.getLayout = getLayout;
