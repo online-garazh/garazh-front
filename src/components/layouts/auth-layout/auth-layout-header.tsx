@@ -49,7 +49,7 @@ export const AuthLayoutHeader = memo(function AuthLayoutHeaderBase() {
             edge="end"
             sx={{ ml: 1 }}
           >
-            {palette.mode === 'dark' ? <Brightness7Icon color="secondary" /> : <Brightness4Icon color="secondary" />}
+            {palette.mode === 'dark' ? <Brightness7Icon color="tertiary" /> : <Brightness4Icon color="tertiary" />}
           </IconButton>
         )}
       </Toolbar>

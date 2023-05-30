@@ -50,12 +50,14 @@ export const useApiQuery = <TData>(
   url: string,
   { ctx }: { ctx?: any } = {}
 ): UseQueryResult<AxiosResponse<TData>, AxiosError> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const { token, getAuthToken } = authService(ctx);
   const test = getAuthToken();
 
   console.info('test', test);
 
   return useQuery<TData, AxiosError, AxiosResponse<TData>>({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: key,
     queryFn: (_data) => apiRequest<TData>({ url, method: 'get' }, { token }),
   });
