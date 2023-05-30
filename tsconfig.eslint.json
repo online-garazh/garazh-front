@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "build", "dist"],
+  "include": [
+    "lint-staged.config.js",
+    "additional.d.ts",
+    "next.config.js",
+    "next-env.d.ts",
+    ".eslintrc.js",
+    "src/**/*.tsx",
+    "src/**/*.ts",
+    "typings/*"
+  ]
+}

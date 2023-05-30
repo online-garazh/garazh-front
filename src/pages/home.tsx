@@ -1,18 +1,20 @@
-import { HomeView } from '@/components/views/home-view/home-view';
-import { useCurrentUser } from '@/utils/useCurrentUser';
-import { withSession } from '@/utils/withSession';
 import { dehydrate } from '@tanstack/react-query';
 import Link from 'next/link';
 
-const CONFIG_ROUTE = {
-  requireAuth: false,
+import { HomeView } from '~/components/views/home-view';
+import { useCurrentUser } from '~/hooks/use-current-user.hook';
+import { type RouteConfig } from '~/types/app.type';
+import { withSession } from '~/utils/with-session.util';
+
+const ROUTE_CONFIG: RouteConfig = {
   disableRedirect: true,
+  requireAuth: false,
 };
 
-const Home = () => {
+export default function Home() {
   const { currentUser } = useCurrentUser();
 
-  console.log('currentUser', currentUser);
+  console.info('currentUser', currentUser);
 
   return (
     <>
@@ -20,14 +22,13 @@ const Home = () => {
       Home <Link href="/">go to landing</Link>
     </>
   );
-};
+}
 
-export const getServerSideProps = withSession(async (ctx, client) => {
-  return {
+export const getServerSideProps = withSession(
+  async (_ctx, client) => ({
     props: {
       dehydratedState: dehydrate(client),
     },
-  };
-}, CONFIG_ROUTE);
-
-export default Home;
+  }),
+  ROUTE_CONFIG
+);
