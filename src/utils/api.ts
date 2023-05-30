@@ -1,11 +1,7 @@
-import { authToken } from '@/utils/authToken';
-import {
-  useMutation,
-  UseMutationOptions,
-  useQuery,
-  UseQueryResult,
-} from '@tanstack/react-query';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { useMutation, type UseMutationOptions, useQuery, type UseQueryResult } from '@tanstack/react-query';
+import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios';
+
+import { authService } from '~/services/auth.service';
 
 interface ApiError {
   message: string;
@@ -28,10 +24,7 @@ export const apiRequest = async <TData>(
   axiosRequestConfig: AxiosRequestConfig,
   customConfig?: { token?: string }
 ): Promise<TData> => {
-  const authorizationHeader = customConfig?.token
-    ? { Authorization: `Bearer ${customConfig.token}` }
-    : {};
-
+  const authorizationHeader = customConfig?.token ? { Authorization: `Bearer ${customConfig.token}` } : {};
   const requestHeaders = {
     ...authorizationHeader,
     'Content-Type': 'application/json',
@@ -46,7 +39,8 @@ export const apiRequest = async <TData>(
 
     return response.data;
   } catch (error) {
-    console.log('Error request', error);
+    console.info('Error request', error);
+
     return Promise.reject(error);
   }
 };
@@ -56,30 +50,23 @@ export const useApiQuery = <TData>(
   url: string,
   { ctx }: { ctx?: any } = {}
 ): UseQueryResult<AxiosResponse<TData>, AxiosError> => {
-  const { token, getAuthToken } = authToken(ctx);
-
+  const { token, getAuthToken } = authService(ctx);
   const test = getAuthToken();
 
-  console.log('test', test);
+  console.info('test', test);
 
-  return useQuery<TData, AxiosError, AxiosResponse<TData>>(key, (data) => {
-    return apiRequest<TData>({ url, method: 'get' }, { token });
+  return useQuery<TData, AxiosError, AxiosResponse<TData>>({
+    queryKey: key,
+    queryFn: (_data) => apiRequest<TData>({ url, method: 'get' }, { token }),
   });
 };
 
 export const usePostMutation = <TData, TVariables>(
   url: string,
   options?: UseMutationOptions<TData, Error, TVariables>
-) => {
-  return useMutation<TData, AxiosError<ApiError>, TVariables>(
-    (data) => {
-      return apiRequest<TData>({ url, method: 'post', data });
-    },
-    {
-      ...options,
-      onSuccess: (data, variables, context) => {
-        return options?.onSuccess?.(data, variables, context);
-      },
-    }
-  );
-};
+) =>
+  useMutation<TData, AxiosError<ApiError>, TVariables>({
+    mutationFn: (data) => apiRequest<TData>({ url, method: 'post', data }),
+    ...options,
+    onSuccess: (data, variables, context) => options?.onSuccess?.(data, variables, context),
+  });

@@ -1,30 +1,39 @@
-import { HeaderAuth } from '@/components/common/header-auth/header-auth';
-import { useApiQuery } from '@/utils/api';
-import { withSession } from '@/utils/withSession';
+import Typography from '@mui/material/Typography';
 import { dehydrate } from '@tanstack/react-query';
 
-const CONFIG_ROUTE = {
+import { getLayout } from '~/components/layouts/landing-layout';
+import { type RouteConfig } from '~/types/app.type';
+import { PagesSubTitles } from '~/types/page.type';
+import { useApiQuery } from '~/utils/api';
+import { withSession } from '~/utils/with-session.util';
+
+const ROUTE_CONFIG: RouteConfig = {
   requireAuth: false,
-  // disableRedirect: true,
 };
 
-const LandingRoute = () => {
-  const { data, isLoading } = useApiQuery(['posts'], '/posts');
+export default function LandingRoute() {
+  const { data } = useApiQuery(['posts'], '/posts');
 
-  console.log('data', data);
+  console.info('data', data);
+
   return (
-    <div>
-      <HeaderAuth /> Landing
-    </div>
+    <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 4 }}>
+      Landing
+    </Typography>
   );
-};
+}
 
-export const getServerSideProps = withSession(async (ctx, client) => {
-  return {
+export const getServerSideProps = withSession(
+  async (_ctx, client) => ({
     props: {
       dehydratedState: dehydrate(client),
     },
-  };
-}, CONFIG_ROUTE);
+  }),
+  ROUTE_CONFIG
+);
 
-export default LandingRoute;
+LandingRoute.layoutConfig = {
+  subTitle: PagesSubTitles.INDEX,
+};
+
+LandingRoute.getLayout = getLayout;

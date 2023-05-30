@@ -1,98 +1,120 @@
 import createEmotionServer from '@emotion/server/create-instance';
-import { AppType } from 'next/app';
-import Document, {
-  DocumentContext,
-  DocumentProps,
-  Head,
+import { type AppType } from 'next/dist/shared/lib/utils';
+import NextDocument, {
+  type DocumentContext as NextDocumentContext,
+  type DocumentInitialProps as NextDocumentInitialProps,
   Html,
+  Head,
   Main,
   NextScript,
 } from 'next/document';
-import * as React from 'react';
+import { type ComponentType } from 'react';
 
-import createEmotionCache from '@/themes/helper';
-import { MyAppProps, rubik } from './_app';
+import { PAGE_DESCRIPTION, PAGE_BASE_TITLE } from '~/constants/seo.constant';
+import { rubik } from '~/pages/_app';
+import { createEmotionCache } from '~/theme/create-emotion-cache';
+import { type AppEnhancedProps } from '~/types/app.type';
 
-interface MyDocumentProps extends DocumentProps {
+interface DocumentInitialProps extends NextDocumentInitialProps {
   emotionStyleTags: JSX.Element[];
 }
 
-export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
-  return (
-    <Html lang="en" className={rubik.className}>
-      <Head>
-        {/* PWA primary color */}
-        <meta name="theme-color" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <meta name="emotion-insertion-point" content="" />
-        {emotionStyleTags}
-      </Head>
+export default class Document extends NextDocument<DocumentInitialProps> {
+  private readonly language = 'en';
 
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
-}
+  public static getInitialProps = async (context: NextDocumentContext): Promise<DocumentInitialProps> => {
+    const originalRenderPage = context.renderPage;
+    const cache = createEmotionCache();
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const { extractCriticalToChunks } = createEmotionServer(cache);
 
-// `getInitialProps` belongs to `_document` (instead of `_app`),
-// it's compatible with static-site generation (SSG).
-MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  // Resolution order
-  //
-  // On the server:
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. document.getInitialProps
-  // 4. app.render
-  // 5. page.render
-  // 6. document.render
-  //
-  // On the server with error:
-  // 1. document.getInitialProps
-  // 2. app.render
-  // 3. page.render
-  // 4. document.render
-  //
-  // On the client
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. app.render
-  // 4. page.render
+    context.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App: AppType | ComponentType<AppEnhancedProps>) => {
+          const EnhanceApp: AppType = (props) => <App emotionCache={cache} {...props} />;
 
-  const originalRenderPage = ctx.renderPage;
-
-  // You can consider sharing the same Emotion cache between all the SSR requests to speed up performance.
-  // However, be aware that it can have global side effects.
-  const cache = createEmotionCache();
-  const { extractCriticalToChunks } = createEmotionServer(cache);
-
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: (
-        App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>
-      ) =>
-        function EnhanceApp(props) {
-          return <App emotionCache={cache} {...props} />;
+          return EnhanceApp;
         },
-    });
+      });
 
-  const initialProps = await Document.getInitialProps(ctx);
-  // This is important. It prevents Emotion to render invalid HTML.
-  // See https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
-  const emotionStyles = extractCriticalToChunks(initialProps.html);
-  const emotionStyleTags = emotionStyles.styles.map((style) => (
-    <style
-      data-emotion={`${style.key} ${style.ids.join(' ')}`}
-      key={style.key}
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: style.css }}
-    />
-  ));
+    const initialProps = await NextDocument.getInitialProps(context);
+    const emotionStyles = extractCriticalToChunks(initialProps.html);
+    const emotionStyleTags = emotionStyles.styles.map((style) => (
+      <style
+        dangerouslySetInnerHTML={{ __html: style.css }}
+        data-emotion={`${style.key} ${style.ids.join(' ')}`}
+        key={style.key}
+      />
+    ));
 
-  return {
-    ...initialProps,
-    emotionStyleTags,
+    return {
+      ...initialProps,
+      emotionStyleTags,
+    };
   };
-};
+
+  private renderFavicon() {
+    return (
+      <>
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+        <meta name="theme-color" content="#ffffff" />
+      </>
+    );
+  }
+
+  private renderSeo() {
+    return (
+      <>
+        <meta name="description" content={PAGE_DESCRIPTION} />
+        <meta property="og:title" content={PAGE_BASE_TITLE} />
+        <meta property="og:description" content={PAGE_DESCRIPTION} />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content={this.language} />
+      </>
+    );
+  }
+
+  private renderFonts() {
+    return (
+      <>
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />*/}
+        {/* <link rel="preconnect" href="https://fonts.gstatic.com" />*/}
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
+        {/* <link href="/fonts/fonts.css" rel="stylesheet" />*/}
+      </>
+    );
+  }
+
+  private renderEmotion() {
+    return (
+      <>
+        <meta name="emotion-insertion-point" content="" />
+        {this.props.emotionStyleTags}
+      </>
+    );
+  }
+
+  public render() {
+    return (
+      <Html lang={this.language} className={rubik.className}>
+        <Head>
+          {this.renderFavicon()}
+          {this.renderEmotion()}
+          {this.renderFonts()}
+          {this.renderSeo()}
+        </Head>
+
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
