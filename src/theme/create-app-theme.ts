@@ -2,6 +2,7 @@ import { type PaletteMode, type Shadows } from '@mui/material';
 import { createTheme, responsiveFontSizes, type Theme, type ThemeOptions } from '@mui/material/styles';
 import { type CSSProperties } from 'react';
 
+import { rubik } from '~/pages/_app';
 import { appPalette } from '~/theme/app-palette';
 import { defaultTheme } from '~/theme/default-theme';
 import {
@@ -26,24 +27,26 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
 
   theme = createTheme(theme, {
     typography: {
-      fontFamily: 'inherit',
+      fontFamily: rubik.style.fontFamily,
       button: {
         textTransform: 'none',
       },
       h1: {
-        fontFamily: 'Rubik',
+        fontFamily: rubik.style.fontFamily,
       },
       h2: {
         color: palette.text.primary,
       },
-      h3: {},
+      h3: {
+        fontFamily: rubik.style.fontFamily,
+      },
       h4: {},
       h5: {},
       h6: {},
       subtitle1: {},
       subtitle2: {},
       body1: {
-        fontFamily: 'Rubik',
+        fontFamily: rubik.style.fontFamily,
         fontSize: '1rem',
         [breakpoints.down('md')]: {},
       },
