@@ -1,0 +1,372 @@
+
+
+.home {
+  &__container {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    max-width: 1480px;
+    margin: 0 auto;
+    grid-gap: 24px;
+    padding: 0 24px;
+    //align-items: flex-start;
+  }
+}
+
+
+.sidebar {
+
+  border-right: 1px dashed rgba(145, 158, 171, 0.24);
+  padding-right: 16px;
+
+  &__account {
+    padding: 12px 16px;
+    background-color: rgba(145, 158, 171, 0.12);
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+
+  &__labelMenu {
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: rgb(95 114 134);
+    margin-left: 16px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  &__info {
+    margin-left: 24px;
+  }
+
+  &__name {
+    color: rgb(33, 43, 54);
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  &__subName {
+    color: rgb(99, 115, 129);
+    font-size: 0.875rem;
+  }
+
+  &__item {
+    display: flex !important;
+    align-items: center;
+    padding: 12px 12px;
+    border-radius: 6px;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(145, 158, 171, 0.08);
+      p {
+        position: relative;
+        z-index: 1;
+        color: #0d0b15;
+        //color: #c03;
+      }
+
+      svg {
+        position: relative;
+        z-index: 1;
+        color: #c03;
+        //color: #6b57d4;
+      }
+    }
+
+    svg {
+      color: rgb(99, 115, 129);
+      width: 26px;
+      height: 26px;
+    }
+
+    p {
+      margin-left: 14px;
+      color: rgb(99, 115, 129);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.containerPost {
+  //border-radius: 8px;
+  //box-shadow: rgb(100 116 139 / 6%) 0px 1px 1px,
+  //rgb(100 116 139 / 10%) 0px 1px 2px;
+  //background-color: #fff;
+  //padding: 0 24px;
+  //padding-top: 16px;
+  box-shadow: rgb(145 158 171 / 20%) 0px 0px 2px 0px,
+  rgb(145 158 171 / 12%) 0px 12px 24px -4px;
+  border-radius: 16px;
+  background-color: rgb(255, 255, 255);
+  //padding: 0 24px;
+}
+
+.post {
+  //border-radius: 8px;
+  //box-shadow: rgb(100 116 139 / 6%) 0px 1px 1px,
+  //  rgb(100 116 139 / 10%) 0px 1px 2px;
+  //background-color: #fff;
+  //padding: 16px 24px;
+  //border: 1px solid #ebebeb;
+  margin-bottom: 24px;
+  //padding: 0 24px;
+  //padding-top: 16px;
+
+  box-shadow: rgb(145 158 171 / 20%) 0px 0px 2px 0px,
+  rgb(145 158 171 / 12%) 0px 12px 24px -4px;
+  border-radius: 16px;
+  background-color: rgb(255, 255, 255);
+
+  &__backgroundAva {
+    position: absolute;
+    background: url("https://minimal-assets-api-dev.vercel.app/assets/icons/shape-avatar.svg")
+    no-repeat;
+    background-size: contain;
+    bottom: -15px;
+    right: 29px;
+    width: 84px;
+    height: 36px;
+  }
+
+  &__wrapImage {
+    position: relative;
+    height: 280px;
+    padding: 0 16px;
+
+    img {
+      //height: 100%;
+      border-radius: 8px;
+      //max-width: 100%;
+      //width: 100%;
+      //object-fit: cover;
+    }
+  }
+
+  &__title {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    font-size: 20px;
+  }
+
+  &__body {
+    padding: 16px 0 24px 0;
+  }
+
+  &__authorAvatar {
+    position: absolute;
+    right: -10px;
+    bottom: -7px;
+  }
+
+  &__authorAvatar2 {
+    position: absolute;
+    right: 57px;
+    bottom: -11px;
+  }
+
+  &__desc {
+    margin-top: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(101, 116, 139);
+
+    font-size: 14px;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    padding: 16px 0px 0 0px;
+  }
+
+  &__like {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 4px;
+      font-size: 14px;
+    }
+
+    svg {
+      color: #c03;
+    }
+  }
+
+  &__cardHeaderAvatar {
+    position: relative;
+  }
+
+  &__bookmark {
+    margin-left: 12px;
+
+    svg {
+      color: #333;
+    }
+  }
+
+  &__comment {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+
+    span {
+      margin-left: 4px;
+      font-size: 14px;
+    }
+
+    svg {
+      color: #333;
+    }
+  }
+}
+
+
+.subHeader {
+  box-shadow: rgb(145 158 171 / 16%) 0px 8px 16px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding: 8px 0;
+
+  .sidebar__item {
+    padding: 8px 12px;
+  }
+}
+
+.header {
+
+  display: flex;
+  align-items: center;
+  background-color: #111;
+  height: 60px;
+
+
+  &__rightCol {
+    display: flex;
+    align-items: center;
+
+
+
+
+    p {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    svg {
+      color: #fff;
+    }
+  }
+
+  &__wrapper {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__avatar {
+    border: 2px solid #fff;
+  }
+
+  &__wrapper {
+    max-width: 1475px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+
+  &__logo {
+    height: 50px;
+    // background-color: #c03;
+    color: #fff;
+    display: inline-block;
+    padding: 0 24px;
+    line-height: 50px;
+    font-weight: 900;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 17px;
+  }
+}
+
+.postType {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  border-bottom: 1px solid rgb(230, 232, 240);
+  padding-bottom: 12px;
+
+  &__img {
+    width: 100px;
+    height: 56px;
+    border-radius: 4px;
+  }
+
+  &__text {
+    margin-left: 12px;
+  }
+}
+
+.headNews {
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  &__icon {
+    cursor: pointer;
+    background-color: #ededed;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33px;
+    height: 33px;
+
+    svg {
+      color: #333;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.postContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+}
+
+.cardHeader {
+  position: relative;
+
+  &__groupName {
+    font-weight: 500;
+  }
+
+  span {
+    font-family: inherit;
+  }
+}
+
+.borderAvatar {
+  border: 3px solid #fff;
+}
