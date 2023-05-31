@@ -1,4 +1,5 @@
 import { Link as MUILink, type LinkProps as MUILinkProps } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import NextLink, { type LinkProps as NextLinkProps } from 'next/link';
 import { forwardRef, type AnchorHTMLAttributes } from 'react';
 
@@ -13,7 +14,6 @@ interface NextLinkComposedProps
 
 type LinkProps = {
   activeClassName?: string;
-
   noLinkStyle?: boolean;
   linkAs?: NextLinkProps['as'];
   href: NextLinkProps['href'];
@@ -42,7 +42,9 @@ export const NextLinkComposed = forwardRef<HTMLAnchorElement, NextLinkComposedPr
 );
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ underline = 'hover', noLinkStyle, href, as: linkAs, sx, passHref, ...rest }, ref) => {
+  ({ underline = 'hover', noLinkStyle, href, as: linkAs, sx, passHref, color, ...rest }, ref) => {
+    const { palette } = useTheme();
+    const modifiedColor = color ?? palette.mode === 'dark' ? 'secondary' : 'primary';
     const isExternal = typeof href === 'string' && (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
 
     if (isExternal) {
@@ -57,6 +59,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       <MUILink
         component={NextLinkComposed}
         underline={underline}
+        color={modifiedColor}
         linkAs={linkAs}
         href={href as string}
         ref={ref}

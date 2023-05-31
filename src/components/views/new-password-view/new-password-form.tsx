@@ -7,12 +7,13 @@ import { BoolRenderProp } from '~/components/common/bool-render-prop';
 import { Button } from '~/components/common/button';
 import { PasswordIcon } from '~/components/common/icons/password-icon';
 import { TextField } from '~/components/common/text-field';
+import { ResolverErrors } from '~/constants/errors.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
 import { fieldsSchemas } from '~/validations/fields.schemas';
 
 export type FormValues = {
+  confirmPassword: string;
   password: string;
-  email: string;
 };
 
 type Props = {
@@ -20,22 +21,27 @@ type Props = {
   onSubmit: (values: FormValues) => void;
 };
 
-export const signInFormSchema = () =>
-  z.object({
-    password: fieldsSchemas.password(),
-    email: fieldsSchemas.email(),
-  });
+export const newPasswordFormSchema = () =>
+  z
+    .object({
+      confirmPassword: fieldsSchemas.password(),
+      password: fieldsSchemas.password(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: ResolverErrors.passwordsMatchField,
+      path: ['confirmPassword'],
+    });
 
-export function SignInForm(props: Props) {
+export function NewPasswordForm(props: Props) {
   const { onSubmit, isLoading } = props;
   const { handleSubmit, control } = useForm<FormValues>({
     shouldFocusError: false,
     reValidateMode: 'onChange',
     defaultValues: {
+      confirmPassword: '',
       password: '',
-      email: '',
     },
-    resolver: zodResolver(signInFormSchema()),
+    resolver: zodResolver(newPasswordFormSchema()),
     mode: 'onSubmit',
   });
 
@@ -55,21 +61,33 @@ export function SignInForm(props: Props) {
       <Controller
         control={control}
         render={({ field, fieldState }) => (
-          <TextField
-            {...field}
-            errorMessage={fieldState.error?.message}
-            InputProps={{
-              placeholder: 'Введіть свою електронну пошту тут',
-            }}
-            fullWidth
-            required
-            label="Електронна пошта"
-            error={fieldState.invalid}
-            type="email"
-            id={UiILocators.SIGN_IN_FORM_EMAIL}
+          <BoolRenderProp
+            render={({ toggleBool, boolValue }) => (
+              <TextField
+                {...field}
+                alwaysShowAdornment
+                errorMessage={fieldState.error?.message}
+                InputProps={{
+                  placeholder: 'Введіть новий пароль тут',
+                }}
+                fullWidth
+                required
+                suffix={
+                  <PasswordIcon
+                    toggleBool={toggleBool}
+                    boolValue={boolValue}
+                    id={UiILocators.NEW_PASSWORD_FORM_NEW_PASSWORD_ICON}
+                  />
+                }
+                label="Пароль"
+                error={fieldState.invalid}
+                type={boolValue ? 'text' : 'password'}
+                id={UiILocators.NEW_PASSWORD_FORM_NEW_PASSWORD}
+              />
+            )}
           />
         )}
-        name="email"
+        name="password"
       />
 
       <Controller
@@ -82,7 +100,7 @@ export function SignInForm(props: Props) {
                 alwaysShowAdornment
                 errorMessage={fieldState.error?.message}
                 InputProps={{
-                  placeholder: 'Введіть свій пароль тут',
+                  placeholder: 'Введіть підтвердження паролю тут',
                 }}
                 fullWidth
                 required
@@ -90,18 +108,18 @@ export function SignInForm(props: Props) {
                   <PasswordIcon
                     toggleBool={toggleBool}
                     boolValue={boolValue}
-                    id={UiILocators.SIGN_IN_FORM_PASSWORD_ICON}
+                    id={UiILocators.NEW_PASSWORD_FORM_CONFIRM_PASSWORD_ICON}
                   />
                 }
-                label="Пароль"
+                label="Підтвердження пароля"
                 error={fieldState.invalid}
                 type={boolValue ? 'text' : 'new-password'}
-                id={UiILocators.SIGN_IN_FORM_PASSWORD}
+                id={UiILocators.NEW_PASSWORD_FORM_CONFIRM_PASSWORD}
               />
             )}
           />
         )}
-        name="password"
+        name="confirmPassword"
       />
 
       <Button
@@ -111,9 +129,9 @@ export function SignInForm(props: Props) {
         color="secondary"
         type="submit"
         size="large"
-        id={UiILocators.SIGN_IN_FORM_SUBMIT}
+        id={UiILocators.NEW_PASSWORD_FORM_SUBMIT}
       >
-        Увійти
+        Підтвердити
       </Button>
     </Box>
   );

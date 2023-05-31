@@ -19,7 +19,7 @@ export function ServerErrorView() {
           Server error
         </Typography>
 
-        <Button href={RoutePaths.HOME} id={UiILocators.BACK_TO_HOME_BUTTON}>
+        <Button href={RoutePaths.FEED} id={UiILocators.BACK_TO_HOME_BUTTON}>
           Back to Homepage
         </Button>
       </Box>

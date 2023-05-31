@@ -1,8 +1,10 @@
 import { dehydrate } from '@tanstack/react-query';
 
-import { HomeView } from '~/components/views/home-view';
+import { getLayout } from '~/components/layouts/user-layout';
+import { SettingsView } from '~/components/views/settings-view';
 import { useCurrentUser } from '~/hooks/use-current-user.hook';
 import { type RouteConfig } from '~/types/app.type';
+import { PagesSubTitles } from '~/types/page.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
@@ -10,12 +12,12 @@ const ROUTE_CONFIG: RouteConfig = {
   requireAuth: false,
 };
 
-export default function HomeRoute() {
+export default function SettingsRoute() {
   const { currentUser } = useCurrentUser();
 
   console.debug('currentUser', currentUser);
 
-  return <HomeView />;
+  return <SettingsView />;
 }
 
 export const getServerSideProps = withSession(
@@ -26,3 +28,9 @@ export const getServerSideProps = withSession(
   }),
   ROUTE_CONFIG
 );
+
+SettingsRoute.layoutConfig = {
+  subTitle: PagesSubTitles.SETTINGS,
+};
+
+SettingsRoute.getLayout = getLayout;

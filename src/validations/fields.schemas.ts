@@ -4,22 +4,18 @@ import { ResolverErrors } from '~/constants/errors.constant';
 import { PASSWORD_REGEXP } from '~/constants/regexps.constant';
 
 const nickname = () =>
-  z
-    .string()
-    .min(1, { message: ResolverErrors.requiredField })
-    .max(18, { message: 'Поле має містити не більше 18 символів' })
-    .trim();
+  z.string().min(1, { message: ResolverErrors.requiredField }).max(18, { message: ResolverErrors.max18Field }).trim();
 const password = () =>
   z
     .string()
     .min(1, { message: ResolverErrors.requiredField })
-    .regex(PASSWORD_REGEXP, { message: 'Введіть дійсний пароль' });
+    .regex(PASSWORD_REGEXP, { message: ResolverErrors.validPasswordField });
 const email = () =>
   z
     .string()
     .min(1, { message: ResolverErrors.requiredField })
-    .max(18, { message: 'Поле має містити не більше 18 символів' })
-    .email({ message: 'Введіть дійсну електронну пошту' })
+    .max(18, { message: ResolverErrors.max18Field })
+    .email({ message: ResolverErrors.validEmailField })
     .trim();
 
 export const fieldsSchemas = {

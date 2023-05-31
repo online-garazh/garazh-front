@@ -1,7 +1,7 @@
 import { dehydrate } from '@tanstack/react-query';
 
 import { getLayout } from '~/components/layouts/auth-layout';
-import { SignInView } from '~/components/views/sign-in-view';
+import { ForgotPasswordView } from '~/components/views/forgot-password-view';
 import { type RouteConfig } from '~/types/app.type';
 import { PagesSubTitles } from '~/types/page.type';
 import { withSession } from '~/utils/with-session.util';
@@ -10,8 +10,8 @@ const ROUTE_CONFIG: RouteConfig = {
   requireAuth: false,
 };
 
-export default function SignInRoute() {
-  return <SignInView />;
+export default function ForgotPasswordRoute() {
+  return <ForgotPasswordView />;
 }
 
 export const getServerSideProps = withSession(
@@ -23,9 +23,9 @@ export const getServerSideProps = withSession(
   ROUTE_CONFIG
 );
 
-SignInRoute.layoutConfig = {
+ForgotPasswordRoute.layoutConfig = {
   disableAuthButtons: true,
-  subTitle: PagesSubTitles.SIGN_IN,
+  subTitle: PagesSubTitles.FORGOT_PASSWORD,
 };
 
-SignInRoute.getLayout = getLayout;
+ForgotPasswordRoute.getLayout = getLayout;

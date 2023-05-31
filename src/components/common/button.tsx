@@ -5,7 +5,7 @@ import { type UiILocators } from '~/constants/ui-locators.constant';
 
 export type Props = MuiButtonProps & {
   isLoading?: boolean;
-  id?: UiILocators;
+  id: UiILocators;
 };
 
 export function Button(props: Props) {

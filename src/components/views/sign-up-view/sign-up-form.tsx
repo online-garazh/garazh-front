@@ -7,6 +7,7 @@ import { BoolRenderProp } from '~/components/common/bool-render-prop';
 import { Button } from '~/components/common/button';
 import { PasswordIcon } from '~/components/common/icons/password-icon';
 import { TextField } from '~/components/common/text-field';
+import { ResolverErrors } from '~/constants/errors.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
 import { fieldsSchemas } from '~/validations/fields.schemas';
 
@@ -31,7 +32,7 @@ export const signUpFormSchema = () =>
       email: fieldsSchemas.email(),
     })
     .refine((data) => data.password === data.confirmPassword, {
-      message: 'Паролі не збігаються',
+      message: ResolverErrors.passwordsMatchField,
       path: ['confirmPassword'],
     });
 
@@ -70,7 +71,7 @@ export function SignUpForm(props: Props) {
             {...field}
             errorMessage={fieldState.error?.message}
             InputProps={{
-              placeholder: 'Enter your email here',
+              placeholder: 'Введіть свій нікнейм тут',
             }}
             fullWidth
             required
@@ -145,7 +146,7 @@ export function SignUpForm(props: Props) {
                 alwaysShowAdornment
                 errorMessage={fieldState.error?.message}
                 InputProps={{
-                  placeholder: 'Введіть свій пароль тут',
+                  placeholder: 'Введіть підтвердження паролю тут',
                 }}
                 fullWidth
                 required
@@ -158,7 +159,7 @@ export function SignUpForm(props: Props) {
                 }
                 label="Підтвердження пароля"
                 error={fieldState.invalid}
-                type={boolValue ? 'text' : 'password'}
+                type={boolValue ? 'text' : 'new-password'}
                 id={UiILocators.SIGN_UP_FORM_CONFIRM_PASSWORD}
               />
             )}

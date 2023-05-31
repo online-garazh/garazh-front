@@ -1,10 +1,9 @@
-import Typography from '@mui/material/Typography';
 import { dehydrate } from '@tanstack/react-query';
 
 import { getLayout } from '~/components/layouts/landing-layout';
+import { LandingView } from '~/components/views/landing-view';
 import { type RouteConfig } from '~/types/app.type';
 import { PagesSubTitles } from '~/types/page.type';
-import { useApiQuery } from '~/utils/api';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
@@ -12,15 +11,7 @@ const ROUTE_CONFIG: RouteConfig = {
 };
 
 export default function LandingRoute() {
-  const { data } = useApiQuery(['posts'], '/posts');
-
-  console.info('data', data);
-
-  return (
-    <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 4 }}>
-      Landing
-    </Typography>
-  );
+  return <LandingView />;
 }
 
 export const getServerSideProps = withSession(

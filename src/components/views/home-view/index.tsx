@@ -1,17 +1,15 @@
-// import { Header } from '~/components/common/header';
-import styles from './styles.module.scss';
 import { Logout, PersonAdd, Settings } from '@mui/icons-material';
-import Feed from '@mui/icons-material/FeedOutlined';
-import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
-import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined';
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import SettingsIcon from '@mui/icons-material/Settings';
+import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import Feed from '@mui/icons-material/FeedOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import SettingsIcon from '@mui/icons-material/Settings';
+import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined';
 import {
   Avatar,
   Box,
@@ -25,36 +23,33 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import React from 'react';
 import Menu from '@mui/material/Menu';
+import React from 'react';
+
+import styles from './styles.module.scss';
+
 export function HomeView() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   return (
     <>
-      {/*<Header />*/}
-
       <div className={styles.home}>
         <div className={styles.header}>
           <div className={styles.header__wrapper}>
             <a className={styles.header__logo} href="#">
-              <img src="/images/logo-icon.jpg" style={{ maxWidth: '45px' }} />
-
-              <img src="/images/logo-text.jpg" style={{ maxWidth: '110px', marginLeft: '8px' }} />
-
-              {/* <img src="/images/logo2.jpg" style={{maxWidth: '150px'}} />  */}
+              <img src="/images/logo-icon.jpg" style={{ maxWidth: '45px' }} alt="test1" />
+              <img src="/images/logo-text.jpg" style={{ maxWidth: '110px', marginLeft: '8px' }} alt="test2" />
             </a>
 
             <div className={styles.header__rightCol}>
-              <img src="/images/accord-white.png" style={{ maxWidth: '70px', marginTop: '40px' }} />
+              <img src="/images/accord-white.png" style={{ maxWidth: '70px', marginTop: '40px' }} alt="test3" />
 
               <Box
                 sx={{
@@ -120,22 +115,27 @@ export function HomeView() {
                   <MenuItem>
                     <Avatar /> Profile
                   </MenuItem>
+
                   <MenuItem>
                     <Avatar /> My account
                   </MenuItem>
+
                   <Divider />
+
                   <MenuItem>
                     <ListItemIcon>
                       <PersonAdd fontSize="small" />
                     </ListItemIcon>
                     Add another account
                   </MenuItem>
+
                   <MenuItem>
                     <ListItemIcon>
                       <Settings fontSize="small" />
                     </ListItemIcon>
                     Settings
                   </MenuItem>
+
                   <MenuItem>
                     <ListItemIcon>
                       <Logout fontSize="small" />
@@ -147,19 +147,20 @@ export function HomeView() {
             </div>
           </div>
         </div>
+
         <div className={styles.subHeader}>
           <div className={styles.sidebar__item}>
             <Feed />
-
             <p>Лента</p>
           </div>
+
           <div className={styles.sidebar__item}>
             <DirectionsCarFilledOutlinedIcon />
             <p>Машины</p>
           </div>
+
           <div className={styles.sidebar__item}>
             <AutoStoriesOutlinedIcon />
-
             <p>Бортжурналы</p>
           </div>
 
@@ -175,10 +176,10 @@ export function HomeView() {
 
           <div className={styles.sidebar__item}>
             <TakeoutDiningOutlinedIcon />
-
             <p>Барахолка</p>
           </div>
         </div>
+
         <div className={styles.home__container}>
           <div className={styles.sidebar}>
             <div className={styles.sidebar__account}>
@@ -193,20 +194,22 @@ export function HomeView() {
                 <p className={styles.sidebar__subName}>Admin</p>
               </div>
             </div>
+
             <p className={styles.sidebar__labelMenu}>Загальне</p>
+
             <div className={styles.sidebar__item}>
               <Feed />
-
               <p>Лента</p>
               <p>Лента</p>
             </div>
+
             <div className={styles.sidebar__item}>
               <DirectionsCarFilledOutlinedIcon />
               <p>Машины</p>
             </div>
+
             <div className={styles.sidebar__item}>
               <AutoStoriesOutlinedIcon />
-
               <p>Бортжурналы</p>
             </div>
 
@@ -222,17 +225,19 @@ export function HomeView() {
 
             <div className={styles.sidebar__item}>
               <TakeoutDiningOutlinedIcon />
-
               <p>Барахолка</p>
             </div>
           </div>
+
           <div>
             <div className={styles.headNews}>
               <p className={styles.headNews__title}>Стрічка</p>
+
               <div className={styles.headNews__icon}>
                 <SettingsIcon />
               </div>
             </div>
+
             <div className={styles.postContainer}>
               <div className={styles.post}>
                 <CardHeader
@@ -272,7 +277,9 @@ export function HomeView() {
                     image="https://a.d-cd.net/JJdlQnVxsBZ85TYF_sE1T4AfjyE-1920.jpg"
                     alt="Paella dish"
                   />
-                  <div className={styles.post__backgroundAva}></div>
+
+                  <div className={styles.post__backgroundAva} />
+
                   <Avatar
                     className={styles.post__authorAvatar2}
                     sx={{ width: 28, height: 28 }}
@@ -288,15 +295,13 @@ export function HomeView() {
                       Ребзя привет! Начал саться главный радиатор. Какую марку посоветуете?
                     </Typography>
                   </CardContent>
-                  {/*<p className={styles.post__desc}>*/}
-                  {/* */}
-                  {/*</p>*/}
 
                   <div className={styles.post__footer}>
                     <div className={styles.post__like}>
                       <FavoriteOutlinedIcon />
                       <span>2</span>
                     </div>
+
                     <div className={styles.post__comment}>
                       <ChatBubbleOutlineIcon />
                       <span>5</span>
@@ -308,8 +313,6 @@ export function HomeView() {
                   </div>
                 </div>
               </div>
-
-              {/*-------*/}
 
               <div className={styles.post}>
                 <CardHeader
@@ -349,11 +352,6 @@ export function HomeView() {
                     image="https://a.d-cd.net/JJdlQnVxsBZ85TYF_sE1T4AfjyE-1920.jpg"
                     alt="Paella dish"
                   />
-                  {/*<div className={styles.post__backgroundAva}></div>*/}
-                  {/*<img*/}
-                  {/*  src="https://a.d-cd.net/JJdlQnVxsBZ85TYF_sE1T4AfjyE-1920.jpg"*/}
-                  {/*  alt="img-post"*/}
-                  {/*/>*/}
                 </div>
 
                 <div className={styles.post__body}>
@@ -367,15 +365,17 @@ export function HomeView() {
                       22000р. AVA стоит 12к (не варик). Желательно до 10к…
                     </Typography>
                   </CardContent>
-                  {/*<p className={styles.post__desc}>*/}
+
+                  {/* <p className={styles.post__desc}>*/}
                   {/* */}
-                  {/*</p>*/}
+                  {/* </p>*/}
 
                   <div className={styles.post__footer}>
                     <div className={styles.post__like}>
                       <FavoriteOutlinedIcon />
                       <span>2</span>
                     </div>
+
                     <div className={styles.post__comment}>
                       <ChatBubbleOutlineIcon />
                       <span>5</span>
@@ -387,8 +387,6 @@ export function HomeView() {
                   </div>
                 </div>
               </div>
-
-              {/*------*/}
 
               <div className={styles.post}>
                 <CardHeader
@@ -428,11 +426,6 @@ export function HomeView() {
                     image="https://a.d-cd.net/JJdlQnVxsBZ85TYF_sE1T4AfjyE-1920.jpg"
                     alt="Paella dish"
                   />
-                  {/*<div className={styles.post__backgroundAva}></div>*/}
-                  {/*<img*/}
-                  {/*  src="https://a.d-cd.net/JJdlQnVxsBZ85TYF_sE1T4AfjyE-1920.jpg"*/}
-                  {/*  alt="img-post"*/}
-                  {/*/>*/}
                 </div>
 
                 <div className={styles.post__body}>
@@ -446,15 +439,13 @@ export function HomeView() {
                       22000р. AVA стоит 12к (не варик). Желательно до 10к…
                     </Typography>
                   </CardContent>
-                  {/*<p className={styles.post__desc}>*/}
-                  {/* */}
-                  {/*</p>*/}
 
                   <div className={styles.post__footer}>
                     <div className={styles.post__like}>
                       <FavoriteOutlinedIcon />
                       <span>2</span>
                     </div>
+
                     <div className={styles.post__comment}>
                       <ChatBubbleOutlineIcon />
                       <span>5</span>
@@ -466,7 +457,6 @@ export function HomeView() {
                   </div>
                 </div>
               </div>
-              {/*-----*/}
 
               <div className={styles.post}>
                 <CardHeader
@@ -506,11 +496,6 @@ export function HomeView() {
                     image="https://a.d-cd.net/JJdlQnVxsBZ85TYF_sE1T4AfjyE-1920.jpg"
                     alt="Paella dish"
                   />
-                  {/*<div className={styles.post__backgroundAva}></div>*/}
-                  {/*<img*/}
-                  {/*  src="https://a.d-cd.net/JJdlQnVxsBZ85TYF_sE1T4AfjyE-1920.jpg"*/}
-                  {/*  alt="img-post"*/}
-                  {/*/>*/}
                 </div>
 
                 <div className={styles.post__body}>
@@ -524,15 +509,13 @@ export function HomeView() {
                       22000р. AVA стоит 12к (не варик). Желательно до 10к…
                     </Typography>
                   </CardContent>
-                  {/*<p className={styles.post__desc}>*/}
-                  {/* */}
-                  {/*</p>*/}
 
                   <div className={styles.post__footer}>
                     <div className={styles.post__like}>
                       <FavoriteOutlinedIcon />
                       <span>2</span>
                     </div>
+
                     <div className={styles.post__comment}>
                       <ChatBubbleOutlineIcon />
                       <span>5</span>

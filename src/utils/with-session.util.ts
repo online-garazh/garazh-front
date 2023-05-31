@@ -32,8 +32,6 @@ export function withSession(
           apiRequest({ url: '/users/profile/', method: 'GET' }, { token })
         );
 
-        console.info('currentUser2', currentUser);
-
         access = getRouteAccess(config, currentUser, config.disableRedirect);
       } catch (error) {
         await logout();

@@ -4,20 +4,32 @@ export const muiInputOverride: Partial<Components<Theme>> = {
   MuiOutlinedInput: {
     styleOverrides: {
       root: ({ theme: { palette, spacing, shape } }) => ({
-        backgroundColor: palette.background.paper,
+        ...(palette.mode === 'dark' && {
+          backgroundColor: palette.background.paper,
+          borderColor: palette.background.paper,
+        }),
         borderRadius: shape.borderRadius * 3,
-        borderColor: palette.background.paper,
         '&.MuiInputBase-adornedEnd': {
           paddingRight: spacing(1),
         },
+        '&:hover': {
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: palette.secondary.main,
+          },
+        },
+        '&.Mui-focused': {
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: palette.secondary.main,
+          },
+        },
       }),
       input: ({ theme: { spacing } }) => ({
-        height: '1.5em',
         lineHeight: 1.5,
+        height: '1.5em',
         padding: spacing(1.5, 2),
       }),
       notchedOutline: ({ theme: { palette } }) => ({
-        borderColor: palette.background.paper,
+        borderColor: palette.mode === 'dark' ? palette.background.paper : palette.divider,
       }),
     },
   },

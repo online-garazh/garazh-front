@@ -4,6 +4,7 @@ import { type ReactElement, type ReactNode } from 'react';
 import { type Colors } from '~/theme/colors';
 
 export type LayoutConfig = {
+  disableAuthButtons?: boolean;
   bodyBgColor?: Colors;
   subTitle?: string;
 };
@@ -22,15 +23,13 @@ export type GlobalProps = {};
 export type NextPage<P = {}, IP = P> = DefaultNextPage<P & GlobalProps, IP> & PageProps;
 
 export enum PagesSubTitles {
-  // Auth pages
   FORGOT_PASSWORD = 'Forgot password',
   NEW_PASSWORD = 'New password',
+  MY_GARAGE = 'Мій гараж',
+  SETTINGS = 'Налаштування',
   SIGN_UP = 'Реєстрація',
   SIGN_IN = 'Вхід',
-  // Landing page
+  PROFILE = 'Профіль',
   INDEX = 'Landing',
-  // My own profile pages
-  SETTINGS = 'Settings',
-  PROFILE = 'Profile',
-  HOME = 'Home',
+  FEED = 'Стрічка',
 }

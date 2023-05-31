@@ -3,15 +3,12 @@ import Box from '@mui/material/Box';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { BoolRenderProp } from '~/components/common/bool-render-prop';
 import { Button } from '~/components/common/button';
-import { PasswordIcon } from '~/components/common/icons/password-icon';
 import { TextField } from '~/components/common/text-field';
 import { UiILocators } from '~/constants/ui-locators.constant';
 import { fieldsSchemas } from '~/validations/fields.schemas';
 
 export type FormValues = {
-  password: string;
   email: string;
 };
 
@@ -20,22 +17,20 @@ type Props = {
   onSubmit: (values: FormValues) => void;
 };
 
-export const signInFormSchema = () =>
+export const forgotPasswordFormSchema = () =>
   z.object({
-    password: fieldsSchemas.password(),
     email: fieldsSchemas.email(),
   });
 
-export function SignInForm(props: Props) {
+export function ForgotPasswordForm(props: Props) {
   const { onSubmit, isLoading } = props;
   const { handleSubmit, control } = useForm<FormValues>({
     shouldFocusError: false,
     reValidateMode: 'onChange',
     defaultValues: {
-      password: '',
       email: '',
     },
-    resolver: zodResolver(signInFormSchema()),
+    resolver: zodResolver(forgotPasswordFormSchema()),
     mode: 'onSubmit',
   });
 
@@ -66,42 +61,10 @@ export function SignInForm(props: Props) {
             label="Електронна пошта"
             error={fieldState.invalid}
             type="email"
-            id={UiILocators.SIGN_IN_FORM_EMAIL}
+            id={UiILocators.FORGOT_PASSWORD_FORM_EMAIL}
           />
         )}
         name="email"
-      />
-
-      <Controller
-        control={control}
-        render={({ field, fieldState }) => (
-          <BoolRenderProp
-            render={({ toggleBool, boolValue }) => (
-              <TextField
-                {...field}
-                alwaysShowAdornment
-                errorMessage={fieldState.error?.message}
-                InputProps={{
-                  placeholder: 'Введіть свій пароль тут',
-                }}
-                fullWidth
-                required
-                suffix={
-                  <PasswordIcon
-                    toggleBool={toggleBool}
-                    boolValue={boolValue}
-                    id={UiILocators.SIGN_IN_FORM_PASSWORD_ICON}
-                  />
-                }
-                label="Пароль"
-                error={fieldState.invalid}
-                type={boolValue ? 'text' : 'new-password'}
-                id={UiILocators.SIGN_IN_FORM_PASSWORD}
-              />
-            )}
-          />
-        )}
-        name="password"
       />
 
       <Button
@@ -111,9 +74,9 @@ export function SignInForm(props: Props) {
         color="secondary"
         type="submit"
         size="large"
-        id={UiILocators.SIGN_IN_FORM_SUBMIT}
+        id={UiILocators.FORGOT_PASSWORD_FORM_SUBMIT}
       >
-        Увійти
+        Надіслати
       </Button>
     </Box>
   );

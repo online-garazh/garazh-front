@@ -19,7 +19,6 @@ export enum UiILocators {
   NEW_PASSWORD_FORM_NEW_PASSWORD_ICON = 'new-password-form-new-password-icon',
   NEW_PASSWORD_FORM_CONFIRM_PASSWORD = 'new-password-form-confirm-password',
   NEW_PASSWORD_FORM_NEW_PASSWORD = 'new-password-form-new-password',
-  NEW_PASSWORD_FORM_BACK_LINK = 'new-password-form-back-link',
   NEW_PASSWORD_FORM_SUBMIT = 'new-password-form-submit',
 
   FORGOT_PASSWORD_FORM_BACK_LINK = 'forgot-password-form-back-link',
@@ -29,7 +28,6 @@ export enum UiILocators {
   BACK_TO_HOME_BUTTON = 'back-to-home-button',
   BUTTON_UP = 'button-up',
 
-  USER_LAYOUT_SIDEBAR_SETTINGS_LINK = 'user-layout-sidebar-settings-link',
-  USER_LAYOUT_SIDEBAR_PROFILE_LINK = 'user-layout-sidebar-profile-link',
-  USER_LAYOUT_SIDEBAR_HOME_LINK = 'user-layout-sidebar-home-link',
+  USER_LAYOUT_SIDEBAR_MY_GARAGE_LINK = 'user-layout-sidebar-garage-link',
+  USER_LAYOUT_SIDEBAR_FEED_LINK = 'user-layout-sidebar-feed-link',
 }

@@ -26,10 +26,10 @@ export function SignUpView() {
 
       setAuthToken(data.access_token);
 
-      void router.push('/home');
+      void router.push(RoutePaths.FEED);
     },
     onError: (error) => {
-      console.info('onError', error);
+      console.debug('onError', error);
     },
   });
   const { mutate: signUpMutate, isLoading: signUpLoading } = usePostMutation<User, User>('/auth/signup/', {
@@ -37,7 +37,7 @@ export function SignUpView() {
       signInMutate({ email: variables.email, password: variables.password });
     },
     onError: (error) => {
-      console.info('onError', error);
+      console.debug('onError', error);
     },
   });
   const submitHandler = (data: FormValues) => {
@@ -53,7 +53,7 @@ export function SignUpView() {
         mt: 8,
       }}
     >
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 4 }}>
+      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
         Реєстрація
       </Typography>
 
@@ -70,8 +70,8 @@ export function SignUpView() {
           mt: 4,
         })}
       >
-        <Grid item>
-          <Link href={RoutePaths.SIGN_IN} id={UiILocators.SIGN_UP_FORM_BACK_LINK} color="secondary">
+        <Grid item xs>
+          <Link href={RoutePaths.SIGN_IN} id={UiILocators.SIGN_UP_FORM_BACK_LINK}>
             Вже є аккаунт? Увійти
           </Link>
         </Grid>

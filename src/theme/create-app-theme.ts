@@ -12,6 +12,7 @@ import {
   muiInputOverride,
   muiTypographyOverride,
   muiFormOverride,
+  muiContainerOverride,
 } from '~/theme/overrides';
 
 export const createAppTheme = (mode: PaletteMode): Theme => {
@@ -21,14 +22,15 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
       mode,
     },
   });
-  const { breakpoints, palette } = theme;
+  const { palette } = theme;
 
   theme = responsiveFontSizes(theme);
 
   theme = createTheme(theme, {
     typography: {
-      fontFamily: rubik.style.fontFamily,
+      fontFamily: 'inherit',
       button: {
+        fontFamily: rubik.style.fontFamily,
         textTransform: 'none',
       },
       h1: {
@@ -40,21 +42,39 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
       h3: {
         fontFamily: rubik.style.fontFamily,
       },
-      h4: {},
-      h5: {},
-      h6: {},
-      subtitle1: {},
-      subtitle2: {},
+      h4: {
+        fontFamily: rubik.style.fontFamily,
+      },
+      h5: {
+        fontFamily: rubik.style.fontFamily,
+      },
+      h6: {
+        fontFamily: rubik.style.fontFamily,
+      },
+      subtitle1: {
+        fontFamily: rubik.style.fontFamily,
+      },
+      subtitle2: {
+        fontFamily: rubik.style.fontFamily,
+      },
       body1: {
         fontFamily: rubik.style.fontFamily,
         fontSize: '1rem',
-        [breakpoints.down('md')]: {},
       },
-      body1_medium: {},
-      body2: {},
-      body2_medium: {},
-      body3: {},
+      body1_medium: {
+        fontFamily: rubik.style.fontFamily,
+      },
+      body2: {
+        fontFamily: rubik.style.fontFamily,
+      },
+      body2_medium: {
+        fontFamily: rubik.style.fontFamily,
+      },
+      body3: {
+        fontFamily: rubik.style.fontFamily,
+      },
       caption: {
+        fontFamily: rubik.style.fontFamily,
         lineHeight: 1.5,
         color: palette.text.secondary,
       },
@@ -67,6 +87,7 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
       // All MUI components overrides put here
       ...muiCssBaseLineOverride,
       ...muiTypographyOverride,
+      ...muiContainerOverride,
       ...muiButtonOverride,
       ...muiAppBarOverride,
       ...muiInputOverride,
