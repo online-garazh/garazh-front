@@ -105,17 +105,15 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
             </>
           )}
 
-          {process.env.NEXT_PUBLIC_DARK_MODE_SWITCHING === 'true' && (
-            <IconButton
-              aria-label="toggle dark mode"
-              onClick={changeDarkModeHandler}
-              color="inherit"
-              edge="end"
-              sx={{ ml: 0.5 }}
-            >
-              {palette.mode === 'dark' ? <Brightness7Icon color="tertiary" /> : <Brightness4Icon color="tertiary" />}
-            </IconButton>
-          )}
+          <IconButton
+            aria-label="toggle dark mode"
+            onClick={changeDarkModeHandler}
+            color="inherit"
+            edge="end"
+            sx={{ ml: 0.5 }}
+          >
+            {palette.mode === 'dark' ? <Brightness7Icon color="tertiary" /> : <Brightness4Icon color="tertiary" />}
+          </IconButton>
         </Box>
       </Toolbar>
     </AppBar>

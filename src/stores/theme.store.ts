@@ -12,7 +12,7 @@ export interface ThemeStoreMutations {
 
 const initialStore: ThemeStore = {
   // darkMode: !!JSON.parse(localStorage.getItem('darkMode') as string),
-  darkMode: true,
+  darkMode: false,
 };
 const store = proxy<ThemeStore>({
   ...initialStore,
