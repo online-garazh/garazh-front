@@ -113,7 +113,7 @@ export function NewPasswordForm(props: Props) {
                 }
                 label="Підтвердження пароля"
                 error={fieldState.invalid}
-                type={boolValue ? 'text' : 'new-password'}
+                type={boolValue ? 'text' : 'password'}
                 id={UiILocators.NEW_PASSWORD_FORM_CONFIRM_PASSWORD}
               />
             )}

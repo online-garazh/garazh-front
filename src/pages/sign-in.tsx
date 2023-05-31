@@ -2,8 +2,8 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { getLayout } from '~/components/layouts/auth-layout';
 import { SignInView } from '~/components/views/sign-in-view';
+import { RoutesBasicSubTitles } from '~/constants/routes.constant';
 import { type RouteConfig } from '~/types/app.type';
-import { PagesSubTitles } from '~/types/page.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
@@ -25,7 +25,7 @@ export const getServerSideProps = withSession(
 
 SignInRoute.layoutConfig = {
   disableAuthButtons: true,
-  subTitle: PagesSubTitles.SIGN_IN,
+  subTitle: RoutesBasicSubTitles.SIGN_IN,
 };
 
 SignInRoute.getLayout = getLayout;

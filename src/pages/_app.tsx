@@ -5,11 +5,11 @@ import Head from 'next/head';
 import { useState } from 'react';
 
 import { AppLayout } from '~/components/layouts/app-layout';
-import { PAGE_BASE_TITLE } from '~/constants/seo.constant';
 import { AppProvider } from '~/providers/app.provider';
 import { ThemeProvider } from '~/providers/theme.provider';
 import { createEmotionCache } from '~/theme/create-emotion-cache';
 import { type AppProps } from '~/types/app.type';
+import { getRouteTitle } from '~/utils/get-route-sub-title.util';
 
 import '../styles/index.scss';
 
@@ -26,14 +26,13 @@ export default function MyApp(props: AppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const { dehydratedState, ...restPageProps } = pageProps;
   const getLayout = Component.getLayout ?? ((page) => page);
-  const subTitle = Component.layoutConfig?.subTitle || '';
-  const modifiedSubTitle = subTitle ? ` | ${subTitle}` : '';
+  const title = getRouteTitle(Component.layoutConfig?.subTitle);
   const [queryClient] = useState(() => new QueryClient());
 
   return (
     <>
       <Head>
-        <title>{`${PAGE_BASE_TITLE}${modifiedSubTitle}`}</title>
+        <title>{title}</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
 

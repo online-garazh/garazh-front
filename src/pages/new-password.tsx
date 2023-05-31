@@ -2,8 +2,8 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { getLayout } from '~/components/layouts/auth-layout';
 import { NewPasswordView } from '~/components/views/new-password-view';
+import { RoutesBasicSubTitles } from '~/constants/routes.constant';
 import { type RouteConfig } from '~/types/app.type';
-import { PagesSubTitles } from '~/types/page.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
@@ -25,7 +25,7 @@ export const getServerSideProps = withSession(
 
 NewPasswordRoute.layoutConfig = {
   disableAuthButtons: true,
-  subTitle: PagesSubTitles.NEW_PASSWORD,
+  subTitle: RoutesBasicSubTitles.NEW_PASSWORD,
 };
 
 NewPasswordRoute.getLayout = getLayout;

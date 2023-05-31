@@ -2,8 +2,8 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { getLayout } from '~/components/layouts/landing-layout';
 import { LandingView } from '~/components/views/landing-view';
+import { RoutesBasicSubTitles } from '~/constants/routes.constant';
 import { type RouteConfig } from '~/types/app.type';
-import { PagesSubTitles } from '~/types/page.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
@@ -24,7 +24,7 @@ export const getServerSideProps = withSession(
 );
 
 LandingRoute.layoutConfig = {
-  subTitle: PagesSubTitles.INDEX,
+  subTitle: RoutesBasicSubTitles.INDEX,
 };
 
 LandingRoute.getLayout = getLayout;

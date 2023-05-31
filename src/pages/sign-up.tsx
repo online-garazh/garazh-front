@@ -1,6 +1,6 @@
 import { getLayout } from '~/components/layouts/auth-layout';
 import { SignUpView } from '~/components/views/sign-up-view';
-import { PagesSubTitles } from '~/types/page.type';
+import { RoutesBasicSubTitles } from '~/constants/routes.constant';
 
 export default function SignUpRoute() {
   return <SignUpView />;
@@ -8,7 +8,7 @@ export default function SignUpRoute() {
 
 SignUpRoute.layoutConfig = {
   disableAuthButtons: true,
-  subTitle: PagesSubTitles.SIGN_UP,
+  subTitle: RoutesBasicSubTitles.SIGN_UP,
 };
 
 SignUpRoute.getLayout = getLayout;

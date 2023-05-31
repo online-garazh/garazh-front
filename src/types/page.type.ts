@@ -21,15 +21,3 @@ export type PageServerProps = {
 export type GlobalProps = {};
 
 export type NextPage<P = {}, IP = P> = DefaultNextPage<P & GlobalProps, IP> & PageProps;
-
-export enum PagesSubTitles {
-  FORGOT_PASSWORD = 'Forgot password',
-  NEW_PASSWORD = 'New password',
-  MY_GARAGE = 'Мій гараж',
-  SETTINGS = 'Налаштування',
-  SIGN_UP = 'Реєстрація',
-  SIGN_IN = 'Вхід',
-  PROFILE = 'Профіль',
-  INDEX = 'Landing',
-  FEED = 'Стрічка',
-}
