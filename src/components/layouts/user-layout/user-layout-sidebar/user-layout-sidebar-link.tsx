@@ -35,8 +35,29 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
         },
       })}
     >
-      <ListItem sx={{ pl: 2, py: 0.75, borderRadius: 2 }}>
-        <Box sx={{ width: 24, height: 24, mr: 2.75 }}>{icon}</Box>
+      <ListItem
+        sx={({ breakpoints }) => ({
+          borderRadius: 2,
+          px: 1.5,
+          py: 0.75,
+          [breakpoints.up('sm')]: {
+            pl: 2.5,
+            pr: 0.75,
+          },
+        })}
+      >
+        <Box
+          sx={({ breakpoints }) => ({
+            height: 24,
+            width: 24,
+            mr: 2.75,
+            [breakpoints.up('sm')]: {
+              mr: 3.25,
+            },
+          })}
+        >
+          {icon}
+        </Box>
 
         <Typography variant="body1" sx={{ fontWeight: 300, fontSize: '0.875rem' }}>
           {text}

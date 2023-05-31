@@ -1,17 +1,21 @@
 import { dehydrate } from '@tanstack/react-query';
 
-import { getLayout } from '~/components/layouts/auth-layout';
-import { SignInView } from '~/components/views/sign-in-view';
+import { HomeView } from '~/components/views/home-view';
+import { useCurrentUser } from '~/hooks/use-current-user.hook';
 import { type RouteConfig } from '~/types/app.type';
-import { PagesSubTitles } from '~/types/page.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
+  disableRedirect: true,
   requireAuth: false,
 };
 
-export default function SignInRoute() {
-  return <SignInView />;
+export default function HomeRoute() {
+  const { currentUser } = useCurrentUser();
+
+  console.debug('currentUser', currentUser);
+
+  return <HomeView />;
 }
 
 export const getServerSideProps = withSession(
@@ -22,10 +26,3 @@ export const getServerSideProps = withSession(
   }),
   ROUTE_CONFIG
 );
-
-SignInRoute.layoutConfig = {
-  disableAuthButtons: true,
-  subTitle: PagesSubTitles.SIGN_IN,
-};
-
-SignInRoute.getLayout = getLayout;

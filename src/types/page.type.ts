@@ -4,6 +4,7 @@ import { type ReactElement, type ReactNode } from 'react';
 import { type Colors } from '~/theme/colors';
 
 export type LayoutConfig = {
+  disableAuthButtons?: boolean;
   bodyBgColor?: Colors;
   subTitle?: string;
 };

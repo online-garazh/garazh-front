@@ -3,25 +3,24 @@ import { type Palette } from '@mui/material';
 import { Colors } from '~/theme/colors';
 
 export const appPalette = {
-  // ---------- Light mode ----------
   light: {
     primary: {
       contrastText: Colors.white,
-      light: Colors.primary300,
-      main: Colors.primary500,
-      dark: Colors.primary700,
+      light: '#33BC77',
+      main: '#00AB55',
+      dark: '#008944',
     },
     secondary: {
       contrastText: Colors.white,
-      light: Colors.secondary500,
-      main: Colors.secondary700,
-      dark: Colors.secondary800,
+      light: '#0C0D0F',
+      main: '#0C0D0F',
+      dark: '#0C0D0F',
     },
     tertiary: {
       contrastText: Colors.white,
-      light: Colors.tertiary500,
-      main: Colors.tertiary700,
-      dark: Colors.tertiary900,
+      light: '#0C0D0F',
+      main: '#0C0D0F',
+      dark: '#0C0D0F',
     },
     warning: {
       contrastText: Colors.white,
@@ -42,10 +41,10 @@ export const appPalette = {
       dark: Colors.error700,
     },
     background: {
-      secondary: Colors.white,
-      primary: Colors.white,
+      secondary: '#F4F4F4',
+      primary: '#FCFCFC',
       default: Colors.white,
-      paper: '#FCFCFC',
+      paper: '#F4F4F4',
     },
     info: {
       contrastText: Colors.white,
@@ -54,9 +53,11 @@ export const appPalette = {
       dark: Colors.smoke900,
     },
     text: {
-      secondary: '#333333',
+      secondary: '#7A8296',
+      tertiary: '#31343C',
       disabled: Colors.secondary200,
-      primary: '#1F1F1F',
+      primary: '#0C0D0F',
+      hint: '#626878',
     },
     divider: Colors.secondary200,
     common: {
@@ -64,7 +65,7 @@ export const appPalette = {
       white: Colors.white,
     },
   } as Palette,
-  // ---------- Dark mode ----------
+
   dark: {
     primary: {
       contrastText: Colors.black,

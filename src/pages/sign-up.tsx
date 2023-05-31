@@ -7,6 +7,7 @@ export default function SignUpRoute() {
 }
 
 SignUpRoute.layoutConfig = {
+  disableAuthButtons: true,
   subTitle: PagesSubTitles.SIGN_UP,
 };
 

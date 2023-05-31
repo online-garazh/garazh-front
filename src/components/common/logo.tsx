@@ -1,4 +1,5 @@
 import { Box, SvgIcon } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { type MouseEvent } from 'react';
 
@@ -7,6 +8,7 @@ import { RoutePaths } from '~/constants/routes.constant';
 
 export function Logo() {
   const router = useRouter();
+  const { palette } = useTheme();
   const logoClickHandler = (e: MouseEvent<HTMLElement>): void => {
     e.preventDefault();
 
@@ -19,30 +21,33 @@ export function Logo() {
     <Box
       onClick={logoClickHandler}
       sx={({ palette, transitions }) => ({
-        backgroundColor: palette.background.primary,
         justifyContent: 'center',
-        borderRadius: 2,
-        transition: transitions.create('background-color', {
-          duration: transitions.duration.shorter,
-          easing: transitions.easing.sharp,
-        }),
         alignItems: 'center',
+        flexShrink: 0,
         display: 'flex',
-        height: 46,
-        width: 56,
+        height: 32,
+        width: 32,
+        '& .MuiSvgIcon-root': {
+          transition: transitions.create('color', {
+            duration: transitions.duration.shortest,
+            easing: transitions.easing.sharp,
+          }),
+        },
         '&:hover': {
-          backgroundColor: palette.background.secondary,
           cursor: 'pointer',
+          '& .MuiSvgIcon-root': {
+            color: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
+          },
         },
       })}
     >
       <SvgIcon
-        color="primary"
+        color={palette.mode === 'dark' ? 'primary' : 'secondary'}
         inheritViewBox
         component={icons.svg.logo}
         sx={{
-          height: 30,
-          width: 30,
+          height: 32,
+          width: 32,
         }}
       />
     </Box>

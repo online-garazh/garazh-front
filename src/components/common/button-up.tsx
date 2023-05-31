@@ -33,20 +33,24 @@ export function ButtonUp(props: Props) {
     <Button
       onClick={scrollUpHandler}
       variant="contained"
+      color="secondary"
       size="medium"
       sx={({ transitions }) => ({
+        justifyContent: 'center',
         pointerEvents: 'none',
-        transition: transitions.create('opacity', {
+        transition: transitions.create(['opacity', 'background-color'], {
           duration: transitions.duration.enteringScreen,
           easing: transitions.easing.sharp,
         }),
+        alignItems: 'center',
+        minWidth: 40,
         display: 'none',
         opacity: 0,
         height: 40,
         width: 40,
         ...(visible && {
           pointerEvents: 'auto',
-          display: 'block',
+          display: 'flex',
           opacity: 1,
           cursor: 'pointer',
         }),

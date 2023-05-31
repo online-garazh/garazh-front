@@ -19,7 +19,6 @@ export enum UiILocators {
   NEW_PASSWORD_FORM_NEW_PASSWORD_ICON = 'new-password-form-new-password-icon',
   NEW_PASSWORD_FORM_CONFIRM_PASSWORD = 'new-password-form-confirm-password',
   NEW_PASSWORD_FORM_NEW_PASSWORD = 'new-password-form-new-password',
-  NEW_PASSWORD_FORM_BACK_LINK = 'new-password-form-back-link',
   NEW_PASSWORD_FORM_SUBMIT = 'new-password-form-submit',
 
   FORGOT_PASSWORD_FORM_BACK_LINK = 'forgot-password-form-back-link',

@@ -1,7 +1,7 @@
 import { Box, Container } from '@mui/material';
 import { type ReactElement, type ReactNode } from 'react';
 
-import { AuthLayoutHeader } from '~/components/layouts/auth-layout/auth-layout-header';
+import { HeaderCommon } from '~/components/common/header-common';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { type LayoutConfig } from '~/types/page.type';
 
@@ -11,11 +11,11 @@ type Props = {
 };
 
 export function AuthLayout(props: Props) {
-  const { children } = props;
+  const { layoutConfig, children } = props;
 
   return (
     <Box sx={{ flexDirection: 'column', minHeight: '100vh', display: 'flex' }}>
-      <AuthLayoutHeader />
+      <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} />
 
       <Box
         component="main"

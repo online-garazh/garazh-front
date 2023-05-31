@@ -1,10 +1,15 @@
-import FeedIcon from '@mui/icons-material/Feed';
-import GarageIcon from '@mui/icons-material/Garage';
+import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import { Drawer, List } from '@mui/material';
 import { memo } from 'react';
 import { useSnapshot } from 'valtio/react';
 
-import { USER_DRAWER_FULL_WIDTH, USER_DRAWER_ROLLED_WIDTH, HEADER_HEIGHT } from '~/configs/mui-components.config';
+import {
+  USER_DRAWER_FULL_WIDTH,
+  USER_DRAWER_ROLLED_WIDTH,
+  HEADER_HEIGHT,
+  USER_DRAWER_ROLLED_WIDTH_XS,
+} from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
 import { UiElementNames, uiStore } from '~/stores/ui.store';
@@ -17,13 +22,13 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
   const links: LinkProps[] = [
     {
       href: RoutePaths.FEED,
-      icon: <FeedIcon />,
+      icon: <FeedOutlinedIcon />,
       text: 'Стрічка',
       id: UiILocators.USER_LAYOUT_SIDEBAR_FEED_LINK,
     },
     {
       href: RoutePaths.MY_GARAGE,
-      icon: <GarageIcon />,
+      icon: <DirectionsCarFilledOutlinedIcon />,
       text: 'Мій гараж',
       id: UiILocators.USER_LAYOUT_SIDEBAR_MY_GARAGE_LINK,
     },
@@ -32,7 +37,7 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
   return (
     <Drawer
       variant="permanent"
-      sx={({ transitions, palette }) => ({
+      sx={({ breakpoints, transitions, palette }) => ({
         '& .MuiDrawer-paper': {
           backgroundColor: palette.background.default,
           whiteSpace: 'nowrap',
@@ -42,16 +47,15 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
           }),
           boxSizing: 'border-box',
           position: 'relative',
-          width: USER_DRAWER_FULL_WIDTH,
           border: 'none',
+          width: USER_DRAWER_FULL_WIDTH,
           ...(!sideIsOpen && {
-            transition: transitions.create('width', {
-              duration: transitions.duration.leavingScreen,
-              easing: transitions.easing.sharp,
-            }),
             overflowX: 'hidden',
-            width: USER_DRAWER_ROLLED_WIDTH,
+            width: USER_DRAWER_ROLLED_WIDTH_XS,
           }),
+          [breakpoints.up('sm')]: {
+            width: sideIsOpen ? USER_DRAWER_FULL_WIDTH : USER_DRAWER_ROLLED_WIDTH,
+          },
         },
       })}
     >
