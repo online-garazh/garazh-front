@@ -21,8 +21,16 @@ export function ForgotPasswordView() {
         mt: 8,
       }}
     >
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
-        Забули пароль
+      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 4 }}>
+        Забули пароль?
+      </Typography>
+
+      <Typography
+        variant="body1"
+        sx={({ palette }) => ({ textAlign: 'center', mb: 4, fontSize: '0.875rem', color: palette.text.hint })}
+      >
+        Введіть адресу електронної пошти, пов’язану з вашим обліковим записом, і ми надішлемо вам електронною поштою
+        посилання для зміни пароля.
       </Typography>
 
       <ForgotPasswordForm isLoading={false} onSubmit={submitHandler} />

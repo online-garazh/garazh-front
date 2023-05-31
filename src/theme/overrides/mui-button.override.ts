@@ -28,7 +28,7 @@ export const muiButtonOverride: Partial<Components<Theme>> = {
       }),
 
       sizeLarge: ({ theme: { spacing } }) => ({
-        height: spacing(5.5),
+        height: spacing(6),
       }),
     },
   },

@@ -18,7 +18,7 @@ export function NewPasswordView() {
       }}
     >
       <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
-        Зміна паролю
+        Змінити пароль
       </Typography>
 
       <NewPasswordForm isLoading={false} onSubmit={submitHandler} />

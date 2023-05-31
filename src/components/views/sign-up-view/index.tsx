@@ -54,7 +54,7 @@ export function SignUpView() {
       }}
     >
       <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
-        Реєстрація
+        Зареєструватись
       </Typography>
 
       <SignUpForm isLoading={signUpLoading || signInLoading} onSubmit={submitHandler} />
