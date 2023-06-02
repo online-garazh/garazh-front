@@ -41,10 +41,10 @@ export const appPalette = {
       dark: Colors.error700,
     },
     background: {
-      secondary: '#F4F4F4',
-      primary: '#FCFCFC',
+      secondary: '#FBFBFB',
+      primary: Colors.white,
       default: Colors.white,
-      paper: '#F4F4F4',
+      paper: '#FBFBFB',
     },
     info: {
       contrastText: Colors.white,

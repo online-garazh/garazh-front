@@ -23,10 +23,14 @@ export const muiInputOverride: Partial<Components<Theme>> = {
           },
         },
       }),
-      input: ({ theme: { spacing } }) => ({
+      input: ({ theme: { spacing, palette } }) => ({
         lineHeight: 1.5,
         height: '1.5em',
         padding: spacing(1.5, 2),
+        '&::placeholder': {
+          color: palette.text.secondary,
+          opacity: 0.5,
+        },
       }),
       notchedOutline: ({ theme: { palette } }) => ({
         borderColor: palette.mode === 'dark' ? palette.background.paper : palette.divider,

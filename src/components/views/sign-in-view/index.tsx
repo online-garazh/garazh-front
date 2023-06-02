@@ -71,7 +71,7 @@ export function SignInView() {
         />
       </Box>
 
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
+      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
         Увійдіть
       </Typography>
 
@@ -83,8 +83,8 @@ export function SignInView() {
           borderTopColor: palette.divider,
           borderTopStyle: 'solid',
           borderTopWidth: 1,
-          pt: 2,
-          mt: 4,
+          pt: 1.5,
+          mt: 3.75,
         })}
       >
         <Grid item xs>

@@ -18,7 +18,9 @@ export interface UiStoreMutations {
 }
 
 const initialStore: UiStore = {
-  active: {},
+  active: {
+    [UiElementNames.USER_SIDEBAR]: true,
+  },
 };
 const store = proxy<UiStore>({
   ...initialStore,

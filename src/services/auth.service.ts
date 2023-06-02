@@ -10,9 +10,9 @@ export const authService = (ctx?: GetServerSidePropsContext) => {
   const removeAuthToken = () => deleteCookie(ACCESS_TOKEN_NAME, { req: ctx?.req, res: ctx?.res });
 
   return {
-    token,
+    removeAuthToken,
     getAuthToken,
     setAuthToken,
-    removeAuthToken,
+    token,
   };
 };

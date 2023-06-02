@@ -29,7 +29,7 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
         '&:hover': {
           textDecoration: 'none',
           li: {
-            backgroundColor: palette.secondary.main,
+            backgroundColor: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
             color: palette.secondary.contrastText,
           },
         },
@@ -38,11 +38,12 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
       <ListItem
         sx={({ breakpoints }) => ({
           borderRadius: 2,
-          px: 1.5,
-          py: 0.75,
+          px: 1,
+          py: 1,
           [breakpoints.up('sm')]: {
-            pl: 2.5,
-            pr: 0.75,
+            pl: 2,
+            pr: 1,
+            py: 1.5,
           },
         })}
       >
@@ -50,18 +51,16 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
           sx={({ breakpoints }) => ({
             height: 24,
             width: 24,
-            mr: 2.75,
+            mr: 2,
             [breakpoints.up('sm')]: {
-              mr: 3.25,
+              mr: 3,
             },
           })}
         >
           {icon}
         </Box>
 
-        <Typography variant="body1" sx={{ fontWeight: 300, fontSize: '0.875rem' }}>
-          {text}
-        </Typography>
+        <Typography variant="body1">{text}</Typography>
       </ListItem>
     </Link>
   );

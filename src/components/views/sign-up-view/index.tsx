@@ -53,7 +53,7 @@ export function SignUpView() {
         mt: 8,
       }}
     >
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
+      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
         Зареєструватись
       </Typography>
 
@@ -66,11 +66,11 @@ export function SignUpView() {
           borderTopColor: palette.divider,
           borderTopStyle: 'solid',
           borderTopWidth: 1,
-          pt: 2,
-          mt: 4,
+          pt: 1.5,
+          mt: 3.75,
         })}
       >
-        <Grid item xs>
+        <Grid item>
           <Link href={RoutePaths.SIGN_IN} id={UiILocators.SIGN_UP_FORM_BACK_LINK}>
             Вже є аккаунт? Увійти
           </Link>

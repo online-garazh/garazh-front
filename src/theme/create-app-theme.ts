@@ -13,6 +13,7 @@ import {
   muiTypographyOverride,
   muiFormOverride,
   muiContainerOverride,
+  muiMenuOverride,
 } from '~/theme/overrides';
 
 export const createAppTheme = (mode: PaletteMode): Theme => {
@@ -28,9 +29,9 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
 
   theme = createTheme(theme, {
     typography: {
-      fontFamily: 'inherit',
+      fontFamily: rubik.style.fontFamily,
       button: {
-        fontFamily: rubik.style.fontFamily,
+        fontFamily: 'inherit',
         textTransform: 'none',
       },
       h1: {
@@ -76,6 +77,7 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
       caption: {
         fontFamily: rubik.style.fontFamily,
         lineHeight: 1.5,
+        fontWeight: 300,
         color: palette.text.secondary,
       },
     },
@@ -92,6 +94,7 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
       ...muiAppBarOverride,
       ...muiInputOverride,
       ...muiFormOverride,
+      ...muiMenuOverride,
     },
   } as ThemeOptions);
 

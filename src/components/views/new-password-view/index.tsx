@@ -17,7 +17,7 @@ export function NewPasswordView() {
         mt: 8,
       }}
     >
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
+      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
         Змінити пароль
       </Typography>
 

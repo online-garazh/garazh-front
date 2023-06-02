@@ -1,18 +1,15 @@
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
 import { memo } from 'react';
 
 import { Button } from '~/components/common/button';
+import { AccountMenu } from '~/components/common/header-common/account-menu';
 import { Logo } from '~/components/common/logo';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
 import { useCurrentUser } from '~/hooks/use-current-user.hook';
-import { themeStoreMutations } from '~/stores/theme.store';
 import { UiElementNames, uiStoreMutations } from '~/stores/ui.store';
 
 type Props = {
@@ -22,33 +19,40 @@ type Props = {
 
 export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
   const { disableAuthButtons, withSidebar } = props;
-  const { palette } = useTheme();
   const { currentUser } = useCurrentUser();
-  const changeDarkModeHandler = () => {
-    themeStoreMutations.toggleDarkMode();
-  };
   const toggleDrawerHandler = () => {
     uiStoreMutations.toggleUi(UiElementNames.USER_SIDEBAR);
   };
 
   return (
     <AppBar
-      sx={({ palette, zIndex }) => ({
-        backgroundColor: palette.mode === 'dark' ? palette.background.default : palette.background.secondary,
+      sx={({ palette, zIndex, breakpoints }) => ({
+        backgroundColor: palette.background.default,
         position: 'absolute',
         zIndex: zIndex.drawer + 1,
-        px: 0,
+        px: 2,
+        [breakpoints.up('sm')]: {
+          px: 3,
+        },
       })}
     >
       <Toolbar
-        sx={({ breakpoints }) => ({
+        sx={({ breakpoints, palette }) => ({
           justifyContent: 'space-between',
           minHeight: HEADER_HEIGHT,
           display: 'flex',
           height: HEADER_HEIGHT,
           width: '100%',
+          borderBottomColor: palette.divider,
+          borderBottomStyle: 'solid',
+          borderBottomWidth: 1,
+          ...(palette.mode === 'dark' && {
+            borderColor: 'transparent',
+          }),
+          padding: 0,
           [breakpoints.up('xs')]: {
             minHeight: HEADER_HEIGHT,
+            padding: 0,
           },
         })}
       >
@@ -74,7 +78,7 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
               edge="start"
               sx={{ marginRight: 'auto' }}
             >
-              <MenuIcon />
+              <MenuIcon color="tertiary" />
             </IconButton>
           )}
 
@@ -105,15 +109,7 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
             </>
           )}
 
-          <IconButton
-            aria-label="toggle dark mode"
-            onClick={changeDarkModeHandler}
-            color="inherit"
-            edge="end"
-            sx={{ ml: 0.5 }}
-          >
-            {palette.mode === 'dark' ? <Brightness7Icon color="tertiary" /> : <Brightness4Icon color="tertiary" />}
-          </IconButton>
+          <AccountMenu user={void currentUser} />
         </Box>
       </Toolbar>
     </AppBar>

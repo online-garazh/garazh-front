@@ -5,7 +5,7 @@ export function SettingsView() {
   return (
     <Box sx={{ width: '100%', p: 2 }}>
       <Typography component="h1" variant="h4" sx={{ mb: 4 }}>
-        Settings
+        Налаштування
       </Typography>
     </Box>
   );

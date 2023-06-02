@@ -5,3 +5,4 @@ export { muiButtonOverride } from './mui-button.override';
 export { muiAppBarOverride } from './mui-app-bar.override';
 export { muiInputOverride } from './mui-input.override';
 export { muiFormOverride } from './mui-form.override';
+export { muiMenuOverride } from './mui-menu.override';

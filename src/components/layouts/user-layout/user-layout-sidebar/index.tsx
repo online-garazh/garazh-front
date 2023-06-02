@@ -39,6 +39,10 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
       variant="permanent"
       sx={({ breakpoints, transitions, palette }) => ({
         '& .MuiDrawer-paper': {
+          border: 'none',
+          borderRightColor: palette.divider,
+          borderRightStyle: 'solid',
+          borderRightWidth: 1,
           backgroundColor: palette.background.default,
           whiteSpace: 'nowrap',
           transition: transitions.create('width', {
@@ -47,11 +51,14 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
           }),
           boxSizing: 'border-box',
           position: 'relative',
-          border: 'none',
+          height: '100%',
           width: USER_DRAWER_FULL_WIDTH,
           ...(!sideIsOpen && {
             overflowX: 'hidden',
             width: USER_DRAWER_ROLLED_WIDTH_XS,
+          }),
+          ...(palette.mode === 'dark' && {
+            borderColor: 'transparent',
           }),
           [breakpoints.up('sm')]: {
             width: sideIsOpen ? USER_DRAWER_FULL_WIDTH : USER_DRAWER_ROLLED_WIDTH,
@@ -59,7 +66,7 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
         },
       })}
     >
-      <List component="nav" sx={{ p: 0, paddingTop: HEADER_HEIGHT / 8, px: 1 }}>
+      <List component="nav" sx={{ p: 0, paddingTop: HEADER_HEIGHT / 8 + 1.5, px: 1 }}>
         {links.map(({ href, text, icon, id }) => (
           <UserLayoutSidebarLink href={href} text={text} icon={icon} key={`${id}-list-item`} id={id} />
         ))}
