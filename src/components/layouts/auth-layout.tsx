@@ -26,7 +26,17 @@ export function AuthLayout(props: Props) {
           flex: 1,
         })}
       >
-        <Container maxWidth="xs">{children}</Container>
+        <Container
+          maxWidth="xs"
+          sx={({ breakpoints }) => ({
+            pb: 8,
+            [breakpoints.down('sm')]: {
+              pb: 4,
+            },
+          })}
+        >
+          {children}
+        </Container>
       </Box>
     </Box>
   );

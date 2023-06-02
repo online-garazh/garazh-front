@@ -46,22 +46,35 @@ export function SignUpView() {
 
   return (
     <Box
-      sx={{
+      sx={({ breakpoints }) => ({
         flexDirection: 'column',
         alignItems: 'center',
         display: 'flex',
         mt: 8,
-      }}
+        [breakpoints.down('sm')]: {
+          mt: 4,
+        },
+      })}
     >
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
+      <Typography
+        component="h1"
+        variant="h3"
+        sx={({ breakpoints }) => ({
+          textAlign: 'center',
+          mb: 5,
+          [breakpoints.down('sm')]: {
+            mb: 4,
+          },
+        })}
+      >
         Зареєструватись
       </Typography>
 
       <SignUpForm isLoading={signUpLoading || signInLoading} onSubmit={submitHandler} />
 
       <Grid
-        container
         justifyContent="center"
+        container
         sx={({ palette }) => ({
           borderTopColor: palette.divider,
           borderTopStyle: 'solid',

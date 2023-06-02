@@ -10,7 +10,7 @@ type Props = {
 export function AccountAvatar(props: Props) {
   const { user } = props;
   const isFullNameExist = user.firstName && user.lastName;
-  const isNickNameExist = user.nickname;
+  const isNickNameExist = user.nickName;
   const enhancedProps = {
     ...(isFullNameExist &&
       !user.profileImage && {
@@ -18,7 +18,7 @@ export function AccountAvatar(props: Props) {
       }),
     ...(!!isNickNameExist &&
       !user.profileImage && {
-        children: getNameInitials(user.nickname),
+        children: getNameInitials(user.nickName),
       }),
     ...(user.profileImage && {
       src: user.profileImage,

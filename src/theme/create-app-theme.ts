@@ -64,6 +64,8 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
       },
       body1_medium: {
         fontFamily: rubik.style.fontFamily,
+        fontWeight: 500,
+        fontSize: '1rem',
       },
       body2: {
         fontFamily: rubik.style.fontFamily,

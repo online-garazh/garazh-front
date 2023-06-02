@@ -2,5 +2,6 @@ export type UserRes = {
   profileImage: string;
   firstName: string;
   lastName: string;
-  nickname: string;
+  nickName: string;
+  email: string;
 };

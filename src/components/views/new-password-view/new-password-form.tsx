@@ -9,6 +9,7 @@ import { PasswordIcon } from '~/components/common/icons/password-icon';
 import { TextField } from '~/components/common/text-field';
 import { ResolverErrors } from '~/constants/errors.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
+import { nameOf } from '~/utils/name-of.util';
 import { fieldsSchemas } from '~/validations/fields.schemas';
 
 export type FormValues = {
@@ -29,7 +30,7 @@ export const newPasswordFormSchema = () =>
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: ResolverErrors.passwordsMatchField,
-      path: ['confirmPassword'],
+      path: [nameOf<FormValues>('confirmPassword')],
     });
 
 export function NewPasswordForm(props: Props) {
@@ -68,7 +69,7 @@ export function NewPasswordForm(props: Props) {
                 alwaysShowAdornment
                 errorMessage={fieldState.error?.message}
                 InputProps={{
-                  placeholder: 'Введіть новий пароль тут',
+                  placeholder: 'Введіть новий пароль',
                 }}
                 fullWidth
                 required
@@ -100,7 +101,7 @@ export function NewPasswordForm(props: Props) {
                 alwaysShowAdornment
                 errorMessage={fieldState.error?.message}
                 InputProps={{
-                  placeholder: 'Введіть підтвердження паролю тут',
+                  placeholder: 'Введіть підтвердження паролю',
                 }}
                 fullWidth
                 required

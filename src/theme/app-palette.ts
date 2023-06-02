@@ -41,7 +41,7 @@ export const appPalette = {
       dark: Colors.error700,
     },
     background: {
-      secondary: '#FBFBFB',
+      secondary: '#F4F4F4',
       primary: Colors.white,
       default: Colors.white,
       paper: '#FBFBFB',

@@ -10,14 +10,27 @@ export function NewPasswordView() {
 
   return (
     <Box
-      sx={{
+      sx={({ breakpoints }) => ({
         flexDirection: 'column',
         alignItems: 'center',
         display: 'flex',
         mt: 8,
-      }}
+        [breakpoints.down('sm')]: {
+          mt: 4,
+        },
+      })}
     >
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
+      <Typography
+        component="h1"
+        variant="h3"
+        sx={({ breakpoints }) => ({
+          textAlign: 'center',
+          mb: 5,
+          [breakpoints.down('sm')]: {
+            mb: 4,
+          },
+        })}
+      >
         Змінити пароль
       </Typography>
 

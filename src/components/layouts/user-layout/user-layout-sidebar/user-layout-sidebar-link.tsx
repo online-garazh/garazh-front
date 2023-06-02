@@ -1,6 +1,7 @@
 import { ListItem } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/router';
 import { memo, type ReactNode } from 'react';
 
 import { Link } from '~/components/common/next-link';
@@ -16,6 +17,8 @@ export type Props = {
 
 export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(props: Props) {
   const { href, icon, text, id } = props;
+  const router = useRouter();
+  const selectedLink = router.pathname.includes(href);
 
   return (
     <Link
@@ -26,11 +29,19 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
         alignItems: 'center',
         display: 'flex',
         color: palette.tertiary.main,
+        mb: 0.5,
+        ...(selectedLink && {
+          pointerEvents: 'none',
+          li: {
+            backgroundColor: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
+
+            color: palette.secondary.contrastText,
+          },
+        }),
         '&:hover': {
           textDecoration: 'none',
           li: {
-            backgroundColor: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
-            color: palette.secondary.contrastText,
+            backgroundColor: palette.mode === 'dark' ? palette.background.primary : palette.background.secondary,
           },
         },
       })}
@@ -39,11 +50,10 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
         sx={({ breakpoints }) => ({
           borderRadius: 2,
           px: 1,
-          py: 1,
+          py: 1.5,
           [breakpoints.up('sm')]: {
-            pl: 2,
-            pr: 1,
-            py: 1.5,
+            px: 2,
+            py: 2,
           },
         })}
       >
@@ -60,7 +70,9 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
           {icon}
         </Box>
 
-        <Typography variant="body1">{text}</Typography>
+        <Typography variant="body1_medium" sx={{ fontSize: '0.875rem' }}>
+          {text}
+        </Typography>
       </ListItem>
     </Link>
   );

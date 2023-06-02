@@ -54,7 +54,7 @@ export function ForgotPasswordForm(props: Props) {
             {...field}
             errorMessage={fieldState.error?.message}
             InputProps={{
-              placeholder: 'Введіть свою електронну пошту тут',
+              placeholder: 'Введіть свою електронну пошту',
             }}
             fullWidth
             required

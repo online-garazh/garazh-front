@@ -37,12 +37,16 @@ export function UserLayout(props: Props) {
         }}
       >
         <Box
-          sx={({ palette, shape }) => ({
+          sx={({ breakpoints, palette, shape }) => ({
             borderTopLeftRadius: shape.borderRadius * 2,
             backgroundColor: palette.background.primary,
             display: 'flex',
             width: '100%',
             flex: 1,
+            p: 3,
+            [breakpoints.down('sm')]: {
+              pl: 2,
+            },
           })}
         >
           {children}

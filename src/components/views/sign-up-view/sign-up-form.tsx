@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Grid, type Theme, useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -9,12 +10,15 @@ import { PasswordIcon } from '~/components/common/icons/password-icon';
 import { TextField } from '~/components/common/text-field';
 import { ResolverErrors } from '~/constants/errors.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
+import { nameOf } from '~/utils/name-of.util';
 import { fieldsSchemas } from '~/validations/fields.schemas';
 
 export type FormValues = {
   confirmPassword: string;
+  firstName: string;
+  lastName: string;
   password: string;
-  nickname: string;
+  nickName: string;
   email: string;
 };
 
@@ -27,24 +31,29 @@ export const signUpFormSchema = () =>
   z
     .object({
       confirmPassword: fieldsSchemas.password(),
-      nickname: fieldsSchemas.nickname(),
+      firstName: fieldsSchemas.firstName(),
+      lastName: fieldsSchemas.lastName(),
+      nickName: fieldsSchemas.nickName(),
       password: fieldsSchemas.password(),
       email: fieldsSchemas.email(),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: ResolverErrors.passwordsMatchField,
-      path: ['confirmPassword'],
+      path: [nameOf<FormValues>('confirmPassword')],
     });
 
 export function SignUpForm(props: Props) {
   const { onSubmit, isLoading } = props;
+  const isXS = useMediaQuery(({ breakpoints }: Theme) => breakpoints.down('sm'));
   const { handleSubmit, control } = useForm<FormValues>({
     shouldFocusError: false,
     reValidateMode: 'onChange',
     defaultValues: {
       confirmPassword: '',
+      firstName: '',
+      lastName: '',
       password: '',
-      nickname: '',
+      nickName: '',
       email: '',
     },
     resolver: zodResolver(signUpFormSchema()),
@@ -64,6 +73,52 @@ export function SignUpForm(props: Props) {
       }}
       sx={{ width: '100%' }}
     >
+      <Grid container spacing={isXS ? 0 : 2}>
+        <Grid item xs={12} sm={5}>
+          <Controller
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                errorMessage={fieldState.error?.message}
+                InputProps={{
+                  placeholder: "Введіть свое ім'я",
+                }}
+                fullWidth
+                required
+                label="Ім'я"
+                error={fieldState.invalid}
+                type="email"
+                id={UiILocators.SIGN_UP_FORM_FIRST_NAME}
+              />
+            )}
+            name="firstName"
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={7}>
+          <Controller
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                errorMessage={fieldState.error?.message}
+                InputProps={{
+                  placeholder: 'Введіть своє прізвище',
+                }}
+                fullWidth
+                required
+                label="Прізвище"
+                error={fieldState.invalid}
+                type="email"
+                id={UiILocators.SIGN_UP_FORM_LAST_NAME}
+              />
+            )}
+            name="lastName"
+          />
+        </Grid>
+      </Grid>
+
       <Controller
         control={control}
         render={({ field, fieldState }) => (
@@ -71,17 +126,17 @@ export function SignUpForm(props: Props) {
             {...field}
             errorMessage={fieldState.error?.message}
             InputProps={{
-              placeholder: 'Введіть свій нікнейм тут',
+              placeholder: 'Введіть свій нікнейм',
             }}
             fullWidth
             required
             label="Нікнейм"
             error={fieldState.invalid}
             type="email"
-            id={UiILocators.SIGN_UP_FORM_NICKNAME}
+            id={UiILocators.SIGN_UP_FORM_NICK_NAME}
           />
         )}
-        name="nickname"
+        name="nickName"
       />
 
       <Controller
@@ -91,7 +146,7 @@ export function SignUpForm(props: Props) {
             {...field}
             errorMessage={fieldState.error?.message}
             InputProps={{
-              placeholder: 'Введіть свою електронну пошту тут',
+              placeholder: 'Введіть свою електронну пошту',
             }}
             fullWidth
             required
@@ -114,7 +169,7 @@ export function SignUpForm(props: Props) {
                 alwaysShowAdornment
                 errorMessage={fieldState.error?.message}
                 InputProps={{
-                  placeholder: 'Введіть свій пароль тут',
+                  placeholder: 'Введіть свій пароль',
                 }}
                 fullWidth
                 required
@@ -146,7 +201,7 @@ export function SignUpForm(props: Props) {
                 alwaysShowAdornment
                 errorMessage={fieldState.error?.message}
                 InputProps={{
-                  placeholder: 'Введіть підтвердження паролю тут',
+                  placeholder: 'Введіть підтвердження паролю',
                 }}
                 fullWidth
                 required
@@ -159,7 +214,7 @@ export function SignUpForm(props: Props) {
                 }
                 label="Підтвердження пароля"
                 error={fieldState.invalid}
-                type={boolValue ? 'text' : 'new-password'}
+                type={boolValue ? 'text' : 'password'}
                 id={UiILocators.SIGN_UP_FORM_CONFIRM_PASSWORD}
               />
             )}

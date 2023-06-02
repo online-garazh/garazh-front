@@ -59,7 +59,7 @@ export function SignInForm(props: Props) {
             {...field}
             errorMessage={fieldState.error?.message}
             InputProps={{
-              placeholder: 'Введіть свою електронну пошту тут',
+              placeholder: 'Введіть свою електронну пошту',
             }}
             fullWidth
             required
@@ -82,7 +82,7 @@ export function SignInForm(props: Props) {
                 alwaysShowAdornment
                 errorMessage={fieldState.error?.message}
                 InputProps={{
-                  placeholder: 'Введіть свій пароль тут',
+                  placeholder: 'Введіть свій пароль',
                 }}
                 fullWidth
                 required
@@ -95,7 +95,7 @@ export function SignInForm(props: Props) {
                 }
                 label="Пароль"
                 error={fieldState.invalid}
-                type={boolValue ? 'text' : 'new-password'}
+                type={boolValue ? 'text' : 'password'}
                 id={UiILocators.SIGN_IN_FORM_PASSWORD}
               />
             )}

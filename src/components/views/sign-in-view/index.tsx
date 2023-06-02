@@ -42,12 +42,15 @@ export function SignInView() {
 
   return (
     <Box
-      sx={{
+      sx={({ breakpoints }) => ({
         flexDirection: 'column',
         alignItems: 'center',
         display: 'flex',
         mt: 8,
-      }}
+        [breakpoints.down('sm')]: {
+          mt: 4,
+        },
+      })}
     >
       <Box
         sx={{
@@ -71,7 +74,17 @@ export function SignInView() {
         />
       </Box>
 
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
+      <Typography
+        component="h1"
+        variant="h3"
+        sx={({ breakpoints }) => ({
+          textAlign: 'center',
+          mb: 5,
+          [breakpoints.down('sm')]: {
+            mb: 4,
+          },
+        })}
+      >
         Увійдіть
       </Typography>
 

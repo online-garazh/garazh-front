@@ -14,14 +14,27 @@ export function ForgotPasswordView() {
 
   return (
     <Box
-      sx={{
+      sx={({ breakpoints }) => ({
         flexDirection: 'column',
         alignItems: 'center',
         display: 'flex',
         mt: 8,
-      }}
+        [breakpoints.down('sm')]: {
+          mt: 4,
+        },
+      })}
     >
-      <Typography component="h1" variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
+      <Typography
+        component="h1"
+        variant="h3"
+        sx={({ breakpoints }) => ({
+          textAlign: 'center',
+          mb: 5,
+          [breakpoints.down('sm')]: {
+            mb: 4,
+          },
+        })}
+      >
         Забули пароль?
       </Typography>
 
@@ -36,6 +49,7 @@ export function ForgotPasswordView() {
       <ForgotPasswordForm isLoading={false} onSubmit={submitHandler} />
 
       <Grid
+        justifyContent="center"
         container
         sx={({ palette }) => ({
           borderTopColor: palette.divider,
@@ -45,7 +59,7 @@ export function ForgotPasswordView() {
           mt: 4,
         })}
       >
-        <Grid item xs>
+        <Grid item>
           <Link href={RoutePaths.SIGN_IN} id={UiILocators.FORGOT_PASSWORD_FORM_BACK_LINK}>
             Повернутись до входу
           </Link>
