@@ -9,7 +9,7 @@ import { AppProvider } from '~/providers/app.provider';
 import { ThemeProvider } from '~/providers/theme.provider';
 import { createEmotionCache } from '~/theme/create-emotion-cache';
 import { type AppProps } from '~/types/app.type';
-import { getRouteTitle } from '~/utils/get-route-sub-title.util';
+import { getRouteTitle } from '~/utils/get-route-title.util';
 
 import '../styles/index.scss';
 

@@ -5,7 +5,6 @@ require('dotenv').config();
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-
 const nextConfig = {
   reactStrictMode: false,
   modularizeImports: {
@@ -16,7 +15,7 @@ const nextConfig = {
       transform: 'lodash/{{member}}',
     },
   },
-  optimizeFonts: true,
+  // optimizeFonts: true,
   swcMinify: false,
   eslint: {
     ignoreDuringBuilds: true,

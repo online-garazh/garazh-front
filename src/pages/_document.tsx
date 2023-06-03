@@ -10,7 +10,6 @@ import NextDocument, {
 } from 'next/document';
 import { type ComponentType } from 'react';
 
-import { PAGE_DESCRIPTION, PAGE_BASE_TITLE } from '~/constants/seo.constant';
 import { rubik } from '~/pages/_app';
 import { createEmotionCache } from '~/theme/create-emotion-cache';
 import { type AppEnhancedProps } from '~/types/app.type';
@@ -53,44 +52,6 @@ export default class Document extends NextDocument<DocumentInitialProps> {
     };
   };
 
-  private renderFavicon() {
-    return (
-      <>
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
-        <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-        <meta name="theme-color" content="#ffffff" />
-      </>
-    );
-  }
-
-  private renderSeo() {
-    return (
-      <>
-        <meta name="description" content={PAGE_DESCRIPTION} />
-        <meta property="og:title" content={PAGE_BASE_TITLE} />
-        <meta property="og:description" content={PAGE_DESCRIPTION} />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content={this.language} />
-      </>
-    );
-  }
-
-  private renderFonts() {
-    return (
-      <>
-        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />*/}
-        {/* <link rel="preconnect" href="https://fonts.gstatic.com" />*/}
-        {/* eslint-disable-next-line @next/next/no-css-tags */}
-        {/* <link href="/fonts/fonts.css" rel="stylesheet" />*/}
-      </>
-    );
-  }
-
   private renderEmotion() {
     return (
       <>
@@ -103,12 +64,7 @@ export default class Document extends NextDocument<DocumentInitialProps> {
   public render() {
     return (
       <Html lang={this.language} className={rubik.className}>
-        <Head>
-          {this.renderFavicon()}
-          {this.renderEmotion()}
-          {this.renderFonts()}
-          {this.renderSeo()}
-        </Head>
+        <Head>{this.renderEmotion()}</Head>
 
         <body>
           <Main />

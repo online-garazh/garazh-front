@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useWindowLocationOrigin = () => {
+export const useOrigin = () => {
   const [origin, setOrigin] = useState('');
 
   useEffect(() => {
