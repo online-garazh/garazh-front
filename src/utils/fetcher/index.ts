@@ -9,7 +9,7 @@ import { fetcherClientTransformer } from '~/utils/fetcher/fetcher.transformer';
 import { type ApiError, type BaseArgs, type ExtraOptions } from './fetcher.types';
 
 export const fetcherClient = async <T>(args: BaseArgs, extraOptions: ExtraOptions): Promise<T> => {
-  const { customBaseUrl, enableLogs = false, withBaseUrl = false, token } = extraOptions;
+  const { customBaseUrl, enableLogs = false, withBaseUrl = true, token } = extraOptions;
   const accessToken = isClient() ? authService().getAuthToken() : token;
   const headers: AxiosRequestConfig['headers'] = {
     ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
@@ -19,6 +19,8 @@ export const fetcherClient = async <T>(args: BaseArgs, extraOptions: ExtraOption
   const { url, method = 'GET', params, data } = instanceConfig;
 
   if (process.env.NODE_ENV !== 'production' && enableLogs) fetcherClientLogger.reqLogger({ params, method, data, url });
+
+  console.info('process.env.NEXT_PUBLIC_API_URL', process.env.NEXT_PUBLIC_API_URL);
 
   const axiosInstance: AxiosInstance = axios.create({
     // withCredentials: true,

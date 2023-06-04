@@ -46,7 +46,7 @@ export const useFetch = <T>({
 }): UseQueryResult<T, BaseError> =>
   useQuery<T, BaseError, T, QueryKeyT>({
     queryKey: [url!, params!],
-    queryFn: ({ queryKey }) => fetcher({ queryKey }),
+    queryFn: ({ queryKey }) => fetcher<T>({ queryKey }),
     enabled: !!url,
     ...config,
   });

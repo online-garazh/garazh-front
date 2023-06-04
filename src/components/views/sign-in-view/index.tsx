@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 
+import { usePostSignIn } from '~/api/mutations/post-sign-in.mutation';
 import { Link } from '~/components/common/next-link';
 import { type FormValues, SignInForm } from '~/components/views/sign-in-view/sign-in-form';
 import { icons } from '~/configs/icons.config';
@@ -16,28 +17,26 @@ export function SignInView() {
   const { palette } = useTheme();
   const router = useRouter();
   const { setAuthToken, removeAuthToken } = authService();
-  const { mutate: signInMutate, isLoading: signInLoading } = usePostMutation<
-    {
-      access_token: string;
-    },
-    { email: string; password: string }
-  >('/auth/login/', {
-    onSuccess: (data) => {
-      removeAuthToken();
-
-      setAuthToken(data.access_token);
-
-      void router.push(RoutePaths.FEED);
-    },
-    onError: (error) => {
-      console.debug('onError', error);
-    },
-  });
-  const submitHandler = (_data: FormValues) => {
-    signInMutate({
-      password: 'Frontend09',
-      email: 'skoval+1@s-pro.io',
-    });
+  // const { mutate: signInMutate, isLoading: signInLoading } = usePostMutation<
+  //   {
+  //     access_token: string;
+  //   },
+  //   { email: string; password: string }
+  // >('/auth/login/', {
+  //   onSuccess: (data) => {
+  //     removeAuthToken();
+  //
+  //     setAuthToken(data.access_token);
+  //
+  //     void router.push(RoutePaths.FEED);
+  //   },
+  //   onError: (error) => {
+  //     console.debug('onError', error);
+  //   },
+  // });
+  const { mutate: signInMutate, isLoading: signInLoading } = usePostSignIn();
+  const submitHandler = (data: FormValues) => {
+    signInMutate(data);
   };
 
   return (
