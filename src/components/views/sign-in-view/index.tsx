@@ -2,7 +2,7 @@ import { Grid, SvgIcon } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 import { usePostSignIn } from '~/api/mutations/post-sign-in.mutation';
 import { Link } from '~/components/common/next-link';
@@ -10,13 +10,13 @@ import { type FormValues, SignInForm } from '~/components/views/sign-in-view/sig
 import { icons } from '~/configs/icons.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
-import { authService } from '~/services/auth.service';
-import { usePostMutation } from '~/utils/api';
+// import { authService } from '~/services/auth.service';
+// import { usePostMutation } from '~/utils/api';
 
 export function SignInView() {
   const { palette } = useTheme();
-  const router = useRouter();
-  const { setAuthToken, removeAuthToken } = authService();
+  // const router = useRouter();
+  // const { setAuthToken, removeAuthToken } = authService();
   // const { mutate: signInMutate, isLoading: signInLoading } = usePostMutation<
   //   {
   //     access_token: string;
