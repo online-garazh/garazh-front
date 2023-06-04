@@ -28,7 +28,7 @@ export function withSession(
 
     if (token)
       try {
-        const currentUser = await queryClient.fetchQuery(['getUser'], () =>
+        const currentUser = await queryClient.fetchQuery(['/users/profile/'], () =>
           apiRequest({ url: '/users/profile/', method: 'GET' }, { token })
         );
 

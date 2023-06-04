@@ -3,13 +3,13 @@ import { AppBar, IconButton, Toolbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import { memo } from 'react';
 
+import { useGetCurrentUser } from '~/api/queries/get-current-user.query';
 import { Button } from '~/components/common/button';
 import { AccountMenu } from '~/components/common/header-common/account-menu';
 import { Logo } from '~/components/common/logo';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
-import { useCurrentUser } from '~/hooks/use-current-user.hook';
 import { UiElementNames, uiStoreMutations } from '~/stores/ui.store';
 
 type Props = {
@@ -19,7 +19,10 @@ type Props = {
 
 export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
   const { disableAuthButtons, withSidebar } = props;
-  const { currentUser } = useCurrentUser();
+  const { data: currentUser } = useGetCurrentUser();
+
+  console.info('currentUser', currentUser);
+
   const toggleDrawerHandler = () => {
     uiStoreMutations.toggleUi(UiElementNames.USER_SIDEBAR);
   };
@@ -109,7 +112,7 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
             </>
           )}
 
-          <AccountMenu user={void currentUser} />
+          <AccountMenu user={currentUser} />
         </Box>
       </Toolbar>
     </AppBar>

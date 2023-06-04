@@ -6,7 +6,7 @@ import { isClient } from '~/utils/context/is-client.util';
 import { fetcherClientLogger } from '~/utils/fetcher/fetcher.logger';
 import { fetcherClientTransformer } from '~/utils/fetcher/fetcher.transformer';
 
-import { type ApiError, type BaseArgs, type ExtraOptions } from './fetcher.types';
+import { type BaseArgs, type ExtraOptions } from './fetcher.types';
 
 export const fetcherClient = async <T>(args: BaseArgs, extraOptions: ExtraOptions): Promise<T> => {
   const { customBaseUrl, enableLogs = false, withBaseUrl = true, token } = extraOptions;
@@ -23,7 +23,6 @@ export const fetcherClient = async <T>(args: BaseArgs, extraOptions: ExtraOption
   console.info('process.env.NEXT_PUBLIC_API_URL', process.env.NEXT_PUBLIC_API_URL);
 
   const axiosInstance: AxiosInstance = axios.create({
-    // withCredentials: true,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
@@ -53,18 +52,11 @@ export const fetcherClient = async <T>(args: BaseArgs, extraOptions: ExtraOption
       .catch((e: AxiosError) => {
         if (process.env.NODE_ENV !== 'production') console.error('Error!', e);
 
-        if (e.response)
-          return Promise.reject({
-            statusText: e.response.statusText || '',
-            status: e.response.status,
-            data: e.response.data,
-          });
-
         return Promise.reject(e);
       });
 
     return response.data;
   } catch (e) {
-    throw fetcherClientTransformer.transformError(e as AxiosError<ApiError>);
+    throw fetcherClientTransformer.transformError(e as AxiosError);
   }
 };

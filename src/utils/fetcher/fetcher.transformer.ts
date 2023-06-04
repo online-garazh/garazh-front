@@ -1,21 +1,20 @@
 import { type AxiosError } from 'axios';
 
-import { type ApiError, type BaseError } from './fetcher.types';
+import { type ApiErrorResponse, type BaseError } from './fetcher.types';
 
 const defaultMessage = 'Something went wrong. Please try again later';
 const defaultStatus = 0;
-const transformError = (error: AxiosError<ApiError | undefined>): BaseError => {
+const transformError = (error: AxiosError): BaseError => {
   if (!error.response || !error.response.data)
     return {
       message: defaultMessage,
       status: defaultStatus,
     };
 
-  const { data } = error.response;
-  const message = typeof data.message === 'string' ? data.message : defaultMessage;
+  const { data } = error.response as ApiErrorResponse;
 
   return {
-    message,
+    message: data.message,
     status: data.statusCode,
   };
 };

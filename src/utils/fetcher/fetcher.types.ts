@@ -16,13 +16,16 @@ export type ExtraOptions = {
   token?: string;
 };
 
-export interface ApiError {
-  statusCode: number;
-  message: unknown;
-  error: string;
+export interface ApiErrorResponse {
+  statusText: '';
+  status: unknown;
+  data: {
+    statusCode: number;
+    message: unknown;
+  };
 }
 
 export interface BaseError {
-  message: string;
+  message: unknown;
   status: number;
 }

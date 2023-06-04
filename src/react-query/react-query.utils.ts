@@ -9,6 +9,7 @@ import {
   type UseQueryResult,
   type UseMutationResult,
   QueryClient,
+  type UseMutationOptions,
 } from '@tanstack/react-query';
 
 import { fetcherClient } from '~/utils/fetcher';
@@ -50,6 +51,24 @@ export const useFetch = <T>({
     enabled: !!url,
     ...config,
   });
+
+export const ssrFetch = async <T>({
+  params = null,
+  config,
+  url,
+}: {
+  params?: object | null;
+  config?: UseQueryOptions<T, BaseError, T, QueryKeyT>;
+  url: string | null;
+}) => {
+  const ssrQueryClient = new QueryClient();
+
+  return await ssrQueryClient.fetchQuery<T, BaseError, T, QueryKeyT>(
+    [url!, params!],
+    ({ queryKey }) => fetcher({ queryKey }),
+    config
+  );
+};
 
 export const useClientPrefetch = <T>({
   params = null,
@@ -96,50 +115,66 @@ export const useLoadMore = <T>({ params, url }: { params?: object; url: string |
     }
   );
 
-const useGenericMutation = <T, S>({
+const useGenericMutation = <TData, TVariables>({
+  options,
   updater,
   params,
   func,
   url,
 }: {
-  updater?: ((oldData: T, newData: S) => T) | undefined;
+  options?: UseMutationOptions<TData, BaseError, TVariables>;
+  updater?: ((oldData: TVariables | undefined, newData: TVariables) => TVariables) | undefined;
   params?: object;
-  func: (data: T | S) => Promise<S>;
+  func: (data: TVariables) => Promise<TData>;
   url: string;
-}): UseMutationResult<T | S, BaseError, T | S> => {
+}): UseMutationResult<TData, BaseError, TVariables> => {
   const queryClient = useQueryClient();
 
-  return useMutation<T | S, BaseError, T | S>({
+  return useMutation<TData, BaseError, TVariables>({
     mutationFn: func,
+    ...options,
     onMutate: async (data) => {
       await queryClient.cancelQueries([url, params]);
 
       const previousData = queryClient.getQueryData([url, params]);
 
-      queryClient.setQueryData<T>([url, params], (oldData) => (updater ? updater(oldData!, data as S) : (data as T)));
+      queryClient.setQueryData<TVariables>([url, params], (oldData) => (updater ? updater(oldData, data) : data));
 
       return previousData;
     },
-    onError: (_error, _, context) => {
+    onError: (error, variables, context) => {
       queryClient.setQueryData([url, params], context);
+
+      options?.onError?.(error, variables, context);
     },
     onSettled: async () => {
       await queryClient.invalidateQueries([url, params]);
     },
+    onSuccess: (data, variables, context) => {
+      options?.onSuccess?.(data, variables, context);
+    },
   });
 };
 
-export const usePost = <T, S>(
-  url: string,
-  params?: object,
-  updater?: (oldData: T, newData: S) => T,
-  extraOptions?: ExtraOptions
-): UseMutationResult<T | S, BaseError, T | S> =>
-  useGenericMutation<T, S>({
+export const usePost = <TVariables, TData>({
+  extraOptions,
+  options,
+  updater,
+  params,
+  url,
+}: {
+  extraOptions?: ExtraOptions;
+  options?: UseMutationOptions<TData, BaseError, TVariables>;
+  updater?: (oldData: TVariables | undefined, newData: TVariables) => TVariables;
+  params?: object;
+  url: string;
+}): UseMutationResult<TData, BaseError, TVariables> =>
+  useGenericMutation<TData, TVariables>({
+    options,
     updater,
     params,
     func: async (data) =>
-      await fetcherClient<S>(
+      await fetcherClient<TData>(
         {
           method: 'POST',
           data,
@@ -150,17 +185,17 @@ export const usePost = <T, S>(
     url,
   });
 
-export const useUpdate = <T, S>(
+export const useUpdate = <TVariables, TData>(
   url: string,
   params?: object,
-  updater?: (oldData: T, newData: S) => T,
+  updater?: (oldData: TVariables | undefined, newData: TVariables) => TVariables,
   extraOptions?: ExtraOptions
-): UseMutationResult<T | S, BaseError, T | S> =>
-  useGenericMutation<T, S>({
+): UseMutationResult<TData, BaseError, TVariables> =>
+  useGenericMutation<TData, TVariables>({
     updater,
     params,
     func: async (data) =>
-      await fetcherClient<S>(
+      await fetcherClient<TData>(
         {
           method: 'PATCH',
           data,
@@ -171,13 +206,13 @@ export const useUpdate = <T, S>(
     url,
   });
 
-export const useDelete = <T>(
+export const useDelete = <TVariables>(
   url: string,
   params?: object,
-  updater?: (oldData: T, id: string | number) => T,
+  updater?: (oldData: TVariables | undefined, data: TVariables) => TVariables,
   extraOptions?: ExtraOptions
-): UseMutationResult<T | string | number, BaseError, T | string | number> =>
-  useGenericMutation<T, string | number>({
+): UseMutationResult<string | number, BaseError, TVariables> =>
+  useGenericMutation<string | number, TVariables>({
     updater,
     params,
     func: async () =>
