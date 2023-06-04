@@ -18,7 +18,7 @@ const email = () =>
   z
     .string()
     .min(1, { message: ResolverErrors.requiredField })
-    .max(18, { message: ResolverErrors.max18Field })
+    .max(24, { message: ResolverErrors.max24Field })
     .email({ message: ResolverErrors.validEmailField })
     .trim();
 

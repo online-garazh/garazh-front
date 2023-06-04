@@ -32,8 +32,8 @@ export function SignInForm(props: Props) {
     shouldFocusError: false,
     reValidateMode: 'onChange',
     defaultValues: {
-      password: 'Frontend09',
-      email: 'skoval+1@s-pro.io',
+      password: 'Qyerty123!',
+      email: 'seregakova.web+66666@gmail.com',
     },
     resolver: zodResolver(signInFormSchema()),
     mode: 'onSubmit',

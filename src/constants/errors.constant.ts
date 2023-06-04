@@ -4,4 +4,5 @@ export enum ResolverErrors {
   validEmailField = 'Введіть дійсну електронну пошту',
   requiredField = "Це поле є обов'язковим",
   max18Field = 'Поле має містити не більше 18 символів',
+  max24Field = 'Поле має містити не більше 18 символів',
 }
