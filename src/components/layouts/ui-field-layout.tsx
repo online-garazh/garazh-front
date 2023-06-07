@@ -1,4 +1,3 @@
-import { InfoOutlined } from '@mui/icons-material';
 import {
   Box,
   FormControl,
@@ -104,14 +103,6 @@ export function UiFieldLayout(props: Props) {
             height: 30,
           }}
         >
-          <InfoOutlined
-            color="error"
-            sx={({ spacing }) => ({
-              fontSize: '1rem',
-              margin: spacing(0.25, 0, 0, 0),
-            })}
-          />
-
           <FormHelperText
             disabled={disabled}
             required={required}
@@ -121,7 +112,7 @@ export function UiFieldLayout(props: Props) {
               overflow: 'visible',
               fontSize: '0.75rem',
               height: 26,
-              margin: spacing(0.5, 0, 0, 0.5),
+              margin: spacing(0.5, 0, 0, 0),
             })}
           >
             {errorMessage}

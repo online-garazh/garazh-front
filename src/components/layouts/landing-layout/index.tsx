@@ -1,28 +1,34 @@
 import { Box, Container } from '@mui/material';
+import dynamic from 'next/dynamic';
 import { type ReactElement, type ReactNode } from 'react';
 
-import { HeaderCommon } from '~/components/common/header-common';
-import { LandingLayoutFooter } from '~/components/layouts/landing-layout/landing-layout-footer';
+import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
-import { type LayoutConfig } from '~/types/page.type';
+import { type LayoutConfig, type PageData } from '~/types/page.type';
 
 type Props = {
   layoutConfig?: LayoutConfig;
+  currentUser?: CurrentUserRes;
   children: ReactNode;
 };
 
+const LandingLayoutFooter = dynamic(() =>
+  import('../landing-layout/landing-layout-footer').then((mod) => mod.LandingLayoutFooter)
+);
+const HeaderCommon = dynamic(() => import('../../common/header-common').then((mod) => mod.HeaderCommon));
+
 export function LandingLayout(props: Props) {
-  const { layoutConfig, children } = props;
+  const { layoutConfig, currentUser, children } = props;
 
   return (
     <Box sx={{ flexDirection: 'column', minHeight: '100vh', display: 'flex' }}>
-      <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} />
+      <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} currentUser={currentUser} />
 
       <Box
         component="main"
         sx={({ palette }) => ({
           backgroundColor: palette.background.primary,
-          paddingTop: `${HEADER_HEIGHT}px`,
+          paddingTop: HEADER_HEIGHT / 8,
           display: 'flex',
           flex: 1,
         })}
@@ -44,6 +50,8 @@ export function LandingLayout(props: Props) {
   );
 }
 
-export const getLayout = (page: ReactElement, layoutConfig?: LayoutConfig): ReactNode => (
-  <LandingLayout layoutConfig={layoutConfig}>{page}</LandingLayout>
+export const getLayout = (page: ReactElement, data: PageData = {}): ReactNode => (
+  <LandingLayout layoutConfig={data.layoutConfig} currentUser={data.currentUser}>
+    {page}
+  </LandingLayout>
 );

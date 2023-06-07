@@ -1,8 +1,8 @@
 import { type QueryFn } from '~/react-query/react-query.types';
-import { useFetch } from '~/react-query/react-query.utils';
+import { useLazyQuery } from '~/react-query/react-query.utils';
 import { authService } from '~/services/auth.service';
 
-export type UserRes = {
+export type CurrentUserRes = {
   profileImage: string;
   createdAt: string;
   updatedAt: string;
@@ -13,11 +13,12 @@ export type UserRes = {
   id: number;
 };
 
-export const useGetCurrentUser: QueryFn<UserRes | null> = () => {
+export const useGetCurrentUser: QueryFn<CurrentUserRes | null> = () => {
   const { token } = authService();
-  const { isLoading, isSuccess, isError, error, data } = useFetch<UserRes>({
-    url: token ? '/users/profile/' : null,
-  });
+  const [trigger, query] = useLazyQuery<CurrentUserRes>({ url: '/users/profile/' });
+  const { isLoading, isSuccess, isError, error, data } = query;
+
+  if (token) trigger();
 
   return { isLoading, isSuccess, isError, error, data: data ?? null };
 };

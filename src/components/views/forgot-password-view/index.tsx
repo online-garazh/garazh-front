@@ -1,11 +1,16 @@
 import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import dynamic from 'next/dynamic';
 
 import { Link } from '~/components/common/next-link';
-import { type FormValues, ForgotPasswordForm } from '~/components/views/forgot-password-view/forgot-password-form';
+import { type FormValues } from '~/components/views/forgot-password-view/forgot-password-form';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
+
+const ForgotPasswordForm = dynamic(() =>
+  import('../forgot-password-view/forgot-password-form').then((mod) => mod.ForgotPasswordForm)
+);
 
 export function ForgotPasswordView() {
   const submitHandler = (data: FormValues) => {

@@ -11,7 +11,9 @@ const ROUTE_CONFIG: RouteConfig = {
   requireAuth: false,
 };
 
-export default function FeedRoute() {
+export default function FeedRoute(props: any) {
+  console.info('FeedRoute props', props);
+
   return <FeedView />;
 }
 

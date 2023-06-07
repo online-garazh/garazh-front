@@ -15,7 +15,7 @@ export enum RoutePaths {
   CARS = '/cars',
 }
 
-export const NOT_AUTH_REDIRECT = RoutePaths.SIGN_IN;
+export const NOT_AUTH_REDIRECT = RoutePaths.INDEX;
 export const AUTH_REDIRECT = RoutePaths.FEED;
 
 export enum RoutesBasicSubTitles {

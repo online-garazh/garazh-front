@@ -20,8 +20,6 @@ export const fetcherClient = async <T>(args: BaseArgs, extraOptions: ExtraOption
 
   if (process.env.NODE_ENV !== 'production' && enableLogs) fetcherClientLogger.reqLogger({ params, method, data, url });
 
-  console.info('process.env.NEXT_PUBLIC_API_URL', process.env.NEXT_PUBLIC_API_URL);
-
   const axiosInstance: AxiosInstance = axios.create({
     headers: {
       'Content-Type': 'application/json; charset=utf-8',

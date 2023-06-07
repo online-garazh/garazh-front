@@ -1,18 +1,24 @@
 import { Box } from '@mui/material';
+import dynamic from 'next/dynamic';
 import { type ReactElement, type ReactNode } from 'react';
 
-import { HeaderCommon } from '~/components/common/header-common';
-import { UserLayoutSidebar } from '~/components/layouts/user-layout/user-layout-sidebar';
+import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
-import { type LayoutConfig } from '~/types/page.type';
+import { type LayoutConfig, type PageData } from '~/types/page.type';
 
 type Props = {
   layoutConfig?: LayoutConfig;
+  currentUser?: CurrentUserRes;
   children: ReactNode;
 };
 
+const HeaderCommon = dynamic(() => import('../../common/header-common').then((mod) => mod.HeaderCommon));
+const UserLayoutSidebar = dynamic(() =>
+  import('../user-layout/user-layout-sidebar').then((mod) => mod.UserLayoutSidebar)
+);
+
 export function UserLayout(props: Props) {
-  const { layoutConfig, children } = props;
+  const { layoutConfig, currentUser, children } = props;
 
   return (
     <Box
@@ -24,7 +30,7 @@ export function UserLayout(props: Props) {
         width: '100%',
       }}
     >
-      <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} withSidebar />
+      <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} withSidebar currentUser={currentUser} />
       <UserLayoutSidebar />
 
       <Box
@@ -56,6 +62,8 @@ export function UserLayout(props: Props) {
   );
 }
 
-export const getLayout = (page: ReactElement, layoutConfig?: LayoutConfig): ReactNode => (
-  <UserLayout layoutConfig={layoutConfig}>{page}</UserLayout>
+export const getLayout = (page: ReactElement, data: PageData = {}): ReactNode => (
+  <UserLayout layoutConfig={data.layoutConfig} currentUser={data.currentUser}>
+    {page}
+  </UserLayout>
 );

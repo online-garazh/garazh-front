@@ -7,6 +7,7 @@ import { type RouteConfig } from '~/types/app.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {
+  disableRedirect: true,
   requireAuth: false,
 };
 

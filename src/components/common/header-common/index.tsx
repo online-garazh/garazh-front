@@ -3,26 +3,26 @@ import { AppBar, IconButton, Toolbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import { memo } from 'react';
 
-import { useGetCurrentUser } from '~/api/queries/get-current-user.query';
+import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { Button } from '~/components/common/button';
 import { AccountMenu } from '~/components/common/header-common/account-menu';
 import { Logo } from '~/components/common/logo';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
+import { authService } from '~/services/auth.service';
 import { UiElementNames, uiStoreMutations } from '~/stores/ui.store';
 
 type Props = {
   disableAuthButtons?: boolean;
   withSidebar?: boolean;
+  currentUser?: CurrentUserRes;
 };
 
 export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
-  const { disableAuthButtons, withSidebar } = props;
-  const { data: currentUser } = useGetCurrentUser();
-
-  console.info('currentUser', currentUser);
-
+  const { disableAuthButtons, withSidebar, currentUser } = props;
+  // const { data: currentUser } = useGetCurrentUser();
+  const { token } = authService();
   const toggleDrawerHandler = () => {
     uiStoreMutations.toggleUi(UiElementNames.USER_SIDEBAR);
   };
@@ -85,7 +85,7 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
             </IconButton>
           )}
 
-          {!currentUser && !disableAuthButtons && (
+          {!currentUser && !disableAuthButtons && !token && (
             <>
               <Button
                 href={RoutePaths.SIGN_IN}

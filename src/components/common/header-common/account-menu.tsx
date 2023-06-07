@@ -7,18 +7,20 @@ import Menu from '@mui/material/Menu';
 import { useTheme } from '@mui/material/styles';
 import { useState, type MouseEvent } from 'react';
 
-import { type UserRes } from '~/api/queries/get-user.query';
+import { useCurrentUserLogout } from '~/api/queries/get-current-user-logout.query';
+import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { AccountAvatar } from '~/components/common/account-avatar';
 import { Link } from '~/components/common/next-link';
 import { RoutePaths } from '~/constants/routes.constant';
 import { themeStoreMutations } from '~/stores/theme.store';
 
 type Props = {
-  user?: UserRes;
+  user?: CurrentUserRes;
 };
 
 export function AccountMenu(props: Props) {
   const { user } = props;
+  const userLogout = useCurrentUserLogout();
   const { palette } = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -89,54 +91,66 @@ export function AccountMenu(props: Props) {
           {palette.mode === 'dark' ? 'Світлий режим' : 'Темний режим'}
         </MenuItem>
 
-        <Divider />
+        {!!user && <Divider />}
 
-        <Link
-          href={RoutePaths.PROFILE}
-          sx={{
-            display: 'block',
-            color: 'inherit',
-            '&:hover': {
-              textDecoration: 'none',
-            },
-          }}
-          id="test"
-        >
-          <MenuItem onClick={handleClose}>
+        {!!user && (
+          <Link
+            href={RoutePaths.PROFILE}
+            sx={{
+              display: 'block',
+              color: 'inherit',
+              '&:hover': {
+                textDecoration: 'none',
+              },
+            }}
+            id="test"
+          >
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <Person fontSize="small" color="tertiary" />
+              </ListItemIcon>
+              Профіль
+            </MenuItem>
+          </Link>
+        )}
+
+        {!!user && (
+          <Link
+            href={RoutePaths.SETTINGS}
+            sx={{
+              display: 'block',
+              color: 'inherit',
+              '&:hover': {
+                textDecoration: 'none',
+              },
+            }}
+            id="test"
+          >
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <Settings fontSize="small" color="tertiary" />
+              </ListItemIcon>
+              Налаштування
+            </MenuItem>
+          </Link>
+        )}
+
+        {!!user && <Divider />}
+
+        {!!user && (
+          <MenuItem
+            onClick={() => {
+              handleClose();
+
+              void userLogout();
+            }}
+          >
             <ListItemIcon>
-              <Person fontSize="small" color="tertiary" />
+              <Logout fontSize="small" color="tertiary" />
             </ListItemIcon>
-            Профіль
+            Вихід
           </MenuItem>
-        </Link>
-
-        <Link
-          href={RoutePaths.SETTINGS}
-          sx={{
-            display: 'block',
-            color: 'inherit',
-            '&:hover': {
-              textDecoration: 'none',
-            },
-          }}
-          id="test"
-        >
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <Settings fontSize="small" color="tertiary" />
-            </ListItemIcon>
-            Налаштування
-          </MenuItem>
-        </Link>
-
-        <Divider />
-
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" color="tertiary" />
-          </ListItemIcon>
-          Вихід
-        </MenuItem>
+        )}
       </Menu>
     </>
   );

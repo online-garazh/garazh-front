@@ -11,6 +11,7 @@ import {
   QueryClient,
   type UseMutationOptions,
 } from '@tanstack/react-query';
+import { useCallback, useState } from 'react';
 
 import { fetcherClient } from '~/utils/fetcher';
 import { type ExtraOptions, type BaseError } from '~/utils/fetcher/fetcher.types';
@@ -21,13 +22,13 @@ export type QueryKeyT = [string, object | null];
 
 export type PrefetchReturnType = () => Promise<void>;
 
-export const fetcher = <T>(
+export const fetcher = <TData>(
   { queryKey, pageParam }: Pick<QueryFunctionContext<QueryKeyT>, 'queryKey' | 'pageParam'>,
   extraOptions?: ExtraOptions
-): Promise<T> => {
+): Promise<TData> => {
   const [url, params] = queryKey;
 
-  return fetcherClient<T>(
+  return fetcherClient<TData>(
     {
       params: { ...params, pageParam },
       url,
@@ -36,38 +37,63 @@ export const fetcher = <T>(
   );
 };
 
-export const useFetch = <T>({
+export const useFetch = <TData>({
   params = null,
   config,
   url,
 }: {
   params?: object | null;
-  config?: UseQueryOptions<T, BaseError, T, QueryKeyT>;
+  config?: UseQueryOptions<TData, BaseError, TData, QueryKeyT>;
   url: string | null;
-}): UseQueryResult<T, BaseError> =>
-  useQuery<T, BaseError, T, QueryKeyT>({
-    queryKey: [url!, params!],
-    queryFn: ({ queryKey }) => fetcher<T>({ queryKey }),
+}): UseQueryResult<TData, BaseError> =>
+  useQuery<TData, BaseError, TData, QueryKeyT>({
+    queryKey: [url!, params],
+    queryFn: ({ queryKey }) => fetcher<TData>({ queryKey }),
     enabled: !!url,
     ...config,
   });
 
-export const ssrFetch = async <T>({
+export const ssrFetch = async <TData>({
+  extraOptions,
+  params = null,
+  config,
+  url,
+}: {
+  extraOptions?: ExtraOptions;
+  params?: object | null;
+  config?: UseQueryOptions<TData, BaseError, TData, QueryKeyT>;
+  url: string | null;
+}) => {
+  const ssrQueryClient = new QueryClient();
+
+  return await ssrQueryClient.fetchQuery<TData, BaseError, TData, QueryKeyT>(
+    [url!, params!],
+    ({ queryKey }) => fetcher({ queryKey }, extraOptions),
+    { ...config }
+  );
+};
+
+export const useLazyQuery = <TData>({
   params = null,
   config,
   url,
 }: {
   params?: object | null;
-  config?: UseQueryOptions<T, BaseError, T, QueryKeyT>;
+  config?: UseQueryOptions<TData, BaseError, TData, QueryKeyT>;
   url: string | null;
-}) => {
-  const ssrQueryClient = new QueryClient();
+}): [() => void, UseQueryResult<TData, BaseError>] => {
+  const [enabled, setEnabled] = useState(false);
+  const query = useQuery<TData, BaseError, TData, QueryKeyT>({
+    queryKey: [url!, params],
+    queryFn: ({ queryKey }) => fetcher<TData>({ queryKey }),
+    enabled,
+    ...config,
+  });
+  const trigger = useCallback(() => {
+    if (!enabled) setEnabled(true);
+  }, [enabled]);
 
-  return await ssrQueryClient.fetchQuery<T, BaseError, T, QueryKeyT>(
-    [url!, params!],
-    ({ queryKey }) => fetcher({ queryKey }),
-    config
-  );
+  return [trigger, query];
 };
 
 export const useClientPrefetch = <T>({
@@ -89,16 +115,18 @@ export const useClientPrefetch = <T>({
 };
 
 export const ssrPrefetch = async <T>({
+  extraOptions,
   params = null,
   url,
 }: {
+  extraOptions?: ExtraOptions;
   params?: object | null;
   url: string;
 }): Promise<QueryClient> => {
   const ssrQueryClient = new QueryClient();
 
   await ssrQueryClient.prefetchQuery<T, BaseError, T, QueryKeyT>([url, params!], ({ queryKey }) =>
-    fetcher({ queryKey })
+    fetcher({ queryKey }, extraOptions)
   );
 
   return ssrQueryClient;

@@ -2,47 +2,53 @@ import { QueryClient } from '@tanstack/react-query';
 import isEmpty from 'lodash/isEmpty';
 import { type GetServerSideProps, type GetServerSidePropsContext } from 'next';
 
-import { NOT_AUTH_REDIRECT } from '~/constants/routes.constant';
+import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
+import { ssrFetch } from '~/react-query/react-query.utils';
 import { authService } from '~/services/auth.service';
 import { type RouteConfig } from '~/types/app.type';
-import { apiRequest } from '~/utils/api';
-import { ssrRedirect } from '~/utils/context/ssr-redirect.util';
 import { getRouteAccess } from '~/utils/get-route-access.util';
 import { getServerSideLogout } from '~/utils/get-server-side-logout';
 
 export function withSession(
-  getServerSideProps: (
-    ...args: [...Parameters<GetServerSideProps>, QueryClient, boolean]
-  ) => ReturnType<GetServerSideProps>,
+  callback: (...args: [...Parameters<GetServerSideProps>, QueryClient, boolean]) => ReturnType<GetServerSideProps>,
   config: RouteConfig
 ) {
   return async (ctx: GetServerSidePropsContext) => {
     const { token } = authService(ctx);
     const queryClient = new QueryClient();
     const logout = getServerSideLogout(queryClient, ctx);
+    let currentUser: CurrentUserRes | undefined;
     let access = {};
-
-    if (!token && config.requireAuth !== false) {
-      // access = REDIRECT_TO_SIGN_IN();
-    }
 
     if (token)
       try {
-        const currentUser = await queryClient.fetchQuery(['/users/profile/'], () =>
-          apiRequest({ url: '/users/profile/', method: 'GET' }, { token })
-        );
+        currentUser = await ssrFetch({
+          extraOptions: { token },
+          url: '/users/profile',
+        });
 
-        access = getRouteAccess(config, currentUser, config.disableRedirect);
+        console.info('currentUser', currentUser);
       } catch (error) {
         await logout();
-
-        access = ssrRedirect(NOT_AUTH_REDIRECT);
       }
 
-    const getServerSidePropsData = await getServerSideProps(ctx, queryClient, isEmpty(access));
+    access = getRouteAccess(config, currentUser, config.disableRedirect);
+
+    const result = await callback(ctx, queryClient, isEmpty(access));
+
+    // For return { notFound: true } logic
+    if (!('props' in result))
+      return {
+        ...result,
+      };
 
     return {
-      ...getServerSidePropsData,
+      ...result,
+      props: {
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        ...result.props,
+        ...(currentUser ? { currentUser } : {}),
+      },
       ...access,
     };
   };

@@ -1,10 +1,10 @@
 import { Avatar } from '@mui/material';
 
-import { type UserRes } from '~/api/queries/get-user.query';
+import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { getNameInitials } from '~/utils/get-name-initials.util';
 
 type Props = {
-  user: UserRes;
+  user: CurrentUserRes;
 };
 
 export function AccountAvatar(props: Props) {

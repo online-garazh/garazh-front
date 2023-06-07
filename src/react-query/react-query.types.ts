@@ -16,6 +16,7 @@ type QueryProps<T, D> = {
 } & D;
 
 export type QueryFn<T, D = {}> = (props?: QueryProps<T, D>) => {
+  isFetching?: boolean;
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;

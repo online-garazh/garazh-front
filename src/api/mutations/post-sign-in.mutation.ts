@@ -4,8 +4,13 @@ import { RoutePaths } from '~/constants/routes.constant';
 import { usePost } from '~/react-query/react-query.utils';
 import { authService } from '~/services/auth.service';
 
-export type SignInReq = { email: string; password: string };
-export type SignInRes = { access_token: string };
+export type SignInReq = {
+  password: string;
+  email: string;
+};
+export type SignInRes = {
+  access_token: string;
+};
 
 export const usePostSignIn = () => {
   const router = useRouter();

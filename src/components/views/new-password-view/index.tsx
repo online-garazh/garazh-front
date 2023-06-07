@@ -1,7 +1,12 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import dynamic from 'next/dynamic';
 
-import { type FormValues, NewPasswordForm } from '~/components/views/new-password-view/new-password-form';
+import { type FormValues } from '~/components/views/new-password-view/new-password-form';
+
+const NewPasswordForm = dynamic(() =>
+  import('../new-password-view/new-password-form').then((mod) => mod.NewPasswordForm)
+);
 
 export function NewPasswordView() {
   const submitHandler = (data: FormValues) => {

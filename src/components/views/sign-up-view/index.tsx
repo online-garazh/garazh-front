@@ -1,26 +1,18 @@
 import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import dynamic from 'next/dynamic';
 
-import { usePostSignIn } from '~/api/mutations/post-sign-in.mutation';
+import { usePostSignUp } from '~/api/mutations/post-sign-up.mutation';
 import { Link } from '~/components/common/next-link';
-import { type FormValues, SignUpForm } from '~/components/views/sign-up-view/sign-up-form';
+import { type FormValues } from '~/components/views/sign-up-view/sign-up-form';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
-import { usePostMutation } from '~/utils/api';
 
-type User = FormValues;
+const SignUpForm = dynamic(() => import('../sign-up-view/sign-up-form').then((mod) => mod.SignUpForm));
 
 export function SignUpView() {
-  const { mutate: signInMutate, isLoading: signInLoading } = usePostSignIn();
-  const { mutate: signUpMutate, isLoading: signUpLoading } = usePostMutation<User, User>('/auth/signup/', {
-    onSuccess: (_data, variables) => {
-      signInMutate({ email: variables.email, password: variables.password });
-    },
-    onError: (error) => {
-      console.debug('onError', error);
-    },
-  });
+  const { mutate: signUpMutate, isLoading } = usePostSignUp();
   const submitHandler = (data: FormValues) => {
     signUpMutate(data);
   };
@@ -51,7 +43,7 @@ export function SignUpView() {
         Зареєструватись
       </Typography>
 
-      <SignUpForm isLoading={signUpLoading || signInLoading} onSubmit={submitHandler} />
+      <SignUpForm isLoading={isLoading} onSubmit={submitHandler} />
 
       <Grid
         justifyContent="center"

@@ -2,13 +2,16 @@ import { Grid, SvgIcon } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import dynamic from 'next/dynamic';
 
 import { usePostSignIn } from '~/api/mutations/post-sign-in.mutation';
 import { Link } from '~/components/common/next-link';
-import { type FormValues, SignInForm } from '~/components/views/sign-in-view/sign-in-form';
+import { type FormValues } from '~/components/views/sign-in-view/sign-in-form';
 import { icons } from '~/configs/icons.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
+
+const SignInForm = dynamic(() => import('../sign-in-view/sign-in-form').then((mod) => mod.SignInForm));
 
 export function SignInView() {
   const { palette } = useTheme();

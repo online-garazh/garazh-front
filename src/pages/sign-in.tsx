@@ -10,7 +10,9 @@ const ROUTE_CONFIG: RouteConfig = {
   requireAuth: false,
 };
 
-export default function SignInRoute() {
+export default function SignInRoute(props: any) {
+  console.info('SignInRoute props', props);
+
   return <SignInView />;
 }
 
