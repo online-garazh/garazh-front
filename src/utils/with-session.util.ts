@@ -5,7 +5,7 @@ import { type GetServerSideProps, type GetServerSidePropsContext } from 'next';
 import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { ssrFetch } from '~/react-query/react-query.utils';
 import { authService } from '~/services/auth.service';
-import { type RouteConfig } from '~/types/app.type';
+import { type RouteConfig } from '~/types/route.type';
 import { getRouteAccess } from '~/utils/get-route-access.util';
 import { getServerSideLogout } from '~/utils/get-server-side-logout';
 
@@ -27,7 +27,7 @@ export function withSession(
           url: '/users/profile',
         });
 
-        console.info('currentUser', currentUser);
+        console.debug('currentUser', currentUser);
       } catch (error) {
         await logout();
       }

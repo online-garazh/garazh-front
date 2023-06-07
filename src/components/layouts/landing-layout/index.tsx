@@ -4,7 +4,7 @@ import { type ReactElement, type ReactNode } from 'react';
 
 import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { HEADER_HEIGHT } from '~/configs/mui-components.config';
-import { type LayoutConfig, type PageData } from '~/types/page.type';
+import { type LayoutConfig, type RouteData } from '~/types/route.type';
 
 type Props = {
   layoutConfig?: LayoutConfig;
@@ -50,7 +50,7 @@ export function LandingLayout(props: Props) {
   );
 }
 
-export const getLayout = (page: ReactElement, data: PageData = {}): ReactNode => (
+export const getLayout = (page: ReactElement, data: RouteData = {}): ReactNode => (
   <LandingLayout layoutConfig={data.layoutConfig} currentUser={data.currentUser}>
     {page}
   </LandingLayout>

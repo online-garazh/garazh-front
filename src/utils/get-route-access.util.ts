@@ -1,6 +1,6 @@
 import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import { AUTH_REDIRECT, NOT_AUTH_REDIRECT } from '~/constants/routes.constant';
-import { type RouteConfig } from '~/types/app.type';
+import { type RouteConfig } from '~/types/route.type';
 import { ssrRedirect } from '~/utils/context/ssr-redirect.util';
 
 // const checkHasAccessRoute = (

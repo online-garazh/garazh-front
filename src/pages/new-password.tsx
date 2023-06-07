@@ -3,7 +3,7 @@ import { dehydrate } from '@tanstack/react-query';
 import { getLayout } from '~/components/layouts/auth-layout';
 import { NewPasswordView } from '~/components/views/new-password-view';
 import { RoutesBasicSubTitles } from '~/constants/routes.constant';
-import { type RouteConfig } from '~/types/app.type';
+import { type RouteConfig } from '~/types/route.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {

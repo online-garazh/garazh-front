@@ -1,7 +1,7 @@
 import { dehydrate } from '@tanstack/react-query';
 
 import { HomeView } from '~/components/views/home-view';
-import { type RouteConfig } from '~/types/app.type';
+import { type RouteConfig } from '~/types/route.type';
 import { withSession } from '~/utils/with-session.util';
 
 const ROUTE_CONFIG: RouteConfig = {

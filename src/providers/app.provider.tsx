@@ -6,7 +6,7 @@ import { memo, type ReactNode } from 'react';
 import { DefaultSeo } from '~/components/common/default-seo';
 import { ErrorBoundary } from '~/components/common/error-boundary';
 import { useBodyBgColor } from '~/hooks/use-body-bg-color.hook';
-import { type LayoutConfig } from '~/types/page.type';
+import { type LayoutConfig } from '~/types/route.type';
 
 type Props = {
   layoutConfig?: LayoutConfig;

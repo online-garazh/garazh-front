@@ -10,20 +10,26 @@ export type LayoutConfig = {
   subTitle?: string;
 };
 
-export type PageData = {
+export type RouteData = {
   layoutConfig?: LayoutConfig;
   currentUser?: CurrentUserRes;
 };
 
-export type PageProps = {
+export type RouteProps = {
   layoutConfig?: LayoutConfig;
-  getLayout?: (page: ReactElement, data?: PageData) => ReactNode;
+  getLayout?: (page: ReactElement, data?: RouteData) => ReactNode;
 };
 
-export type PageServerProps = {
+export type RouteServerProps = {
   [key: string]: unknown;
 };
 
 export type GlobalProps = {};
 
-export type NextPage<P = {}, IP = P> = DefaultNextPage<P & GlobalProps, IP> & PageProps;
+export type NextRoute<P = {}, IP = P> = DefaultNextPage<P & GlobalProps, IP> & RouteProps;
+
+export type RouteConfig = {
+  disableRedirect?: boolean;
+  requireAuth?: boolean;
+  permissions?: string[];
+};
