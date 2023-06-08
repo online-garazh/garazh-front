@@ -10,26 +10,26 @@ type Props = {
 export function AccountAvatar(props: Props) {
   const {
     user: {
-      profileImage,
       firstName,
       lastName,
       nickName,
-      // profileImage = 'https://res.cloudinary.com/minimal-ui/image/upload/v1614655910/upload_minimal/avatar/minimal_avatar.jpg',
+      avatar,
+      // avatarImage = 'https://res.cloudinary.com/minimal-ui/image/upload/v1614655910/upload_minimal/avatar/minimal_avatar.jpg',
     },
   } = props;
   const isFullNameExist = firstName && lastName;
   const isNickNameExist = nickName;
   const enhancedProps = {
     ...(isFullNameExist &&
-      !profileImage && {
+      !avatar && {
         children: getNameInitials(`${firstName} ${lastName}`),
       }),
     ...(!!isNickNameExist &&
-      !profileImage && {
+      !avatar && {
         children: getNameInitials(nickName),
       }),
-    ...(profileImage && {
-      src: profileImage,
+    ...(avatar && {
+      src: avatar,
     }),
   };
 
@@ -76,7 +76,7 @@ export function AccountAvatar(props: Props) {
             backgroundColor: palette.common.black,
             color: palette.common.white,
           }),
-          ...((profileImage || palette.mode === 'light') && {
+          ...((avatar || palette.mode === 'light') && {
             '&::after': {
               borderRadius: '50%',
               position: 'absolute',

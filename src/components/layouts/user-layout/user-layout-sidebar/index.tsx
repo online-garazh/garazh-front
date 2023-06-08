@@ -4,12 +4,13 @@ import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import HouseSidingIcon from '@mui/icons-material/HouseSiding';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined';
-import { Drawer, List } from '@mui/material';
+import { Avatar, Drawer, List } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { memo } from 'react';
 import { useSnapshot } from 'valtio/react';
 
+import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
 import {
   USER_DRAWER_FULL_WIDTH,
   USER_DRAWER_ROLLED_WIDTH,
@@ -23,7 +24,12 @@ import { UiElementNames, uiStore } from '~/stores/ui.store';
 
 import { type Props as LinkProps, UserLayoutSidebarLink } from './user-layout-sidebar-link';
 
-export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
+type Props = {
+  currentUser?: CurrentUserRes;
+};
+
+export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Props) {
+  const { currentUser } = props;
   const snapshot = useSnapshot(uiStore);
   const sideIsOpen = snapshot.active[UiElementNames.USER_SIDEBAR] || false;
   const links: LinkProps[] = [
@@ -95,14 +101,34 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
       })}
     >
       <Box
-        sx={({ palette }) => ({
+        sx={({ breakpoints, palette }) => ({
           backgroundColor: palette.mode === 'dark' ? palette.background.primary : palette.background.secondary,
           borderRadius: 4,
+          alignItems: 'center',
           minHeight: 80,
+          display: 'flex',
           mb: 3,
+          p: 1,
+          [breakpoints.down('sm')]: {},
         })}
       >
-        Test
+        <Avatar
+          sx={({ breakpoints }) => ({
+            height: 56,
+            width: 56,
+            ...(!sideIsOpen && {
+              height: 40,
+              width: 40,
+            }),
+            [breakpoints.down('sm')]: {},
+          })}
+          src={currentUser?.avatar ?? undefined}
+        />
+
+        <Box>
+          <Typography>{currentUser?.nickName}</Typography>
+          <Typography variant="caption">{currentUser?.email}</Typography>
+        </Box>
       </Box>
 
       <Typography

@@ -33,7 +33,7 @@ export function UserLayout(props: Props) {
     >
       <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} withSidebar currentUser={currentUser} />
       <UserLayoutSubHeader />
-      <UserLayoutSidebar />
+      <UserLayoutSidebar currentUser={currentUser} />
 
       <Box
         component="main"

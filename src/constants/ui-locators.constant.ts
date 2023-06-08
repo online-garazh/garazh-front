@@ -36,5 +36,10 @@ export enum UiILocators {
   USER_LAYOUT_SIDEBAR_LOG_BOOKS_LINK = 'user-layout-sidebar-log-books-link',
   USER_LAYOUT_SIDEBAR_SHOPS_LINK = 'user-layout-sidebar-shops-link',
   USER_LAYOUT_SIDEBAR_FEED_LINK = 'user-layout-sidebar-feed-link',
-  USER_LAYOUT_SIDEBAR_CARS_LINK = 'user-layout-sidebar-cars-link',
+
+  USER_LAYOUT_SUB_HEADER_FLEA_MARKET_LINK = 'user-layout-sub-header-flea-market-link',
+  USER_LAYOUT_SUB_HEADER_COMMUNITIES_LINK = 'user-layout-sub-header-communities-link',
+  USER_LAYOUT_SUB_HEADER_LOG_BOOKS_LINK = 'user-layout-sub-header-log-books-link',
+  USER_LAYOUT_SUB_HEADER_SHOPS_LINK = 'user-layout-sub-header-shops-link',
+  USER_LAYOUT_SUB_HEADER_CARS_LINK = 'user-layout-sub-header-cars-link',
 }

@@ -3,12 +3,12 @@ import { useLazyQuery } from '~/react-query/react-query.utils';
 import { authService } from '~/services/auth.service';
 
 export type CurrentUserRes = {
-  profileImage: string;
   createdAt: string;
   updatedAt: string;
   firstName: string;
   lastName: string;
   nickName: string;
+  avatar: string;
   email: string;
   id: number;
 };

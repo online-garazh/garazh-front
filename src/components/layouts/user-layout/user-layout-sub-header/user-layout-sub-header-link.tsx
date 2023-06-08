@@ -48,11 +48,11 @@ export const UserLayoutSubHeaderLink = memo(function UserLayoutSubHeaderLinkBase
       })}
     >
       <ListItem
-        sx={() => ({
+        sx={{
           borderRadius: 2,
           px: 1,
           py: 0.5,
-        })}
+        }}
       >
         <Box
           sx={({ breakpoints }) => ({

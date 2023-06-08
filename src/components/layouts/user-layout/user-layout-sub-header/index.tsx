@@ -19,31 +19,31 @@ export const UserLayoutSubHeader = memo(function UserLayoutSubHeaderBase() {
       href: RoutePaths.CARS,
       icon: <DirectionsCarFilledOutlinedIcon />,
       text: 'Автомобілі',
-      id: UiILocators.USER_LAYOUT_SIDEBAR_CARS_LINK,
+      id: UiILocators.USER_LAYOUT_SUB_HEADER_CARS_LINK,
     },
     {
       href: RoutePaths.LOG_BOOKS,
       icon: <AutoStoriesOutlinedIcon />,
       text: 'Бортжурнали',
-      id: UiILocators.USER_LAYOUT_SIDEBAR_LOG_BOOKS_LINK,
+      id: UiILocators.USER_LAYOUT_SUB_HEADER_LOG_BOOKS_LINK,
     },
     {
       href: RoutePaths.COMMUNITIES,
       icon: <PeopleAltOutlinedIcon />,
       text: 'Спільноти',
-      id: UiILocators.USER_LAYOUT_SIDEBAR_COMMUNITIES_LINK,
+      id: UiILocators.USER_LAYOUT_SUB_HEADER_COMMUNITIES_LINK,
     },
     {
       href: RoutePaths.SHOPS,
       icon: <BuildOutlinedIcon />,
       text: 'Автосервіси та магазини',
-      id: UiILocators.USER_LAYOUT_SIDEBAR_SHOPS_LINK,
+      id: UiILocators.USER_LAYOUT_SUB_HEADER_SHOPS_LINK,
     },
     {
       href: RoutePaths.FLEA_MARKET,
       icon: <TakeoutDiningOutlinedIcon />,
       text: 'Барахолка',
-      id: UiILocators.USER_LAYOUT_SIDEBAR_FLEA_MARKET_LINK,
+      id: UiILocators.USER_LAYOUT_SUB_HEADER_FLEA_MARKET_LINK,
     },
   ];
 
