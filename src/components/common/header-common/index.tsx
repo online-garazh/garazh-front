@@ -1,6 +1,7 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import { memo } from 'react';
 
 import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
@@ -21,7 +22,7 @@ type Props = {
 
 export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
   const { disableAuthButtons, withSidebar, currentUser } = props;
-  // const { data: currentUser } = useGetCurrentUser();
+  const { palette } = useTheme();
   const { token } = authService();
   const toggleDrawerHandler = () => {
     uiStoreMutations.toggleUi(UiElementNames.USER_SIDEBAR);
@@ -30,36 +31,41 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
   return (
     <AppBar
       sx={({ palette, zIndex, breakpoints }) => ({
-        backgroundColor: palette.background.default,
+        backgroundColor: palette.mode === 'dark' ? palette.background.default : palette.common.black,
         position: 'absolute',
         zIndex: zIndex.drawer + 1,
         px: 2,
+        ...(palette.mode === 'dark' && {
+          '&::after': {
+            backgroundColor: palette.divider,
+            position: 'absolute',
+            content: '""',
+            height: '1px',
+            bottom: 0,
+            width: '100%',
+            left: 0,
+          },
+        }),
         [breakpoints.up('sm')]: {
           px: 3,
         },
       })}
     >
       <Toolbar
-        sx={({ breakpoints, palette }) => ({
+        sx={({ breakpoints }) => ({
           justifyContent: 'space-between',
           minHeight: HEADER_HEIGHT,
           display: 'flex',
           height: HEADER_HEIGHT,
           width: '100%',
-          borderBottomColor: palette.divider,
-          borderBottomStyle: 'solid',
-          borderBottomWidth: 1,
-          ...(palette.mode === 'dark' && {
-            borderColor: 'transparent',
-          }),
-          padding: 0,
+          p: 0,
           [breakpoints.up('xs')]: {
             minHeight: HEADER_HEIGHT,
-            padding: 0,
+            p: 0,
           },
         })}
       >
-        <Logo />
+        <Logo onDarkBackground />
 
         <Box
           sx={({ breakpoints }) => ({
@@ -81,7 +87,14 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
               edge="start"
               sx={{ marginRight: 'auto' }}
             >
-              <MenuIcon color="tertiary" />
+              <MenuIcon
+                color="tertiary"
+                sx={({ palette }) => ({
+                  ...(palette.mode !== 'dark' && {
+                    color: palette.common.white,
+                  }),
+                })}
+              />
             </IconButton>
           )}
 
@@ -90,7 +103,7 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
               <Button
                 href={RoutePaths.SIGN_IN}
                 variant="outlined"
-                color="secondary"
+                color={palette.mode === 'dark' ? 'secondary' : 'primary'}
                 size="medium"
                 id={UiILocators.SIGN_IN_FORM_SUBMIT}
                 sx={{
@@ -103,7 +116,7 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
               <Button
                 href={RoutePaths.SIGN_UP}
                 variant="contained"
-                color="secondary"
+                color={palette.mode === 'dark' ? 'secondary' : 'primary'}
                 size="medium"
                 id={UiILocators.SIGN_IN_FORM_SUBMIT}
               >

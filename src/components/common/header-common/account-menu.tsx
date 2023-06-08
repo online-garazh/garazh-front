@@ -50,10 +50,13 @@ export function AccountMenu(props: Props) {
         ) : (
           <MenuIcon
             color="tertiary"
-            sx={{
+            sx={({ palette }) => ({
               height: 30,
               width: 30,
-            }}
+              ...(palette.mode !== 'dark' && {
+                color: palette.common.white,
+              }),
+            })}
           />
         )}
       </IconButton>

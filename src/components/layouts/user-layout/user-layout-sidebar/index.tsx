@@ -1,8 +1,7 @@
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
-import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
-import GarageIcon from '@mui/icons-material/Garage';
+import HouseSidingIcon from '@mui/icons-material/HouseSiding';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined';
 import { Drawer, List } from '@mui/material';
@@ -16,6 +15,7 @@ import {
   USER_DRAWER_ROLLED_WIDTH,
   HEADER_HEIGHT,
   USER_DRAWER_ROLLED_WIDTH_XS,
+  USER_SUB_HEADER_HEIGHT,
 } from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
@@ -35,15 +35,9 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
     },
     {
       href: RoutePaths.MY_GARAGE,
-      icon: <GarageIcon />,
+      icon: <HouseSidingIcon />,
       text: 'Мій гараж',
       id: UiILocators.USER_LAYOUT_SIDEBAR_MY_GARAGE_LINK,
-    },
-    {
-      href: RoutePaths.CARS,
-      icon: <DirectionsCarFilledOutlinedIcon />,
-      text: 'Автомобілі',
-      id: UiILocators.USER_LAYOUT_SIDEBAR_CARS_LINK,
     },
     {
       href: RoutePaths.LOG_BOOKS,
@@ -76,12 +70,8 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
       variant="permanent"
       sx={({ breakpoints, transitions, palette }) => ({
         '& .MuiDrawer-paper': {
-          border: 'none',
-          borderRightColor: palette.divider,
-          borderRightStyle: 'solid',
-          borderRightWidth: 1,
           backgroundColor: palette.background.default,
-          paddingTop: HEADER_HEIGHT / 8 + 2,
+          paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8 + 2,
           whiteSpace: 'nowrap',
           transition: transitions.create('width', {
             duration: transitions.duration.enteringScreen,
@@ -89,6 +79,7 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
           }),
           boxSizing: 'border-box',
           position: 'relative',
+          border: 'none',
           height: '100%',
           width: USER_DRAWER_FULL_WIDTH,
           px: 1,
@@ -96,32 +87,19 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase() {
             overflowX: 'hidden',
             width: USER_DRAWER_ROLLED_WIDTH_XS,
           }),
-          ...(palette.mode === 'dark' && {
-            borderColor: 'transparent',
-          }),
           [breakpoints.up('sm')]: {
-            paddingTop: HEADER_HEIGHT / 8 + 3,
+            paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8,
             width: sideIsOpen ? USER_DRAWER_FULL_WIDTH : USER_DRAWER_ROLLED_WIDTH,
           },
         },
       })}
     >
       <Box
-        sx={({ breakpoints, palette }) => ({
+        sx={({ palette }) => ({
           backgroundColor: palette.mode === 'dark' ? palette.background.primary : palette.background.secondary,
           borderRadius: 4,
           minHeight: 80,
           mb: 3,
-          ...(sideIsOpen &&
-            {
-              // mx: 1,
-            }),
-          [breakpoints.up('sm')]: {
-            ...(sideIsOpen &&
-              {
-                // mx: 2,
-              }),
-          },
         })}
       >
         Test

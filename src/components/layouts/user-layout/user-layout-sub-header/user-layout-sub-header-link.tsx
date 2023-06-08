@@ -15,7 +15,7 @@ export type Props = {
   id: UiILocators;
 };
 
-export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(props: Props) {
+export const UserLayoutSubHeaderLink = memo(function UserLayoutSubHeaderLinkBase(props: Props) {
   const { href, icon, text, id } = props;
   const router = useRouter();
   const selectedLink = router.pathname.includes(href);
@@ -29,42 +29,37 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
         alignItems: 'center',
         display: 'flex',
         color: palette.tertiary.main,
-        mb: 0.5,
         ...(selectedLink && {
           pointerEvents: 'none',
           li: {
-            backgroundColor: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
-
-            color: palette.secondary.contrastText,
+            color: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
           },
         }),
+        mr: 1,
+        '&:last-of-type': {
+          mr: 0,
+        },
         '&:hover': {
           textDecoration: 'none',
           li: {
-            backgroundColor: palette.mode === 'dark' ? palette.background.primary : palette.background.secondary,
+            color: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
           },
         },
       })}
     >
       <ListItem
-        sx={({ breakpoints }) => ({
+        sx={() => ({
           borderRadius: 2,
           px: 1,
-          py: 1.5,
-          [breakpoints.up('sm')]: {
-            px: 2,
-            py: 2,
-          },
+          py: 0.5,
         })}
       >
         <Box
           sx={({ breakpoints }) => ({
             height: 24,
             width: 24,
-            mr: 2,
-            [breakpoints.up('sm')]: {
-              mr: 3,
-            },
+            mr: 1,
+            [breakpoints.up('sm')]: {},
           })}
         >
           {icon}

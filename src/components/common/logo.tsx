@@ -6,7 +6,12 @@ import { type MouseEvent } from 'react';
 import { icons } from '~/configs/icons.config';
 import { RoutePaths } from '~/constants/routes.constant';
 
-export function Logo() {
+type Props = {
+  onDarkBackground?: boolean;
+};
+
+export function Logo(props: Props) {
+  const { onDarkBackground } = props;
   const router = useRouter();
   const { palette } = useTheme();
   const logoClickHandler = (e: MouseEvent<HTMLElement>): void => {
@@ -42,13 +47,17 @@ export function Logo() {
       })}
     >
       <SvgIcon
-        color={palette.mode === 'dark' ? 'primary' : 'secondary'}
         inheritViewBox
         component={icons.svg.logo}
-        sx={{
+        color={palette.mode === 'dark' ? 'primary' : 'secondary'}
+        sx={({ palette }) => ({
           height: 32,
           width: 32,
-        }}
+          ...(onDarkBackground &&
+            palette.mode !== 'dark' && {
+              color: palette.common.white,
+            }),
+        })}
       />
     </Box>
   );

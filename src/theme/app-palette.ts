@@ -61,7 +61,7 @@ export const appPalette = {
     },
     divider: Colors.secondary200,
     common: {
-      black: Colors.black,
+      black: '#0C0D0F',
       white: Colors.white,
     },
   } as Palette,
