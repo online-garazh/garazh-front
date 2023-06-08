@@ -116,6 +116,7 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
           sx={({ breakpoints }) => ({
             height: 56,
             width: 56,
+            mr: 1,
             ...(!sideIsOpen && {
               height: 40,
               width: 40,
@@ -125,10 +126,23 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
           src={currentUser?.avatar ?? undefined}
         />
 
-        <Box>
-          <Typography>{currentUser?.nickName}</Typography>
-          <Typography variant="caption">{currentUser?.email}</Typography>
-        </Box>
+        {sideIsOpen && (
+          <Box>
+            {/* TODO: remove 'nickname' placeholder */}
+            <Typography variant="body1_medium">{currentUser?.nickName || 'nickname'}</Typography>
+
+            <Typography
+              component="p"
+              variant="caption"
+              color="secondary"
+              sx={{
+                letterSpacing: '-0.15px',
+              }}
+            >
+              {currentUser?.email}
+            </Typography>
+          </Box>
+        )}
       </Box>
 
       <Typography

@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { type ReactElement, type ReactNode } from 'react';
 
 import { type CurrentUserRes } from '~/api/queries/get-current-user.query';
-import { UserLayoutSubHeader } from '~/components/layouts/user-layout/user-layout-sub-header';
 import { HEADER_HEIGHT, USER_SUB_HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { type LayoutConfig, type RouteData } from '~/types/route.type';
 
@@ -13,10 +12,13 @@ type Props = {
   children: ReactNode;
 };
 
-const HeaderCommon = dynamic(() => import('../../common/header-common').then((mod) => mod.HeaderCommon));
+const UserLayoutSubHeader = dynamic(() =>
+  import('../user-layout/user-layout-sub-header').then((mod) => mod.UserLayoutSubHeader)
+);
 const UserLayoutSidebar = dynamic(() =>
   import('../user-layout/user-layout-sidebar').then((mod) => mod.UserLayoutSidebar)
 );
+const HeaderCommon = dynamic(() => import('../../common/header-common').then((mod) => mod.HeaderCommon));
 
 export function UserLayout(props: Props) {
   const { layoutConfig, currentUser, children } = props;
