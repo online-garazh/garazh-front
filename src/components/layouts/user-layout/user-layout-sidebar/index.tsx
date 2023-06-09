@@ -111,22 +111,35 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
         onClick={toggleDrawerHandler}
         color="secondary"
         sx={({ palette }) => ({
-          position: 'absolute',
-          right: -16,
-          top: HEADER_HEIGHT + USER_SUB_HEADER_HEIGHT + 40,
-          transform: 'translateY(-50%)',
-          width: 30,
-          height: 30,
           backgroundColor: palette.background.primary,
           borderColor: palette.divider,
           borderStyle: 'solid',
           borderWidth: 1,
+          transform: 'translateY(-50%)',
+          position: 'absolute',
+          height: 30,
+          width: 30,
+          right: -16,
+          top: HEADER_HEIGHT + USER_SUB_HEADER_HEIGHT + 40,
+          ...(palette.mode === 'dark' && {
+            backgroundColor: palette.background.secondary,
+            '& .MuiSvgIcon-root': {
+              color: palette.secondary.contrastText,
+            },
+          }),
           '&:hover': {
             backgroundColor: palette.primary.main,
             borderColor: palette.primary.main,
             '& .MuiSvgIcon-root': {
               color: palette.primary.contrastText,
             },
+            ...(palette.mode === 'dark' && {
+              backgroundColor: palette.secondary.main,
+              borderColor: palette.secondary.main,
+              '& .MuiSvgIcon-root': {
+                color: palette.secondary.contrastText,
+              },
+            }),
           },
         })}
       >
