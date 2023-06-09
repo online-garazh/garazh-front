@@ -1,5 +1,4 @@
-import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Toolbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import { memo } from 'react';
@@ -12,21 +11,16 @@ import { HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
 import { authService } from '~/services/auth.service';
-import { UiElementNames, uiStoreMutations } from '~/stores/ui.store';
 
 type Props = {
   disableAuthButtons?: boolean;
-  withSidebar?: boolean;
   currentUser?: CurrentUserRes;
 };
 
 export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
-  const { disableAuthButtons, withSidebar, currentUser } = props;
+  const { disableAuthButtons, currentUser } = props;
   const { palette } = useTheme();
   const { token } = authService();
-  const toggleDrawerHandler = () => {
-    uiStoreMutations.toggleUi(UiElementNames.USER_SIDEBAR);
-  };
 
   return (
     <AppBar
@@ -79,25 +73,6 @@ export const HeaderCommon = memo(function HeaderCommonBase(props: Props) {
             },
           })}
         >
-          {withSidebar && (
-            <IconButton
-              aria-label="toggle drawer"
-              onClick={toggleDrawerHandler}
-              color="inherit"
-              edge="start"
-              sx={{ marginRight: 'auto' }}
-            >
-              <MenuIcon
-                color="tertiary"
-                sx={({ palette }) => ({
-                  ...(palette.mode !== 'dark' && {
-                    color: palette.common.white,
-                  }),
-                })}
-              />
-            </IconButton>
-          )}
-
           {!currentUser && !disableAuthButtons && !token && (
             <>
               <Button

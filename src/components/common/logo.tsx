@@ -30,8 +30,8 @@ export function Logo(props: Props) {
         alignItems: 'center',
         flexShrink: 0,
         display: 'flex',
-        height: 32,
-        width: 32,
+        height: 44,
+        width: 44,
         '& .MuiSvgIcon-root': {
           transition: transitions.create('color', {
             duration: transitions.duration.shortest,
@@ -51,8 +51,8 @@ export function Logo(props: Props) {
         component={icons.svg.logo}
         color={palette.mode === 'dark' ? 'primary' : 'secondary'}
         sx={({ palette }) => ({
-          height: 32,
-          width: 32,
+          height: 44,
+          width: 44,
           ...(onDarkBackground &&
             palette.mode !== 'dark' && {
               color: palette.common.white,

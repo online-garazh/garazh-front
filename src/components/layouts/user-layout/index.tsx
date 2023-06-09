@@ -33,7 +33,7 @@ export function UserLayout(props: Props) {
         width: '100%',
       }}
     >
-      <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} withSidebar currentUser={currentUser} />
+      <HeaderCommon disableAuthButtons={layoutConfig?.disableAuthButtons} currentUser={currentUser} />
       <UserLayoutSubHeader />
       <UserLayoutSidebar currentUser={currentUser} />
 

@@ -2,7 +2,7 @@ import { Logout, Person, Settings } from '@mui/icons-material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Divider, IconButton, ListItemIcon, MenuItem } from '@mui/material';
+import { IconButton, ListItemIcon, MenuItem } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import { useTheme } from '@mui/material/styles';
 import { useState, type MouseEvent } from 'react';
@@ -64,7 +64,7 @@ export function AccountMenu(props: Props) {
       <Menu
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         MenuListProps={{
-          disablePadding: false,
+          disablePadding: true,
         }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         PaperProps={{
@@ -93,8 +93,6 @@ export function AccountMenu(props: Props) {
 
           {palette.mode === 'dark' ? 'Світлий режим' : 'Темний режим'}
         </MenuItem>
-
-        {!!user && <Divider />}
 
         {!!user && (
           <Link
@@ -137,8 +135,6 @@ export function AccountMenu(props: Props) {
             </MenuItem>
           </Link>
         )}
-
-        {!!user && <Divider />}
 
         {!!user && (
           <MenuItem

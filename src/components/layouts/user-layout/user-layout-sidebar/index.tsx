@@ -1,10 +1,11 @@
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import HouseSidingIcon from '@mui/icons-material/HouseSiding';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined';
-import { Avatar, Drawer, List } from '@mui/material';
+import { Avatar, Drawer, IconButton, List, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { memo } from 'react';
@@ -20,7 +21,7 @@ import {
 } from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
-import { UiElementNames, uiStore } from '~/stores/ui.store';
+import { UiElementNames, uiStore, uiStoreMutations } from '~/stores/ui.store';
 
 import { type Props as LinkProps, UserLayoutSidebarLink } from './user-layout-sidebar-link';
 
@@ -32,6 +33,9 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
   const { currentUser } = props;
   const snapshot = useSnapshot(uiStore);
   const sideIsOpen = snapshot.active[UiElementNames.USER_SIDEBAR] || false;
+  const toggleDrawerHandler = () => {
+    uiStoreMutations.toggleUi(UiElementNames.USER_SIDEBAR);
+  };
   const links: LinkProps[] = [
     {
       href: RoutePaths.FEED,
@@ -75,6 +79,7 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
     <Drawer
       variant="permanent"
       sx={({ breakpoints, transitions, palette }) => ({
+        position: 'relative',
         '& .MuiDrawer-paper': {
           backgroundColor: palette.background.default,
           paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8 + 2,
@@ -83,14 +88,15 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
             duration: transitions.duration.enteringScreen,
             easing: transitions.easing.sharp,
           }),
+          overflowY: 'initial',
           boxSizing: 'border-box',
           position: 'relative',
           border: 'none',
           height: '100%',
           width: USER_DRAWER_FULL_WIDTH,
           px: 1,
+          pb: 2,
           ...(!sideIsOpen && {
-            overflowX: 'hidden',
             width: USER_DRAWER_ROLLED_WIDTH_XS,
           }),
           [breakpoints.up('sm')]: {
@@ -100,79 +106,123 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
         },
       })}
     >
-      <Box
-        sx={({ breakpoints, palette }) => ({
-          backgroundColor: palette.mode === 'dark' ? palette.background.primary : palette.background.secondary,
-          borderRadius: 4,
-          alignItems: 'center',
-          minHeight: 80,
-          display: 'flex',
-          mb: 3,
-          p: 1,
-          [breakpoints.down('sm')]: {},
-        })}
-      >
-        <Avatar
-          sx={({ breakpoints }) => ({
-            height: 56,
-            width: 56,
-            mr: 1,
-            ...(!sideIsOpen && {
-              height: 40,
-              width: 40,
-            }),
-            [breakpoints.down('sm')]: {},
-          })}
-          src={currentUser?.avatar ?? undefined}
-        />
-
-        {sideIsOpen && (
-          <Box>
-            {/* TODO: remove 'nickname' placeholder */}
-            <Typography variant="body1_medium">{currentUser?.nickName || 'nickname'}</Typography>
-
-            <Typography
-              component="p"
-              variant="caption"
-              color="secondary"
-              sx={{
-                letterSpacing: '-0.15px',
-              }}
-            >
-              {currentUser?.email}
-            </Typography>
-          </Box>
-        )}
-      </Box>
-
-      <Typography
-        component="p"
-        variant="caption"
-        sx={({ breakpoints }) => ({
-          textTransform: 'uppercase',
-          width: '100%',
-          px: 1,
-          mb: 1,
-          ...(!sideIsOpen && {
-            letterSpacing: '-0.5px',
-            px: 0,
-          }),
-          [breakpoints.up('sm')]: {
-            px: 2,
-            ...(!sideIsOpen && {
-              px: 0,
-            }),
+      <IconButton
+        aria-label="toggle drawer"
+        onClick={toggleDrawerHandler}
+        color="secondary"
+        sx={({ palette }) => ({
+          position: 'absolute',
+          right: -16,
+          top: HEADER_HEIGHT + USER_SUB_HEADER_HEIGHT + 40,
+          transform: 'translateY(-50%)',
+          width: 30,
+          height: 30,
+          backgroundColor: palette.background.primary,
+          borderColor: palette.divider,
+          borderStyle: 'solid',
+          borderWidth: 1,
+          '&:hover': {
+            backgroundColor: palette.primary.main,
+            borderColor: palette.primary.main,
+            '& .MuiSvgIcon-root': {
+              color: palette.primary.contrastText,
+            },
           },
         })}
       >
-        Загальне
-      </Typography>
+        <ExpandMoreIcon
+          color="secondary"
+          sx={() => ({
+            transform: sideIsOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+          })}
+        />
+      </IconButton>
 
-      <List component="nav" sx={{ p: 0 }}>
-        {links.map(({ href, text, icon, id }) => (
-          <UserLayoutSidebarLink href={href} text={text} icon={icon} key={`${id}-list-item`} id={id} />
-        ))}
-      </List>
+      {currentUser && (
+        <Box
+          sx={({ breakpoints, palette }) => ({
+            backgroundColor: palette.mode === 'dark' ? palette.background.primary : palette.background.secondary,
+            borderRadius: 4,
+            alignItems: 'center',
+            minHeight: 80,
+            display: 'flex',
+            mb: 3,
+            p: 1,
+            [breakpoints.down('sm')]: {},
+          })}
+        >
+          <Avatar
+            sx={({ breakpoints }) => ({
+              height: 56,
+              width: 56,
+              mr: 1,
+              ...(!sideIsOpen && {
+                height: 40,
+                width: 40,
+              }),
+              [breakpoints.down('sm')]: {},
+            })}
+            src={currentUser.avatar ? currentUser.avatar : undefined}
+          />
+
+          {sideIsOpen && (
+            <Box>
+              {/* TODO: remove 'nickname' placeholder */}
+              <Typography variant="body1_medium">{currentUser.nickName || 'nickname'}</Typography>
+
+              <Typography
+                component="p"
+                variant="caption"
+                color="secondary"
+                sx={{
+                  letterSpacing: '-0.15px',
+                }}
+              >
+                {currentUser.email}
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      )}
+
+      <Stack
+        sx={{
+          height: '100%',
+          overflowY: 'auto',
+          ...(!sideIsOpen && {
+            overflowX: 'hidden',
+          }),
+        }}
+      >
+        <Typography
+          component="p"
+          variant="caption"
+          sx={({ breakpoints }) => ({
+            textTransform: 'uppercase',
+            width: '100%',
+            px: 1,
+            mb: 1,
+            ...(!sideIsOpen && {
+              letterSpacing: '-0.5px',
+              px: 0,
+            }),
+            [breakpoints.up('sm')]: {
+              px: 2,
+              ...(!sideIsOpen && {
+                px: 0,
+              }),
+            },
+          })}
+        >
+          Загальне
+        </Typography>
+
+        <List component="nav" sx={{ p: 0 }}>
+          {links.map(({ href, text, icon, id }) => (
+            <UserLayoutSidebarLink href={href} text={text} icon={icon} key={`${id}-list-item`} id={id} />
+          ))}
+        </List>
+      </Stack>
     </Drawer>
   );
 });
