@@ -21,11 +21,11 @@ export interface ApiErrorResponse {
   status: unknown;
   data: {
     statusCode: number;
-    message: unknown;
+    message: string;
   };
 }
 
 export interface BaseError {
-  message: unknown;
+  message: string;
   status: number;
 }

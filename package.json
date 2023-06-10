@@ -53,6 +53,7 @@
     "typescript": "5.0.4",
     "typescript-cookie": "1.0.6",
     "url-parse": "1.5.10",
+    "use-debounce": "^9.0.4",
     "uuid": "9.0.0",
     "valtio": "1.10.5",
     "zod": "3.21.4"

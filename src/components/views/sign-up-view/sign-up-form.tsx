@@ -1,9 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Grid, type Theme, useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useDebouncedCallback } from 'use-debounce';
 import { z } from 'zod';
 
+import { usePostCheckNickName } from '~/api/mutations/post-check-nick-name.mutation';
 import { BoolRenderProp } from '~/components/common/bool-render-prop';
 import { Button } from '~/components/common/button';
 import { PasswordIcon } from '~/components/common/icons/password-icon';
@@ -45,7 +48,7 @@ export const signUpFormSchema = () =>
 export function SignUpForm(props: Props) {
   const { onSubmit, isLoading } = props;
   const isXS = useMediaQuery(({ breakpoints }: Theme) => breakpoints.down('sm'));
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { handleSubmit, control, watch, setError } = useForm<FormValues>({
     shouldFocusError: false,
     reValidateMode: 'onChange',
     defaultValues: {
@@ -59,6 +62,22 @@ export function SignUpForm(props: Props) {
     resolver: zodResolver(signUpFormSchema()),
     mode: 'onSubmit',
   });
+  const nickName = watch('nickName');
+  const { mutate: checkNickNameMutate } = usePostCheckNickName({
+    onSuccess: ({ isExisting }) => {
+      if (isExisting) setError('nickName', { message: `Нікнейм: ${nickName} існує. Введіть інший` });
+    },
+    onError: ({ isExisting }) => {
+      if (isExisting) setError('nickName', { message: `Нікнейм: ${nickName} існує. Введіть інший` });
+    },
+  });
+  const debounced = useDebouncedCallback((nickName) => {
+    checkNickNameMutate({ nickName });
+  }, 1000);
+
+  useEffect(() => {
+    if (nickName) debounced(nickName);
+  }, [debounced, nickName]);
 
   return (
     <Box

@@ -16,7 +16,7 @@ const SignInForm = dynamic(() => import('../sign-in-view/sign-in-form').then((mo
 export function SignInView() {
   const { palette } = useTheme();
   const { mutate: signInMutate, isLoading: signInLoading } = usePostSignIn();
-  const submitHandler = (data: FormValues) => {
+  const submitHandler = async (data: FormValues) => {
     signInMutate(data);
   };
 
@@ -68,7 +68,7 @@ export function SignInView() {
         Увійдіть
       </Typography>
 
-      <SignInForm isLoading={signInLoading} onSubmit={submitHandler} />
+      <SignInForm isLoading={signInLoading} onSubmit={(data) => void submitHandler(data)} />
 
       <Grid
         container
