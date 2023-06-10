@@ -67,8 +67,8 @@ const nextConfig = {
     return [
       {
         // Apply these headers to all routes in your application.
-        source: '/:path*',
-        headers: advancedHeaders,
+        // source: '/:path*',
+        // headers: advancedHeaders,
       },
     ];
   },
