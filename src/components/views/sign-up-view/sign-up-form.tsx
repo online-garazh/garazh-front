@@ -65,19 +65,19 @@ export function SignUpForm(props: Props) {
   const nickName = watch('nickName');
   const { mutate: checkNickNameMutate } = usePostCheckNickName({
     onSuccess: ({ isExisting }) => {
-      if (isExisting) setError('nickName', { message: `Нікнейм: ${nickName} існує. Введіть інший` });
+      if (isExisting) setError('nickName', { message: 'Такій нікнейм вже існує' });
     },
     onError: ({ isExisting }) => {
-      if (isExisting) setError('nickName', { message: `Нікнейм: ${nickName} існує. Введіть інший` });
+      if (isExisting) setError('nickName', { message: 'Такій нікнейм вже існує' });
     },
   });
-  const debounced = useDebouncedCallback((nickName) => {
+  const debouncedCheck = useDebouncedCallback((nickName) => {
     checkNickNameMutate({ nickName });
   }, 1000);
 
   useEffect(() => {
-    if (nickName) debounced(nickName);
-  }, [debounced, nickName]);
+    if (nickName) debouncedCheck(nickName);
+  }, [debouncedCheck, nickName]);
 
   return (
     <Box

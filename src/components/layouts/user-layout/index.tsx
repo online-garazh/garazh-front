@@ -59,12 +59,16 @@ export function UserLayout(props: Props) {
             display: 'flex',
             width: '100%',
             flex: 1,
-            p: 3,
+            pl: 5,
+            pr: 3,
+            pt: 2.5,
+            pb: 6,
             ...(palette.mode === 'dark' && {
               border: 0,
             }),
             [breakpoints.down('sm')]: {
-              pl: 2,
+              px: 2,
+              pb: 4,
             },
           })}
         >

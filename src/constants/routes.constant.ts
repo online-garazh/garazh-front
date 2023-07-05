@@ -1,6 +1,6 @@
 export enum RoutePaths {
   FORGOT_PASSWORD = '/forgot-password',
-  NEW_PASSWORD = '/new-password',
+  RESET_PASSWORD = '/reset-password',
   FLEA_MARKET = '/flea-market',
   COMMUNITIES = '/communities',
   MY_GARAGE = '/my-garage',
@@ -20,7 +20,7 @@ export const AUTH_REDIRECT = RoutePaths.FEED;
 
 export enum RoutesBasicSubTitles {
   FORGOT_PASSWORD = 'Зміна паролю',
-  NEW_PASSWORD = 'Новий пароль',
+  RESET_PASSWORD = 'Новий пароль',
   COMMUNITIES = 'Спільноти',
   FLEA_MARKET = 'Барахолка',
   MY_GARAGE = 'Мій гараж',

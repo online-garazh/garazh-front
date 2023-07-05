@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    /* Basic Options */
     "jsxImportSource": "@emotion/react",
     "isolatedModules": true,
     "removeComments": true,
@@ -17,17 +16,14 @@
       "esnext"
     ],
     "incremental": true,
-    /* Strict Type-Checking Options */
     "strictNullChecks": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strict": true,
-    /* Additional Checks */
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    /* Module Resolution Options */
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
@@ -40,7 +36,6 @@
     "paths": {
       "~/*": ["./src/*"]
     },
-    /* Other Options */
     "forceConsistentCasingInFileNames": true,
     "plugins": [
       {

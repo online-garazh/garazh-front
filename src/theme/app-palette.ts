@@ -18,9 +18,9 @@ export const appPalette = {
     },
     tertiary: {
       contrastText: Colors.white,
-      light: '#0C0D0F',
-      main: '#0C0D0F',
-      dark: '#0C0D0F',
+      light: '#959BAB',
+      main: '#7A8296',
+      dark: '#626878',
     },
     warning: {
       contrastText: Colors.white,
@@ -124,7 +124,7 @@ export const appPalette = {
     },
     divider: '#31343C',
     common: {
-      black: Colors.black,
+      black: '#0C0D0F',
       white: Colors.white,
     },
   } as Palette,

@@ -9,24 +9,18 @@ type Props = {
 
 export function AccountAvatar(props: Props) {
   const {
-    user: {
-      firstName,
-      lastName,
-      nickName,
-      avatar,
-      // avatarImage = 'https://res.cloudinary.com/minimal-ui/image/upload/v1614655910/upload_minimal/avatar/minimal_avatar.jpg',
-    },
+    user: { firstName, lastName, nickName, avatar },
   } = props;
   const isFullNameExist = firstName && lastName;
   const isNickNameExist = nickName;
   const enhancedProps = {
+    ...(isNickNameExist &&
+      !avatar && {
+        children: getNameInitials(nickName),
+      }),
     ...(isFullNameExist &&
       !avatar && {
         children: getNameInitials(`${firstName} ${lastName}`),
-      }),
-    ...(!!isNickNameExist &&
-      !avatar && {
-        children: getNameInitials(nickName),
       }),
     ...(avatar && {
       src: avatar,

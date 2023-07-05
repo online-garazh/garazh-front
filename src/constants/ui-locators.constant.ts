@@ -17,11 +17,11 @@ export enum UiILocators {
   SIGN_UP_FORM_SUBMIT = 'sign-up-form-submit',
   SIGN_UP_FORM_EMAIL = 'sign-up-form-email',
 
-  NEW_PASSWORD_FORM_CONFIRM_PASSWORD_ICON = 'new-password-form-confirm-password-icon',
-  NEW_PASSWORD_FORM_NEW_PASSWORD_ICON = 'new-password-form-new-password-icon',
-  NEW_PASSWORD_FORM_CONFIRM_PASSWORD = 'new-password-form-confirm-password',
-  NEW_PASSWORD_FORM_NEW_PASSWORD = 'new-password-form-new-password',
-  NEW_PASSWORD_FORM_SUBMIT = 'new-password-form-submit',
+  RESET_PASSWORD_FORM_CONFIRM_PASSWORD_ICON = 'reset-password-form-confirm-password-icon',
+  RESET_PASSWORD_FORM_NEW_PASSWORD_ICON = 'reset-password-form-new-password-icon',
+  RESET_PASSWORD_FORM_CONFIRM_PASSWORD = 'reset-password-form-confirm-password',
+  RESET_PASSWORD_FORM_NEW_PASSWORD = 'reset-password-form-new-password',
+  RESET_PASSWORD_FORM_SUBMIT = 'reset-password-form-submit',
 
   FORGOT_PASSWORD_FORM_BACK_LINK = 'forgot-password-form-back-link',
   FORGOT_PASSWORD_FORM_SUBMIT = 'forgot-password-form-submit',

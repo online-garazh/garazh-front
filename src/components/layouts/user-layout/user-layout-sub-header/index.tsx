@@ -52,25 +52,12 @@ export const UserLayoutSubHeader = memo(function UserLayoutSubHeaderBase() {
       sx={({ breakpoints, palette, zIndex }) => ({
         backgroundColor: palette.background.default,
         position: 'absolute',
+        overflow: 'hidden',
+        maxWidth: '100%',
         height: USER_SUB_HEADER_HEIGHT,
         zIndex: zIndex.drawer + 1,
         width: '100%',
         top: HEADER_HEIGHT,
-        '&::after': {
-          // backgroundColor: palette.divider,
-          // position: 'absolute',
-          // display: 'block',
-          // content: '""',
-          // height: '1px',
-          // bottom: 0,
-          // width: `calc(100% - ${USER_DRAWER_FULL_WIDTH}px)`,
-          // right: 0,
-        },
-        ...(palette.mode === 'dark' && {
-          '&::after': {
-            display: 'none',
-          },
-        }),
         px: 2,
         [breakpoints.up('sm')]: {
           px: 3,

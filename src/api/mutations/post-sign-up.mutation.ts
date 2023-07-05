@@ -24,7 +24,7 @@ export const usePostSignUp = () => {
   const { mutate, isLoading: signUpLoading } = usePost<SignUpReq, SignUpRes>({
     url: '/auth/signup/',
     options: {
-      onSuccess: (_data, variables) => {
+      onSuccess: (_, variables) => {
         signInMutate({ email: variables.email, password: variables.password });
       },
       onError: (error) => {

@@ -3,39 +3,14 @@ require('dotenv').config();
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-const advancedHeaders = [
-  {
-    key: 'X-DNS-Prefetch-Control',
-    value: 'on',
-  },
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
-  },
-  {
-    key: 'X-XSS-Protection',
-    value: '1; mode=block',
-  },
-  {
-    key: 'X-Frame-Options',
-    value: 'SAMEORIGIN',
-  },
-  {
-    key: 'X-Content-Type-Options',
-    value: 'nosniff',
-  },
-  {
-    key: 'Referrer-Policy',
-    value: 'origin-when-cross-origin',
-  },
-];
+const withPlugins = (config, plugins) => plugins.reduce((acc, withPlugin) => withPlugin(acc), config);
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
   modularizeImports: {
-    '@mui/material/?(((\\w*)?/?)*)': {
-      transform: '@mui/material/{{ matches.[1] }}/{{member}}',
-    },
-    '@mui/icons-material/?(((\\w*)?/?)*)': {
-      transform: '@mui/icons-material/{{ matches.[1] }}/{{member}}',
+    '@mui/material': {
+      transform: '@mui/material/{{member}}',
     },
     '@mui/styles': {
       transform: '@mui/styles/{{member}}',
@@ -47,10 +22,9 @@ const nextConfig = {
       transform: 'lodash/{{member}}',
     },
   },
-  transpilePackages: ['@mui/icons-material', '@mui/material', '@mui/system'],
   reactStrictMode: false,
   optimizeFonts: true,
-  swcMinify: false,
+  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -63,23 +37,6 @@ const nextConfig = {
 
     return config;
   },
-  // async headers() {
-  //   return [
-  //     {
-  //       // Apply these headers to all routes in your application.
-  //       source: '/:path*',
-  //       headers: advancedHeaders,
-  //     },
-  //   ];
-  // },
 };
 
-module.exports = () => {
-  /**
-   * @type {import('next').NextConfig}
-   */
-
-  const plugins = [withBundleAnalyzer];
-
-  return plugins.reduce((acc, next) => next(acc), nextConfig);
-};
+module.exports = withPlugins(nextConfig, [withBundleAnalyzer]);

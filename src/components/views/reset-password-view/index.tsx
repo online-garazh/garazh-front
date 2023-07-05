@@ -2,15 +2,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import dynamic from 'next/dynamic';
 
-import { type FormValues } from '~/components/views/new-password-view/new-password-form';
+import { usePostResetPassword } from '~/api/mutations/post-reset-password.mutation';
+import { type FormValues } from '~/components/views/reset-password-view/reset-password-form';
 
-const NewPasswordForm = dynamic(() =>
-  import('../new-password-view/new-password-form').then((mod) => mod.NewPasswordForm)
+const ResetPasswordForm = dynamic(() =>
+  import('~/components/views/reset-password-view/reset-password-form').then((mod) => mod.ResetPasswordForm)
 );
 
-export function NewPasswordView() {
+export function ResetPasswordView() {
+  const { mutate: resetPasswordMutate, isLoading } = usePostResetPassword();
   const submitHandler = (data: FormValues) => {
-    console.debug(data);
+    resetPasswordMutate({
+      resetToken: '',
+      password: data.password,
+    });
   };
 
   return (
@@ -39,7 +44,7 @@ export function NewPasswordView() {
         Змінити пароль
       </Typography>
 
-      <NewPasswordForm isLoading={false} onSubmit={submitHandler} />
+      <ResetPasswordForm isLoading={isLoading} onSubmit={submitHandler} />
     </Box>
   );
 }

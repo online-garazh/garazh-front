@@ -1,4 +1,4 @@
-export const USER_DRAWER_ROLLED_WIDTH_XS = 58;
+export const USER_DRAWER_ROLLED_WIDTH_XS = 72;
 export const USER_DRAWER_ROLLED_WIDTH = 72;
 export const USER_DRAWER_FULL_WIDTH = 300;
 export const USER_SUB_HEADER_HEIGHT = 48;

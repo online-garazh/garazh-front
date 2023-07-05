@@ -1,24 +1,22 @@
 import { useRouter } from 'next/router';
 
 import { RoutePaths } from '~/constants/routes.constant';
-import { useNotification } from '~/hooks/use-notification.hook';
 import { usePost } from '~/react-query/react-query.utils';
 import { authService } from '~/services/auth.service';
 
-export type SignInReq = {
+export type ResetPasswordReq = {
+  resetToken: string;
   password: string;
-  email: string;
 };
-export type SignInRes = {
+export type ResetPasswordRes = {
   access_token: string;
 };
 
-export const usePostSignIn = () => {
+export const usePostResetPassword = () => {
   const router = useRouter();
   const { setAuthToken, removeAuthToken } = authService();
-  const { addErrorMessage } = useNotification();
-  const { mutate, isLoading } = usePost<SignInReq, SignInRes>({
-    url: '/auth/login/',
+  const { mutate, isLoading } = usePost<ResetPasswordReq, ResetPasswordRes>({
+    url: '/auth/reset-password/',
     options: {
       onSuccess: (data) => {
         removeAuthToken();
@@ -28,7 +26,7 @@ export const usePostSignIn = () => {
         void router.push(RoutePaths.FEED);
       },
       onError: (error) => {
-        addErrorMessage(error.message);
+        console.error('usePostResetPassword', error);
       },
     },
   });

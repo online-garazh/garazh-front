@@ -22,7 +22,7 @@ type Props = {
   onSubmit: (values: FormValues) => void;
 };
 
-export const newPasswordFormSchema = () =>
+export const resetPasswordFormSchema = () =>
   z
     .object({
       confirmPassword: fieldsSchemas.password(),
@@ -33,7 +33,7 @@ export const newPasswordFormSchema = () =>
       path: [nameOf<FormValues>('confirmPassword')],
     });
 
-export function NewPasswordForm(props: Props) {
+export function ResetPasswordForm(props: Props) {
   const { onSubmit, isLoading } = props;
   const { handleSubmit, control } = useForm<FormValues>({
     shouldFocusError: false,
@@ -42,7 +42,7 @@ export function NewPasswordForm(props: Props) {
       confirmPassword: '',
       password: '',
     },
-    resolver: zodResolver(newPasswordFormSchema()),
+    resolver: zodResolver(resetPasswordFormSchema()),
     mode: 'onSubmit',
   });
 
@@ -77,13 +77,13 @@ export function NewPasswordForm(props: Props) {
                   <PasswordIcon
                     toggleBool={toggleBool}
                     boolValue={boolValue}
-                    id={UiILocators.NEW_PASSWORD_FORM_NEW_PASSWORD_ICON}
+                    id={UiILocators.RESET_PASSWORD_FORM_NEW_PASSWORD_ICON}
                   />
                 }
                 label="Пароль"
                 error={fieldState.invalid}
                 type={boolValue ? 'text' : 'password'}
-                id={UiILocators.NEW_PASSWORD_FORM_NEW_PASSWORD}
+                id={UiILocators.RESET_PASSWORD_FORM_NEW_PASSWORD}
               />
             )}
           />
@@ -109,13 +109,13 @@ export function NewPasswordForm(props: Props) {
                   <PasswordIcon
                     toggleBool={toggleBool}
                     boolValue={boolValue}
-                    id={UiILocators.NEW_PASSWORD_FORM_CONFIRM_PASSWORD_ICON}
+                    id={UiILocators.RESET_PASSWORD_FORM_CONFIRM_PASSWORD_ICON}
                   />
                 }
                 label="Підтвердження пароля"
                 error={fieldState.invalid}
                 type={boolValue ? 'text' : 'password'}
-                id={UiILocators.NEW_PASSWORD_FORM_CONFIRM_PASSWORD}
+                id={UiILocators.RESET_PASSWORD_FORM_CONFIRM_PASSWORD}
               />
             )}
           />
@@ -130,7 +130,7 @@ export function NewPasswordForm(props: Props) {
         color="secondary"
         type="submit"
         size="large"
-        id={UiILocators.NEW_PASSWORD_FORM_SUBMIT}
+        id={UiILocators.RESET_PASSWORD_FORM_SUBMIT}
       >
         Підтвердити
       </Button>
