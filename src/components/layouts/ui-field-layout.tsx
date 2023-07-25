@@ -3,7 +3,6 @@ import {
   FormControl,
   FormHelperText,
   InputLabel,
-  Typography,
   type FormControlProps,
   type InputLabelProps,
 } from '@mui/material';
@@ -88,8 +87,6 @@ export function UiFieldLayout(props: Props) {
           >
             {label}
           </InputLabel>
-
-          {required && <Typography variant="caption">Oбов&apos;язкове</Typography>}
         </Box>
       )}
 

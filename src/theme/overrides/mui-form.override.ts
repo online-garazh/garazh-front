@@ -5,8 +5,9 @@ export const muiFormOverride: Partial<Components<Theme>> = {
     styleOverrides: {
       root: ({ theme: { palette, spacing } }) => ({
         '&.MuiInputLabel-root': {
-          marginBottom: spacing(0.25),
+          marginBottom: spacing(0.8),
           lineHeight: '1.125rem',
+          fontWeight: 400,
           color: palette.text.secondary,
         },
       }),

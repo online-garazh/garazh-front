@@ -70,7 +70,7 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
           {icon}
         </Box>
 
-        <Typography variant="body1" sx={{ fontSize: '0.875rem' }}>
+        <Typography variant="body1" sx={{ fontSize: '0.875rem', fontWeight: 500 }}>
           {text}
         </Typography>
       </ListItem>
