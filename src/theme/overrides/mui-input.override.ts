@@ -25,11 +25,15 @@ export const muiInputOverride: Partial<Components<Theme>> = {
       }),
       input: ({ theme: { spacing, palette } }) => ({
         lineHeight: 1.5,
-        height: '1.5em',
+        height: '1.6em',
         padding: spacing(1.5, 2),
         '&::placeholder': {
-          color: palette.text.secondary,
-          opacity: 0.5,
+          fontSize: '15px',
+          color: '#909eab',
+          opacity: 0.9,
+        },
+        ':-webkit-autofill': {
+          WebkitBoxShadow: palette.mode.includes('dark') ? '0 0 0 1000px #1D1F24 inset' : '0 0 0 1000px white inset',
         },
       }),
       notchedOutline: ({ theme: { palette } }) => ({

@@ -213,6 +213,7 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
           sx={({ breakpoints }) => ({
             textTransform: 'uppercase',
             width: '100%',
+            fontWeight: 500,
             px: 1,
             mb: 1,
             ...(!sideIsOpen && {
