@@ -36,21 +36,28 @@ export const createAppTheme = (mode: PaletteMode): Theme => {
       },
       h1: {
         fontFamily: rubik.style.fontFamily,
+        fontWeight: 500,
       },
       h2: {
+        fontFamily: rubik.style.fontFamily,
         color: palette.text.primary,
+        fontWeight: 500,
       },
       h3: {
         fontFamily: rubik.style.fontFamily,
+        fontWeight: 500,
       },
       h4: {
         fontFamily: rubik.style.fontFamily,
+        fontWeight: 500,
       },
       h5: {
         fontFamily: rubik.style.fontFamily,
+        fontWeight: 500,
       },
       h6: {
         fontFamily: rubik.style.fontFamily,
+        fontWeight: 500,
       },
       subtitle1: {
         fontFamily: rubik.style.fontFamily,

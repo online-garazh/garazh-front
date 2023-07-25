@@ -45,7 +45,7 @@ module.exports = {
     'react/self-closing-comp': ['error', { component: true, html: true }],
     'react/jsx-boolean-value': 'error',
     'react/no-string-refs': 'error',
-    'react/display-name': 'off',
+    'react/display-name': ['error'],
     'react/jsx-newline': ['error', { prevent: true, allowMultilines: true }],
     'react/prop-types': 'off',
     'react/jsx-curly-brace-presence': [
@@ -55,7 +55,6 @@ module.exports = {
         children: 'never',
       },
     ],
-
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: '*', next: 'return' },
@@ -95,12 +94,10 @@ module.exports = {
         allow: ['warn', 'error', 'debug', 'info'],
       },
     ],
-
     'max-len': ['error', 160],
     quotes: ['error', 'single', { avoidEscape: true }],
     eqeqeq: 'error',
     curly: ['error', 'multi', 'consistent'],
-
     '@typescript-eslint/padding-line-between-statements': [
       'error',
       {
@@ -156,7 +153,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/indent': 'off',
-
     'jsx-a11y/alt-text': [
       'error',
       {
@@ -164,19 +160,13 @@ module.exports = {
         img: ['Image'], // import Image from 'next/image'
       },
     ],
-
     'react-hooks/exhaustive-deps': 'error',
-
     'mui-unused-classes/unused-classes': 'error',
-
     '@tanstack/query/prefer-query-object-syntax': 'error',
     '@tanstack/query/exhaustive-deps': 'error',
-
     'valtio/state-snapshot-rule': 'error',
     'valtio/avoid-this-in-proxy': 'error',
-
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-
     'import/no-anonymous-default-export': 'error',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',

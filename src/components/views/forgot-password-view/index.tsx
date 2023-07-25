@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import dynamic from 'next/dynamic';
 
+import { usePostForgotPassword } from '~/api/mutations/post-forgot-password.mutation';
 import { Link } from '~/components/common/next-link';
 import { type FormValues } from '~/components/views/forgot-password-view/forgot-password-form';
 import { RoutePaths } from '~/constants/routes.constant';
@@ -13,8 +14,9 @@ const ForgotPasswordForm = dynamic(() =>
 );
 
 export function ForgotPasswordView() {
+  const { mutate: forgotPasswordMutate, isLoading } = usePostForgotPassword();
   const submitHandler = (data: FormValues) => {
-    console.debug('data', data);
+    forgotPasswordMutate(data);
   };
 
   return (
@@ -51,7 +53,7 @@ export function ForgotPasswordView() {
         посилання для зміни пароля.
       </Typography>
 
-      <ForgotPasswordForm isLoading={false} onSubmit={submitHandler} />
+      <ForgotPasswordForm isLoading={isLoading} onSubmit={submitHandler} />
 
       <Grid
         justifyContent="center"

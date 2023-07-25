@@ -82,7 +82,7 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
         position: 'relative',
         '& .MuiDrawer-paper': {
           backgroundColor: palette.background.default,
-          paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8 + 2,
+          paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8,
           whiteSpace: 'nowrap',
           transition: transitions.create('width', {
             duration: transitions.duration.enteringScreen,

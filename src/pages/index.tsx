@@ -1,4 +1,5 @@
 import { dehydrate } from '@tanstack/react-query';
+import { NextSeo } from 'next-seo';
 
 import { getLayout } from '~/components/layouts/landing-layout';
 import { LandingView } from '~/components/views/landing-view';
@@ -12,7 +13,12 @@ const ROUTE_CONFIG: RouteConfig = {
 };
 
 export default function LandingRoute() {
-  return <LandingView />;
+  return (
+    <>
+      <NextSeo title="Домашня сторінка" />
+      <LandingView />
+    </>
+  );
 }
 
 export const getServerSideProps = withSession(

@@ -1,7 +1,7 @@
 import { dehydrate } from '@tanstack/react-query';
 
+import { ResetPasswordView } from 'src/components/views/reset-password-view';
 import { getLayout } from '~/components/layouts/auth-layout';
-import { NewPasswordView } from '~/components/views/new-password-view';
 import { RoutesBasicSubTitles } from '~/constants/routes.constant';
 import { type RouteConfig } from '~/types/route.type';
 import { withSession } from '~/utils/with-session.util';
@@ -10,8 +10,8 @@ const ROUTE_CONFIG: RouteConfig = {
   requireAuth: false,
 };
 
-export default function NewPasswordRoute() {
-  return <NewPasswordView />;
+export default function ResetPasswordRoute() {
+  return <ResetPasswordView />;
 }
 
 export const getServerSideProps = withSession(
@@ -23,9 +23,9 @@ export const getServerSideProps = withSession(
   ROUTE_CONFIG
 );
 
-NewPasswordRoute.layoutConfig = {
+ResetPasswordRoute.layoutConfig = {
   disableAuthButtons: true,
-  subTitle: RoutesBasicSubTitles.NEW_PASSWORD,
+  subTitle: RoutesBasicSubTitles.RESET_PASSWORD,
 };
 
-NewPasswordRoute.getLayout = getLayout;
+ResetPasswordRoute.getLayout = getLayout;

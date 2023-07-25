@@ -1,6 +1,5 @@
 import { DefaultSeo as NextDefaultSeo } from 'next-seo';
 import { type NextSeoProps, type OpenGraphMedia, type MetaTag } from 'next-seo/lib/types';
-import { type FunctionComponent } from 'react';
 
 import { useOrigin } from '~/hooks/use-origin.hook';
 import { usePathname } from '~/hooks/use-pathname.hook';
@@ -20,7 +19,7 @@ interface Seo {
   };
 }
 
-export const DefaultSeo: FunctionComponent = () => {
+export function DefaultSeo() {
   const origin = useOrigin();
   const pathname = usePathname();
   const url = `${origin}${pathname}`;
@@ -95,7 +94,7 @@ export const DefaultSeo: FunctionComponent = () => {
         },
         ...seo.favicon.metas,
       ]}
-      // defaultTitle={seo.title}
+      // defaultTitle={seo.title} // TODO: Need to fix default seo overwriting
       titleTemplate={`${seo.title} | %s`} // Replaces %s with title when provided in other pages
       description={seo.description}
       canonical={url}
@@ -105,4 +104,4 @@ export const DefaultSeo: FunctionComponent = () => {
       }}
     />
   );
-};
+}
