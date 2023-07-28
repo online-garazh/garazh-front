@@ -8,6 +8,9 @@ const withPlugins = (config, plugins) => plugins.reduce((acc, withPlugin) => wit
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  publicRuntimeConfig: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
   modularizeImports: {
     '@mui/material': {
       transform: '@mui/material/{{member}}',
