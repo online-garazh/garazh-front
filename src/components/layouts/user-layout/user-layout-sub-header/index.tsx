@@ -7,7 +7,7 @@ import { List } from '@mui/material';
 import Box from '@mui/material/Box';
 import { memo } from 'react';
 
-import { HEADER_HEIGHT, USER_SUB_HEADER_HEIGHT } from '~/configs/mui-components.config';
+import { HEADER_HEIGHT } from '~/configs/mui-components.config';
 import { RoutePaths } from '~/constants/routes.constant';
 import { UiILocators } from '~/constants/ui-locators.constant';
 

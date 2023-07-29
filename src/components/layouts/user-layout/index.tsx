@@ -47,7 +47,7 @@ export function UserLayout(props: Props) {
         }}
       >
         <Box
-          sx={({ breakpoints, palette, shape }) => ({
+          sx={({ breakpoints, palette }) => ({
             // borderTopLeftRadius: shape.borderRadius * 4,
             // borderTopRightRadius: shape.borderRadius * 4,
             backgroundColor: palette.background.primary,
