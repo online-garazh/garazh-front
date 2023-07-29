@@ -42,4 +42,7 @@ export enum UiILocators {
   USER_LAYOUT_SUB_HEADER_LOG_BOOKS_LINK = 'user-layout-sub-header-log-books-link',
   USER_LAYOUT_SUB_HEADER_SHOPS_LINK = 'user-layout-sub-header-shops-link',
   USER_LAYOUT_SUB_HEADER_CARS_LINK = 'user-layout-sub-header-cars-link',
+
+  GENERAL_INFO_FORM_FIRST_NAME = 'general-info-form-first-name',
+  GENERAL_INFO_FORM_LAST_NAME = 'general-info-form-last-name',
 }

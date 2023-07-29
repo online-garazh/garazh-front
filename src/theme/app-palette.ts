@@ -53,7 +53,7 @@ export const appPalette = {
       dark: Colors.smoke900,
     },
     text: {
-      secondary: '#7A8296',
+      secondary: '#637381',
       tertiary: '#31343C',
       disabled: Colors.secondary200,
       primary: '#0C0D0F',
