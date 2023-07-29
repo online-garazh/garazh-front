@@ -2,20 +2,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import {
-  Box,
-  CircularProgress,
-  type SxProps,
-  type Theme,
-  type CircularProgressProps,
-  CardHeader,
-  Avatar,
-  IconButton,
-  CardMedia,
-  CardContent,
-  Typography,
-} from '@mui/material';
-import React from 'react';
+import { Box, CardHeader, Avatar, IconButton, CardMedia, CardContent, Typography } from '@mui/material';
 
 import styles from '~/components/views/home-view/styles.module.scss';
 
