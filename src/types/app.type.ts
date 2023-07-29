@@ -14,3 +14,8 @@ export type AppProps = DefaultAppProps<
   RouteServerProps & { dehydratedState: DehydratedState; currentUser?: CurrentUserRes }
 > &
   AppEnhancedProps & { Component: NextRoute };
+
+export type CountryType = {
+  label: string;
+  value: string;
+};

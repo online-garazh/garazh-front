@@ -12,7 +12,7 @@ export function AppLayout(props: Props) {
 
   return (
     <>
-      <NextProgress delay={200} options={{ showSpinner: false }} color={palette.secondary.main} height={4} />
+      <NextProgress delay={200} options={{ showSpinner: false }} color={palette.primary.dark} height={2} />
       {children}
     </>
   );

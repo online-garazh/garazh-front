@@ -13,4 +13,16 @@ export const muiFormOverride: Partial<Components<Theme>> = {
       }),
     },
   },
+
+  // MuiFormControl: {
+  //   styleOverrides: {
+  //     root: ({ theme: { palette, spacing } }) => ({
+  //       // marginBottom: '24px !important',
+  //       marginNormal: 'normal',
+  //       '&.MuiFormControl-root': {
+  //         marginBottom: '24px',
+  //       },
+  //     }),
+  //   },
+  // },
 };
