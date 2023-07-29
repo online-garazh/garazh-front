@@ -28,7 +28,7 @@ export function LandingLayout(props: Props) {
         component="main"
         sx={({ palette }) => ({
           backgroundColor: palette.background.primary,
-          paddingTop: HEADER_HEIGHT / 8,
+          paddingTop: HEADER_HEIGHT / 6,
           display: 'flex',
           flex: 1,
         })}

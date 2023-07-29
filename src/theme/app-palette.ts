@@ -19,7 +19,7 @@ export const appPalette = {
     tertiary: {
       contrastText: Colors.white,
       light: '#959BAB',
-      main: '#7A8296',
+      main: '#212b36',
       dark: '#626878',
     },
     warning: {

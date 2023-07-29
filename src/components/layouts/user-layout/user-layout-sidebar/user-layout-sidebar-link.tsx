@@ -34,7 +34,6 @@ export const UserLayoutSidebarLink = memo(function UserLayoutSidebarLinkBase(pro
           pointerEvents: 'none',
           li: {
             backgroundColor: palette.mode === 'dark' ? palette.secondary.main : palette.primary.main,
-
             color: palette.secondary.contrastText,
           },
         }),
