@@ -51,12 +51,14 @@ export const UserLayoutSubHeader = memo(function UserLayoutSubHeaderBase() {
     <Box
       sx={({ breakpoints, palette, zIndex }) => ({
         backgroundColor: palette.background.default,
+        boxShadow: 'rgba(145, 158, 171, 0.1) 0px 8px 16px 0px',
         position: 'absolute',
         overflow: 'hidden',
         maxWidth: '100%',
-        height: USER_SUB_HEADER_HEIGHT,
         zIndex: zIndex.drawer + 1,
         width: '100%',
+        paddingTop: '12px',
+        paddingBottom: '12px',
         top: HEADER_HEIGHT,
         px: 2,
         [breakpoints.up('sm')]: {

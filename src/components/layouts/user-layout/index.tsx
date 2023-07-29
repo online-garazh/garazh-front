@@ -40,7 +40,7 @@ export function UserLayout(props: Props) {
       <Box
         component="main"
         sx={{
-          paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8,
+          paddingTop: HEADER_HEIGHT / 7 + USER_SUB_HEADER_HEIGHT / 7,
           display: 'flex',
           width: '100%',
           flex: 1,
@@ -48,14 +48,18 @@ export function UserLayout(props: Props) {
       >
         <Box
           sx={({ breakpoints, palette, shape }) => ({
-            borderTopLeftRadius: shape.borderRadius * 4,
+            // borderTopLeftRadius: shape.borderRadius * 4,
+            // borderTopRightRadius: shape.borderRadius * 4,
             backgroundColor: palette.background.primary,
             borderLeftColor: palette.divider,
-            borderLeftStyle: 'solid',
+            borderLeftStyle: 'dashed',
             borderLeftWidth: 1,
-            borderTopColor: palette.divider,
-            borderTopStyle: 'solid',
-            borderTopWidth: 1,
+            borderRightStyle: 'dashed',
+            borderRightWidth: 1,
+            // borderTopColor: palette.divider,
+            borderRightColor: palette.divider,
+            // borderTopStyle: 'dashed',
+            // borderTopWidth: 1,
             display: 'flex',
             width: '100%',
             flex: 1,
@@ -73,6 +77,21 @@ export function UserLayout(props: Props) {
           })}
         >
           {children}
+        </Box>
+
+        <Box
+          sx={({}) => ({
+            display: 'flex',
+            width: '100%',
+            maxWidth: 350,
+            flex: 1,
+            pl: 2,
+            pr: 2,
+            pt: 0,
+            pb: 2,
+          })}
+        >
+          Right Sidebar
         </Box>
       </Box>
     </Box>

@@ -65,7 +65,7 @@ export const UserLayoutSubHeaderLink = memo(function UserLayoutSubHeaderLinkBase
           {icon}
         </Box>
 
-        <Typography variant="body1" sx={{ fontSize: '0.875rem' }}>
+        <Typography variant="body1" sx={{ fontWeight: '500', fontSize: '0.875rem' }}>
           {text}
         </Typography>
       </ListItem>

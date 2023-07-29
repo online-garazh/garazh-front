@@ -82,25 +82,26 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
         position: 'relative',
         '& .MuiDrawer-paper': {
           backgroundColor: palette.background.default,
-          paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8,
+          paddingTop: HEADER_HEIGHT / 6 + USER_SUB_HEADER_HEIGHT / 6,
           whiteSpace: 'nowrap',
           transition: transitions.create('width', {
             duration: transitions.duration.enteringScreen,
             easing: transitions.easing.sharp,
           }),
+
           overflowY: 'initial',
           boxSizing: 'border-box',
           position: 'relative',
           border: 'none',
           height: '100%',
           width: USER_DRAWER_FULL_WIDTH,
-          px: 1,
+          px: 2,
           pb: 2,
           ...(!sideIsOpen && {
             width: USER_DRAWER_ROLLED_WIDTH_XS,
           }),
           [breakpoints.up('sm')]: {
-            paddingTop: HEADER_HEIGHT / 8 + USER_SUB_HEADER_HEIGHT / 8,
+            paddingTop: HEADER_HEIGHT / 7 + USER_SUB_HEADER_HEIGHT / 7,
             width: sideIsOpen ? USER_DRAWER_FULL_WIDTH : USER_DRAWER_ROLLED_WIDTH,
           },
         },
@@ -189,6 +190,9 @@ export const UserLayoutSidebar = memo(function UserLayoutSidebarBase(props: Prop
                 color="secondary"
                 sx={{
                   letterSpacing: '-0.15px',
+                  fontWeight: '400',
+                  color: '#696f7f',
+                  fontSize: '13px',
                 }}
               >
                 {currentUser.email}
